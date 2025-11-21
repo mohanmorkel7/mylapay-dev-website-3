@@ -4198,5 +4198,17 @@
       "ll": null
     },
     "timestamp": "2025-11-21T14:07:57.085Z"
+  },
+  {
+    "sessionId": "sess_o0pcoilp",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T14:08:02.569Z"
   }
 ]
