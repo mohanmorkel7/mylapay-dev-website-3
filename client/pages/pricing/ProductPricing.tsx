@@ -135,35 +135,18 @@ export default function ProductPricing() {
         description: checkoutPlan.title,
         order_id: order.id,
         handler: async function (response: any) {
-          // Verify signature on server
-          const verifyRes = await fetch("/api/razorpay/verify", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
+          // Verify signature on server using axios
+          const axios = (await import("axios")).default;
+          let verifyData: any = null;
+          try {
+            const vr = await axios.post("/api/razorpay/verify", {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
-            }),
-          });
-
-          let verifyData: any = null;
-          try {
-            if (verifyRes.bodyUsed) {
-              verifyData = { ok: false, error: "Verify response body already used" };
-            } else {
-              try {
-                verifyData = await verifyRes.json();
-              } catch (jerr) {
-                try {
-                  const txtv = await verifyRes.text();
-                  verifyData = txtv ? JSON.parse(txtv) : { ok: false, error: "Empty verify response" };
-                } catch (terr) {
-                  verifyData = { ok: false, error: String(terr || jerr) };
-                }
-              }
-            }
-          } catch (err) {
-            verifyData = { ok: false, error: String(err) };
+            });
+            verifyData = vr.data;
+          } catch (err: any) {
+            verifyData = { ok: false, error: err?.message || String(err) };
           }
 
           const details = {
