@@ -119,8 +119,21 @@ export default function ProductPricing() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount, currency: "INR", receipt: `rcpt_${Date.now()}`, notes: { plan: checkoutPlan.key } }),
       });
-      const data = await resp.json();
-      if (!data.ok) throw new Error(data.error || "Failed to create order");
+
+      let data: any;
+      try {
+        data = await resp.json();
+      } catch (e) {
+        // fallback if body already read or invalid json
+        try {
+          const txt = await resp.text();
+          data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
+        } catch (err) {
+          data = { ok: false, error: String(err || e) };
+        }
+      }
+
+      if (!data || !data.ok) throw new Error(data?.error || "Failed to create order");
       const order = data.order;
       const keyId = data.keyId;
 
@@ -147,7 +160,18 @@ export default function ProductPricing() {
               razorpay_signature: response.razorpay_signature,
             }),
           });
-          const verifyData = await verifyRes.json();
+
+          let verifyData: any;
+          try {
+            verifyData = await verifyRes.json();
+          } catch (err) {
+            try {
+              const txt = await verifyRes.text();
+              verifyData = txt ? JSON.parse(txt) : { ok: false, error: "Empty verify response" };
+            } catch (e2) {
+              verifyData = { ok: false, error: String(e2 || err) };
+            }
+          }
 
           const details = {
             ok: verifyData.ok,
