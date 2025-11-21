@@ -192,7 +192,7 @@ export default function Header() {
                   <ChevronDown size={14} className="mt-[1px]" />
                 </button>
                 {productsMenuOpen && (
-                  <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-[620px] bg-white shadow-xl rounded-lg p-6 grid grid-cols-2 gap-6 z-50 border border-slate-100 ml-[-70px]">
+                  <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-[620px] max-w-[90vw] bg-white shadow-xl rounded-lg p-6 grid grid-cols-2 gap-6 z-50 border border-slate-100">
                     {solutions.map((p) => (
                       <Link
                         key={p.key}
