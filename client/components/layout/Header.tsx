@@ -313,7 +313,10 @@ export default function Header() {
                   <ChevronDown size={14} className="mt-[1px]" />
                 </button>
                 {pricingMenuOpen && (
-                  <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-[780px] max-w-[90vw] bg-white shadow-xl rounded-lg p-6 grid grid-cols-3 gap-6 z-50 border border-slate-100">
+                  <div className={cn(
+                    "absolute mt-4 w-[780px] max-w-[90vw] bg-white shadow-xl rounded-lg p-6 grid grid-cols-3 gap-6 z-50 border border-slate-100",
+                    pricingAlign === 'center' ? 'left-1/2 -translate-x-1/2' : pricingAlign === 'right' ? 'right-0' : 'left-0'
+                  )}>
                     {products.map((p) => (
                       <Link
                         key={p.label}
