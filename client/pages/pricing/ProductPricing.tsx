@@ -115,10 +115,29 @@ export default function ProductPricing() {
     try {
       // Create order on server using axios to avoid Response stream issues
       const axios = (await import("axios")).default;
-      const createResp = await axios.post("/api/razorpay/create-order", { amount, currency: "INR", receipt: `rcpt_${Date.now()}`, notes: { plan: checkoutPlan.key } });
-      const data = createResp.data;
+      // Handle zero/placeholder amounts: show message and abort
+      if (!amount || amount <= 0) {
+        alert("This plan requires custom pricing or is free. Please contact sales.");
+        setShowCheckoutModal(false);
+        return;
+      }
 
-      if (!data || !data.ok) throw new Error(data?.error || "Failed to create order");
+      let data: any;
+      try {
+        const createResp = await axios.post("/api/razorpay/create-order", { amount, currency: "INR", receipt: `rcpt_${Date.now()}`, notes: { plan: checkoutPlan.key } });
+        data = createResp.data;
+      } catch (err: any) {
+        console.error("Create order axios error:", err?.response || err);
+        const serverErr = err?.response?.data || err?.message || String(err);
+        alert("Payment initialization failed: " + (typeof serverErr === "string" ? serverErr : JSON.stringify(serverErr)));
+        return;
+      }
+
+      if (!data || !data.ok) {
+        alert("Failed to create order: " + (data?.error || JSON.stringify(data)));
+        return;
+      }
+
       const order = data.order;
       const keyId = data.keyId;
 

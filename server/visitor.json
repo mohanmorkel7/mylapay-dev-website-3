@@ -4030,5 +4030,17 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "sessionId": "sess_op3unhfy",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T13:51:01.559Z"
   }
 ]
