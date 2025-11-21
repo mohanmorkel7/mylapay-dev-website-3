@@ -3190,5 +3190,17 @@
       "ll": null
     },
     "timestamp": "2025-11-21T12:08:02.518Z"
+  },
+  {
+    "sessionId": "sess_pvc7em49",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T12:08:17.238Z"
   }
 ]
