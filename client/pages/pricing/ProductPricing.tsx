@@ -79,33 +79,108 @@ export default function ProductPricing() {
     setShowCheckoutModal(true);
   }
 
-  function handleProceedToPay() {
+  const [showResultModal, setShowResultModal] = useState(false);
+  const [resultDetails, setResultDetails] = useState<any>(null);
+
+  async function loadRazorpayScript() {
+    if (typeof window === "undefined") return false;
+    if ((window as any).Razorpay) return true;
+    return new Promise<boolean>((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  }
+
+  async function handleProceedToPay() {
     if (!checkoutPlan) return;
     // Basic validation
     if (!checkoutEmail || !checkoutFirstName || !checkoutLastName) {
-      // simple alert for now
       alert("Please provide first name, last name and email to proceed.");
       return;
     }
 
-    // Replace this with real checkout integration
-    console.log("Proceeding to pay", {
-      plan: checkoutPlan,
-      billingCycle,
-      email: checkoutEmail,
-      firstName: checkoutFirstName,
-      lastName: checkoutLastName,
-    });
+    // amount mapping (in INR paise)
+    const planAmounts: Record<string, number> = {
+      basic: billingCycle === "yearly" ? 49900 : 4900,
+      pro: billingCycle === "yearly" ? 99900 : 9900,
+      enterprise: billingCycle === "yearly" ? 0 : 0,
+      trial: 0,
+    };
 
-    // Close modal and clear
-    setShowCheckoutModal(false);
-    setCheckoutEmail("");
-    setCheckoutFirstName("");
-    setCheckoutLastName("");
-    setCheckoutPlan(null);
+    const amount = planAmounts[checkoutPlan.key] ?? 0;
 
-    // Optionally navigate to a dedicated checkout route if needed
-    // navigate('/checkout', { state: { ... } })
+    try {
+      // Create order on server
+      const resp = await fetch("/api/razorpay/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount, currency: "INR", receipt: `rcpt_${Date.now()}`, notes: { plan: checkoutPlan.key } }),
+      });
+      const data = await resp.json();
+      if (!data.ok) throw new Error(data.error || "Failed to create order");
+      const order = data.order;
+      const keyId = data.keyId;
+
+      // Load script
+      const loaded = await loadRazorpayScript();
+      if (!loaded) throw new Error("Failed to load Razorpay SDK");
+
+      // Open Razorpay Checkout
+      const options: any = {
+        key: keyId,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Mylapay",
+        description: checkoutPlan.title,
+        order_id: order.id,
+        handler: async function (response: any) {
+          // Verify signature on server
+          const verifyRes = await fetch("/api/razorpay/verify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          });
+          const verifyData = await verifyRes.json();
+
+          const details = {
+            ok: verifyData.ok,
+            paymentResponse: response,
+            order,
+            verifyData,
+          };
+
+          setResultDetails(details);
+          setShowResultModal(true);
+          setShowCheckoutModal(false);
+        },
+        prefill: {
+          name: `${checkoutFirstName} ${checkoutLastName}`,
+          email: checkoutEmail,
+        },
+        theme: { color: "#2CADE3" },
+      };
+
+      const rzp = new (window as any).Razorpay(options);
+      rzp.open();
+
+      // handle failures
+      rzp.on("payment.failed", function (response: any) {
+        const details = { ok: false, paymentResponse: response };
+        setResultDetails(details);
+        setShowResultModal(true);
+        setShowCheckoutModal(false);
+      });
+    } catch (err: any) {
+      console.error("Checkout error:", err);
+      alert(err?.message || "Payment failed to initiate");
+    }
   }
 
   return (
