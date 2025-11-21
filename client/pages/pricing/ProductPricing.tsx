@@ -84,7 +84,7 @@ export default function ProductPricing() {
             <div className="text-center mb-6">
               <h3 className="text-2xl font-semibold mb-2">Trial</h3>
               <p className="text-[#2CADE3] text-lg mb-3">Free (up to 7 days)</p>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs text-gray-600">
                 Best for initial evaluation and integration testing
               </p>
             </div>
@@ -92,13 +92,13 @@ export default function ProductPricing() {
             <div className="space-y-3 mb-6 flex-grow">
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-gray-600">
+                <span className="text-xs text-gray-600">
                   Upto 100 transactions per day
                 </span>
               </div>
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-gray-600">Email support</span>
+                <span className="text-xs text-gray-600">Email support</span>
               </div>
             </div>
 
@@ -118,7 +118,7 @@ export default function ProductPricing() {
             <div className="text-center mb-6">
               <h3 className="text-2xl font-semibold mb-2">Basic Plan</h3>
               <p className="text-gray-600 text-lg mb-3">$$$$/ Year</p>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs text-gray-600">
                 Ideal for small to mid-size merchants starting transaction processing
               </p>
             </div>
@@ -126,19 +126,19 @@ export default function ProductPricing() {
             <div className="space-y-3 mb-6 flex-grow">
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-gray-600">
+                <span className="text-xs text-gray-600">
                   Upto 500 transactions per day
                 </span>
               </div>
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-gray-600">
+                <span className="text-xs text-gray-600">
                   Standard monthly transaction limit
                 </span>
               </div>
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-gray-600">Standard support</span>
+                <span className="text-xs text-gray-600">Standard support</span>
               </div>
             </div>
 
@@ -161,7 +161,7 @@ export default function ProductPricing() {
             <div className="text-center mb-6">
               <h3 className="text-2xl font-semibold mb-2">Pro Plan</h3>
               <p className="text-lg mb-3">$$$/ Year</p>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs text-gray-600">
                 For growing merchants needing higher throughput and stability
               </p>
             </div>
@@ -214,25 +214,25 @@ export default function ProductPricing() {
             <div className="space-y-3 mb-6 flex-grow">
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-gray-600">
+                <span className="text-xs text-gray-600">
                   5,000+ transactions per day
                 </span>
               </div>
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-gray-600">Unlimited transactions</span>
+                <span className="text-xs text-gray-600">Unlimited transactions</span>
               </div>
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-gray-600">Volume-based pricing</span>
+                <span className="text-xs text-gray-600">Volume-based pricing</span>
               </div>
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-gray-600">24×7 dedicated support</span>
+                <span className="text-xs text-gray-600">24×7 dedicated support</span>
               </div>
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-gray-600">
+                <span className="text-xs text-gray-600">
                   Client-side deployment options
                 </span>
               </div>
