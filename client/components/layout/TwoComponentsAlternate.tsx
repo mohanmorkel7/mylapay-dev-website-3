@@ -2,15 +2,21 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { CheckCircle, CloudCheck, Shield, ArrowBigUpDash, Users } from "lucide-react";
+import {
+  CheckCircle,
+  CloudCheck,
+  Shield,
+  ArrowBigUpDash,
+  Users,
+} from "lucide-react";
 
 // Card network logos
 import networkCertificates1 from "@/pages/assets/images/mastercard.png";
-import networkCertificates2 from "@/pages/assets/cardNetworks/amex.png";
+import networkCertificates2 from "@/pages/assets/cardnetworks/amex.png";
 // import networkCertificates3 from "@/pages/assets/cardNetworks/juspay.jpg";
 // import networkCertificates4 from "@/pages/assets/cardNetworks/razorpay.png";
 import networkCertificates5 from "@/pages/assets/images/rupay.png";
-import networkCertificates6 from "@/pages/assets/images/visa.png"
+import networkCertificates6 from "@/pages/assets/images/visa.png";
 
 // Global certificates
 import GCert1 from "@/pages/assets/certificates/1.png";
@@ -22,27 +28,49 @@ import GCert6 from "@/pages/assets/certificates/6.png";
 import GCert7 from "@/pages/assets/certificates/7.png";
 import GCert8 from "@/pages/assets/certificates/8.png";
 
-import Gcpdf2 from "@/pages/assets/pdf/list.pdf"
-import Gcpdf4 from "@/pages/assets/pdf/iso.pdf"
-import Gcpdf5 from "@/pages/assets/pdf/emvco.pdf"
-
+import Gcpdf2 from "@/pages/assets/pdf/list.pdf";
+import Gcpdf4 from "@/pages/assets/pdf/iso.pdf";
+import Gcpdf5 from "@/pages/assets/pdf/emvco.pdf";
 
 const features = [
-  { title: "Enterprise-Grade Throughput", description: "Designed for high-volume – capable to processes 1B+ transactions daily.",icon: CheckCircle  },
-  { title: "User-Friendly APIs", description: "Simplified integration for faster go-to-market",icon: Users },
-  { title: "Cloud-Native Platform", description: "Resilient, secure, and effortlessly scalable", icon: CloudCheck  },
+  {
+    title: "Enterprise-Grade Throughput",
+    description:
+      "Designed for high-volume – capable to processes 1B+ transactions daily.",
+    icon: CheckCircle,
+  },
+  {
+    title: "User-Friendly APIs",
+    description: "Simplified integration for faster go-to-market",
+    icon: Users,
+  },
+  {
+    title: "Cloud-Native Platform",
+    description: "Resilient, secure, and effortlessly scalable",
+    icon: CloudCheck,
+  },
 ];
 
 // Global certificates (image + pdf/external link)
 const globalCertificates = [
-  { img: GCert1, pdf: "https://seal.controlcase.com/index.php?page=showCert&cId=4174044739" },
-  { img: GCert2, pdf: "https://www.sisainfosec.com/certificate.php?number=23955864680360684188&type=pci3ds" },
-  { img: GCert3, pdf: "https://www.sisainfosec.com/certificate.php?number=65293083357311337083&type=pcisthree" },
+  {
+    img: GCert1,
+    pdf: "https://seal.controlcase.com/index.php?page=showCert&cId=4174044739",
+  },
+  {
+    img: GCert2,
+    pdf: "https://www.sisainfosec.com/certificate.php?number=23955864680360684188&type=pci3ds",
+  },
+  {
+    img: GCert3,
+    pdf: "https://www.sisainfosec.com/certificate.php?number=65293083357311337083&type=pcisthree",
+  },
   { img: GCert4, pdf: Gcpdf4 },
   { img: GCert5, pdf: Gcpdf5 },
-  { 
-    img: GCert6,  },
-  { img: GCert7,  },
+  {
+    img: GCert6,
+  },
+  { img: GCert7 },
   { img: GCert8, pdf: Gcpdf2 },
 ];
 
@@ -87,43 +115,43 @@ export default function SolutionSuite() {
 
         <div className="flex flex-col lg:flex-row gap-12">
           {/* Left Features */}
-           <div className="flex-1 grid grid-cols-1 gap-6 relative">
-      {features.map((feature, idx) => (
-        <motion.div
-          key={idx}
-          onHoverStart={() => setHovered(idx)}
-          onHoverEnd={() => setHovered(null)}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          whileHover={{
-            scale: 1.02,
-            y: -2,
-            boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
-            transition: { duration: 0.12, ease: "easeOut" },
-          }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: idx * 0.1 }}
-          className="relative p-6 rounded-2xl bg-white border border-gray-200 cursor-default hover:bg-gradient-to-br hover:from-blue-50 hover:to-[#2baee347]"
-        >
-          {/* Circle with Icon */}
-          <div
-            className={`absolute -top-5 -right-5 w-20 h-20 rounded-full flex items-center justify-center ${
-              hovered === idx ? "bg-[#2baee347]" : "bg-blue-100"
-            } opacity-90 transition-colors duration-200`}
-          >
-            <feature.icon className="w-8 h-8 primarycolormylapay" />
-          </div>
+          <div className="flex-1 grid grid-cols-1 gap-6 relative">
+            {features.map((feature, idx) => (
+              <motion.div
+                key={idx}
+                onHoverStart={() => setHovered(idx)}
+                onHoverEnd={() => setHovered(null)}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{
+                  scale: 1.02,
+                  y: -2,
+                  boxShadow: "0 15px 30px rgba(0,0,0,0.1)",
+                  transition: { duration: 0.12, ease: "easeOut" },
+                }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className="relative p-6 rounded-2xl bg-white border border-gray-200 cursor-default hover:bg-gradient-to-br hover:from-blue-50 hover:to-[#2baee347]"
+              >
+                {/* Circle with Icon */}
+                <div
+                  className={`absolute -top-5 -right-5 w-20 h-20 rounded-full flex items-center justify-center ${
+                    hovered === idx ? "bg-[#2baee347]" : "bg-blue-100"
+                  } opacity-90 transition-colors duration-200`}
+                >
+                  <feature.icon className="w-8 h-8 primarycolormylapay" />
+                </div>
 
-          {/* Content */}
-          <h4 className="font-bold text-lg lg:text-2xl mb-1 secondarycolormylapay">
-            {feature.title}
-          </h4>
-          <p className="text-gray-600 text-sm lg:text-xl">
-            {feature.description}
-          </p>
-        </motion.div>
-      ))}
-    </div>
+                {/* Content */}
+                <h4 className="font-bold text-lg lg:text-2xl mb-1 secondarycolormylapay">
+                  {feature.title}
+                </h4>
+                <p className="text-gray-600 text-sm lg:text-xl">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
 
           {/* Right Container */}
           <div className="flex-1 flex flex-col gap-8">
@@ -137,48 +165,58 @@ export default function SolutionSuite() {
               <div className="hidden  flex-wrap gap-4 justify-center lg:grid grid-cols-4 md:grid-cols-4 gap-4">
                 {globalCertificates.map((cert, idx) => (
                   <motion.div>
-                  <a
-                    key={idx}
-                    href={cert.pdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="min-w-[100px] flex items-center justify-center bg-blue-50 rounded-2xl p-4 shadow"
-                  >
-                    <img src={cert.img} alt={`Global Certificate ${idx + 1}`} className="max-h-10 object-contain" />
-                  </a>
+                    <a
+                      key={idx}
+                      href={cert.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="min-w-[100px] flex items-center justify-center bg-blue-50 rounded-2xl p-4 shadow"
+                    >
+                      <img
+                        src={cert.img}
+                        alt={`Global Certificate ${idx + 1}`}
+                        className="max-h-10 object-contain"
+                      />
+                    </a>
                   </motion.div>
                 ))}
               </div>
 
               {/* Mobile Auto-Scroll */}
               <div className="relative overflow-hidden lg:hidden">
-              <motion.div
-                className="flex gap-4 py-3"
-                style={{ whiteSpace: "nowrap" }} // ensures horizontal layout
-                initial={{ x: 0 }}
-                animate={{ x: ["0%", "-300%"] }} // slide fully
-                transition={{
-                  x: { repeat: Infinity, repeatType: "loop", duration: 30, ease: "linear" },
-                }}
-              >
-                {globalCertificates.concat(globalCertificates).map((cert, idx) => (
-                  <a
-                    key={idx}
-                    href={cert.pdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="min-w-[100px] flex-shrink-0 bg-blue-50 rounded-2xl p-4 flex items-center justify-center shadow"
-                  >
-                    <img
-                      src={cert.img}
-                      alt={`Global Certificate ${idx + 1}`}
-                      className="max-h-10 object-contain"
-                    />
-                  </a>
-                ))}
-              </motion.div>
-            </div>
-
+                <motion.div
+                  className="flex gap-4 py-3"
+                  style={{ whiteSpace: "nowrap" }} // ensures horizontal layout
+                  initial={{ x: 0 }}
+                  animate={{ x: ["0%", "-300%"] }} // slide fully
+                  transition={{
+                    x: {
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      duration: 30,
+                      ease: "linear",
+                    },
+                  }}
+                >
+                  {globalCertificates
+                    .concat(globalCertificates)
+                    .map((cert, idx) => (
+                      <a
+                        key={idx}
+                        href={cert.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="min-w-[100px] flex-shrink-0 bg-blue-50 rounded-2xl p-4 flex items-center justify-center shadow"
+                      >
+                        <img
+                          src={cert.img}
+                          alt={`Global Certificate ${idx + 1}`}
+                          className="max-h-10 object-contain"
+                        />
+                      </a>
+                    ))}
+                </motion.div>
+              </div>
             </div>
 
             {/* Card Network Certificates */}
@@ -192,18 +230,22 @@ export default function SolutionSuite() {
                 {networkCertificates.map((netc, idx) => (
                   <motion.div>
                     <a
-                    key={idx}
-                    className="bg-gradient-to-tr from-blue-50 to-white rounded-2xl p-4 flex items-center justify-center shadow"
-                    // href={netc.pdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    // initial={{ opacity: 0, y: 20 }}
-                    // whileInView={{ opacity: 1, y: 0 }}
-                    // viewport={{ once: true }}
-                    // transition={{ duration: 0.3, delay: idx * 0.05 }}
-                  >
-                    <img src={netc.img} alt={`Card Network ${idx + 1}`} className="max-h-12 object-contain" />
-                  </a>
+                      key={idx}
+                      className="bg-gradient-to-tr from-blue-50 to-white rounded-2xl p-4 flex items-center justify-center shadow"
+                      // href={netc.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      // initial={{ opacity: 0, y: 20 }}
+                      // whileInView={{ opacity: 1, y: 0 }}
+                      // viewport={{ once: true }}
+                      // transition={{ duration: 0.3, delay: idx * 0.05 }}
+                    >
+                      <img
+                        src={netc.img}
+                        alt={`Card Network ${idx + 1}`}
+                        className="max-h-12 object-contain"
+                      />
+                    </a>
                   </motion.div>
                 ))}
               </div>
@@ -215,20 +257,31 @@ export default function SolutionSuite() {
                   initial={{ x: 0 }}
                   animate={{ x: ["0%", "-300%"] }}
                   transition={{
-                    x: { repeat: Infinity, repeatType: "loop", duration: 25, ease: "linear" },
+                    x: {
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      duration: 25,
+                      ease: "linear",
+                    },
                   }}
                 >
-                  {networkCertificates.concat(networkCertificates).map((netc, idx) => (
-                    <a
-                      key={idx}
-                      className="min-w-[120px] flex-shrink-0 bg-gradient-to-tr from-blue-50 to-white rounded-2xl p-4 flex items-center justify-center shadow"
-                      // href={netc.pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img src={netc.img} alt={`Card Network ${idx + 1}`} className="max-h-12 object-contain" />
-                    </a>
-                  ))}
+                  {networkCertificates
+                    .concat(networkCertificates)
+                    .map((netc, idx) => (
+                      <a
+                        key={idx}
+                        className="min-w-[120px] flex-shrink-0 bg-gradient-to-tr from-blue-50 to-white rounded-2xl p-4 flex items-center justify-center shadow"
+                        // href={netc.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          src={netc.img}
+                          alt={`Card Network ${idx + 1}`}
+                          className="max-h-12 object-contain"
+                        />
+                      </a>
+                    ))}
                 </motion.div>
               </div>
             </div>

@@ -4,10 +4,17 @@ import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate  } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { useEffect } from "react";
 import { initUserTracking } from "../src/utlis/userTracker";
-import { initTracking } from '../src/utlis/Visit';
+import { initTracking } from "../src/utlis/Visit";
 
 import Index from "./pages/Home/Index";
 import NotFound from "./pages/NotFound";
@@ -46,8 +53,6 @@ import Dashboard from "./pages/careers/dashboard/index";
 
 import Pricing from "@/pages/pricing/Pricing";
 
-initTracking();
-
 const queryClient = new QueryClient();
 
 // ProtectedRoute component
@@ -71,7 +76,8 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 // Wrapper that hides Header for specific routes
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
-  const hideHeader = location.pathname.startsWith("/admin") || location.pathname === "/login";
+  const hideHeader =
+    location.pathname.startsWith("/admin") || location.pathname === "/login";
 
   return (
     <>
@@ -84,6 +90,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 const App = () => {
   useEffect(() => {
     initUserTracking();
+    initTracking();
   }, []);
 
   return (
@@ -110,28 +117,73 @@ const App = () => {
 
               {/* Blog */}
               <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/payment-resources" element={<PaymentResourceBlog />} />
+              <Route
+                path="/blog/payment-resources"
+                element={<PaymentResourceBlog />}
+              />
               <Route path="/blog/reconciliation" element={<Insights />} />
-              <Route path="/blog/payment-resources2" element={<Paymentresorce2 />} />
-              <Route path="/blog/insitesofpayments" element={<InsightsOfPayments />} />
+              <Route
+                path="/blog/payment-resources2"
+                element={<Paymentresorce2 />}
+              />
+              <Route
+                path="/blog/insitesofpayments"
+                element={<InsightsOfPayments />}
+              />
 
               {/* Solutions */}
               <Route path="/solutions/acquiring" element={<Acquiring />} />
               <Route path="/solutions/upi-payments" element={<Upi />} />
-              <Route path="/solutions/card-payments" element={<CardPayments />} />
-              <Route path="/solutions/payment-orchestration" element={<PaymentOrchestration />} />
+              <Route
+                path="/solutions/card-payments"
+                element={<CardPayments />}
+              />
+              <Route
+                path="/solutions/payment-orchestration"
+                element={<PaymentOrchestration />}
+              />
 
               {/* Products */}
-              <Route path="/products/mylapay-secure" element={<MylapaySecure />} />
-              <Route path="/products/mylapay-cswitch" element={<MylapayCSwitch />} />
-              <Route path="/products/mylapay-uswitch" element={<MylapayUSwitch />} />
-              <Route path="/products/mylapay-tokenx" element={<MylapayTokenX />} />
-              <Route path="/products/mylapay-switchx" element={<MylapaySwitchX />} />
-              <Route path="/products/mylapay-intelle360" element={<MylapayIntelle360 />} />
-              <Route path="/products/mylapay-intellepro" element={<MylapayIntellePro />} />
-              <Route path="/products/mylapay-intellesolve" element={<MylapayIntelleSolve />} />
-              <Route path="/products/mylapay-intellesettle" element={<MylapayIntelleSettle />} />
-              <Route path="/products/mylapay-intellewatch" element={<MylapayIntelleWatch />} />
+              <Route
+                path="/products/mylapay-secure"
+                element={<MylapaySecure />}
+              />
+              <Route
+                path="/products/mylapay-cswitch"
+                element={<MylapayCSwitch />}
+              />
+              <Route
+                path="/products/mylapay-uswitch"
+                element={<MylapayUSwitch />}
+              />
+              <Route
+                path="/products/mylapay-tokenx"
+                element={<MylapayTokenX />}
+              />
+              <Route
+                path="/products/mylapay-switchx"
+                element={<MylapaySwitchX />}
+              />
+              <Route
+                path="/products/mylapay-intelle360"
+                element={<MylapayIntelle360 />}
+              />
+              <Route
+                path="/products/mylapay-intellepro"
+                element={<MylapayIntellePro />}
+              />
+              <Route
+                path="/products/mylapay-intellesolve"
+                element={<MylapayIntelleSolve />}
+              />
+              <Route
+                path="/products/mylapay-intellesettle"
+                element={<MylapayIntelleSettle />}
+              />
+              <Route
+                path="/products/mylapay-intellewatch"
+                element={<MylapayIntelleWatch />}
+              />
 
               {/* Admin Login */}
               <Route
@@ -162,4 +214,13 @@ const App = () => {
   );
 };
 
-createRoot(document.getElementById("root")!).render(<App />);
+const rootEl = document.getElementById("root");
+if (rootEl) {
+  createRoot(rootEl).render(<App />);
+} else {
+  // Fail gracefully if root element is missing
+  // This prevents runtime exceptions during non-browser execution
+  // and provides a clear console message for debugging
+  // eslint-disable-next-line no-console
+  console.error("Root element not found: cannot mount React application.");
+}
