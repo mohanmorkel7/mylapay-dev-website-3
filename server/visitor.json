@@ -2494,5 +2494,17 @@
       "ll": null
     },
     "timestamp": "2025-11-21T11:29:02.317Z"
+  },
+  {
+    "sessionId": "sess_48ruqosg",
+    "duration": 1,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T11:30:09.168Z"
   }
 ]
