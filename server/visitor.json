@@ -4366,5 +4366,17 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "sessionId": "sess_ynbwkuy1",
+    "duration": 1,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T14:12:49.035Z"
   }
 ]

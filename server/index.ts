@@ -217,16 +217,38 @@ export function createServer(): Express {
 
   // --- Server proxy for Mylapay OTP (avoids CORS and exposes sandbox endpoint via our server) ---
   app.post('/api/mylapay/require-otp', async (req: Request, res: Response) => {
-    try {
-      const axios = await import('axios');
-      const externalUrl = 'https://apisandbox-nonprod.mylapay.com/mylapay/v1/mylapay_site/require-otp';
-      const resp = await axios.default.post(externalUrl, req.body, { headers: { 'Content-Type': 'application/json' } });
-      return res.json(resp.data);
-    } catch (err: any) {
-      console.error('Mylapay require-otp proxy error:', err?.response?.data || err?.message || err);
-      const errData = err?.response?.data || { message: err?.message || String(err) };
-      return res.status(err?.response?.status || 500).json({ ok: false, error: errData });
+    const axios = await import('axios');
+    const externalUrl = 'https://apisandbox-nonprod.mylapay.com/mylapay/v1/mylapay_site/require-otp';
+    const maxRetries = 2;
+    const timeoutMs = 5000;
+
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        const resp = await axios.default.post(externalUrl, req.body, {
+          headers: { 'Content-Type': 'application/json' },
+          timeout: timeoutMs,
+        });
+        // forward success response
+        return res.status(resp.status).json(resp.data);
+      } catch (err: any) {
+        const status = err?.response?.status;
+        const data = err?.response?.data;
+        console.error(`Mylapay require-otp proxy attempt ${attempt} error:`, { status, data: data || err?.message || String(err) });
+
+        // If server error (5xx), retry (unless last attempt)
+        if (status && status >= 500 && attempt < maxRetries) {
+          await new Promise((r) => setTimeout(r, 300 * (attempt + 1)));
+          continue;
+        }
+
+        // For other errors or final attempt, return detailed error to client
+        const errData = data || { message: err?.message || String(err) };
+        return res.status(status || 502).json({ ok: false, error: errData });
+      }
     }
+
+    // Should not reach here, but fallback
+    return res.status(502).json({ ok: false, error: { message: 'Upstream service unavailable' } });
   });
 
   // --- Automatic visitor log ---
