@@ -163,9 +163,8 @@ export default function SolutionSuite() {
               {/* Desktop Grid */}
               <div className="hidden  flex-wrap gap-4 justify-center lg:grid grid-cols-4 md:grid-cols-4 gap-4 ">
                 {globalCertificates.map((cert, idx) => (
-                  <motion.div>
+                  <motion.div key={`gcert-${idx}`}>
                     <a
-                      key={idx}
                       href={cert.pdf}
                       target="_blank"
                       rel="noopener noreferrer"
