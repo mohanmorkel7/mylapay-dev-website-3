@@ -216,16 +216,17 @@ export function createServer(): Express {
   });
 
   // --- Server proxy for Mylapay OTP (avoids CORS and exposes sandbox endpoint via our server) ---
-  app.post('/api/mylapay/require-otp', async (req: Request, res: Response) => {
-    const axios = await import('axios');
-    const externalUrl = 'https://apisandbox-nonprod.mylapay.com/mylapay/v1/mylapay_site/require-otp';
+  app.post("/api/mylapay/require-otp", async (req: Request, res: Response) => {
+    const axios = await import("axios");
+    const externalUrl =
+      "https://apisandbox-nonprod.mylapay.com/mylapay/v1/mylapay_site/require-otp";
     const maxRetries = 2;
     const timeoutMs = 5000;
 
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       try {
         const resp = await axios.default.post(externalUrl, req.body, {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" },
           timeout: timeoutMs,
         });
         // forward success response
@@ -233,7 +234,10 @@ export function createServer(): Express {
       } catch (err: any) {
         const status = err?.response?.status;
         const data = err?.response?.data;
-        console.error(`Mylapay require-otp proxy attempt ${attempt} error:`, { status, data: data || err?.message || String(err) });
+        console.error(`Mylapay require-otp proxy attempt ${attempt} error:`, {
+          status,
+          data: data || err?.message || String(err),
+        });
 
         // If server error (5xx), retry (unless last attempt)
         if (status && status >= 500 && attempt < maxRetries) {
@@ -248,7 +252,9 @@ export function createServer(): Express {
     }
 
     // Should not reach here, but fallback
-    return res.status(502).json({ ok: false, error: { message: 'Upstream service unavailable' } });
+    return res
+      .status(502)
+      .json({ ok: false, error: { message: "Upstream service unavailable" } });
   });
 
   // --- Automatic visitor log ---

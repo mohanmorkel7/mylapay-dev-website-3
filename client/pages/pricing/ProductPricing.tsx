@@ -71,54 +71,73 @@ export default function ProductPricing() {
   // Trial modal state
   const [showTrialModal, setShowTrialModal] = useState(false);
   const [trialEmail, setTrialEmail] = useState("");
-  const [trialStage, setTrialStage] = useState<'email' | 'otp'>('email');
+  const [trialStage, setTrialStage] = useState<"email" | "otp">("email");
   const [trialOtp, setTrialOtp] = useState("");
-  const [trialOtpExpiresAt, setTrialOtpExpiresAt] = useState<number | null>(null);
+  const [trialOtpExpiresAt, setTrialOtpExpiresAt] = useState<number | null>(
+    null,
+  );
 
   // Functions for OTP flow
   async function sendTrialOtp() {
-    if (!trialEmail) return alert('Enter an email to receive OTP');
+    if (!trialEmail) return alert("Enter an email to receive OTP");
     try {
-      const axios = (await import('axios')).default;
-      const productName = product?.name ? product.name.toLowerCase() : 'tokenx';
-      const resp = await axios.post('/api/mylapay/require-otp', { email: trialEmail, productName });
+      const axios = (await import("axios")).default;
+      const productName = product?.name ? product.name.toLowerCase() : "tokenx";
+      const resp = await axios.post("/api/mylapay/require-otp", {
+        email: trialEmail,
+        productName,
+      });
       const data = resp.data;
-      if (data && (data.ok === true || data.ok === 'true')) {
-        setTrialStage('otp');
-        setTrialOtp('');
+      if (data && (data.ok === true || data.ok === "true")) {
+        setTrialStage("otp");
+        setTrialOtp("");
         setTrialOtpExpiresAt(Date.now() + 5 * 60 * 1000);
-        toast({ title: 'OTP sent', description: 'Please check your email and enter the 6-digit OTP (expires in 5 minutes).' });
+        toast({
+          title: "OTP sent",
+          description:
+            "Please check your email and enter the 6-digit OTP (expires in 5 minutes).",
+        });
       } else {
         const msg = data?.message || data?.error || JSON.stringify(data);
-        toast({ title: 'Failed to send OTP', description: String(msg) });
+        toast({ title: "Failed to send OTP", description: String(msg) });
       }
     } catch (err: any) {
-      console.error('Send OTP error', err);
-      toast({ title: 'Send OTP failed', description: err?.message || String(err) });
+      console.error("Send OTP error", err);
+      toast({
+        title: "Send OTP failed",
+        description: err?.message || String(err),
+      });
     }
   }
 
   async function verifyTrialOtp() {
-    if (!trialOtp) return alert('Enter the OTP');
+    if (!trialOtp) return alert("Enter the OTP");
     try {
-      const axios = (await import('axios')).default;
-      const productName = product?.name ? product.name.toLowerCase() : 'tokenx';
-      const resp = await axios.post('/api/mylapay/require-otp', { email: trialEmail, productName, otp: trialOtp });
+      const axios = (await import("axios")).default;
+      const productName = product?.name ? product.name.toLowerCase() : "tokenx";
+      const resp = await axios.post("/api/mylapay/require-otp", {
+        email: trialEmail,
+        productName,
+        otp: trialOtp,
+      });
       const data = resp.data;
-      if (data && (data.ok === true || data.ok === 'true')) {
-        toast({ title: data.message || 'Success', description: '' });
+      if (data && (data.ok === true || data.ok === "true")) {
+        toast({ title: data.message || "Success", description: "" });
         setShowTrialModal(false);
-        setTrialEmail('');
-        setTrialStage('email');
-        setTrialOtp('');
+        setTrialEmail("");
+        setTrialStage("email");
+        setTrialOtp("");
         setTrialOtpExpiresAt(null);
       } else {
         const msg = data?.message || data?.error || JSON.stringify(data);
-        toast({ title: 'OTP verification failed', description: String(msg) });
+        toast({ title: "OTP verification failed", description: String(msg) });
       }
     } catch (err: any) {
-      console.error('Verify OTP error', err);
-      toast({ title: 'Verify OTP failed', description: err?.message || String(err) });
+      console.error("Verify OTP error", err);
+      toast({
+        title: "Verify OTP failed",
+        description: err?.message || String(err),
+      });
     }
   }
 
@@ -612,7 +631,7 @@ export default function ProductPricing() {
               </div>
 
               <div className="space-y-3">
-                {trialStage === 'email' ? (
+                {trialStage === "email" ? (
                   <>
                     <input
                       type="email"
@@ -631,7 +650,10 @@ export default function ProductPricing() {
                   </>
                 ) : (
                   <>
-                    <p className="text-sm text-gray-600">Enter the 6-digit OTP sent to your email. Expires in 5 minutes.</p>
+                    <p className="text-sm text-gray-600">
+                      Enter the 6-digit OTP sent to your email. Expires in 5
+                      minutes.
+                    </p>
                     <input
                       type="text"
                       placeholder="Enter OTP"
