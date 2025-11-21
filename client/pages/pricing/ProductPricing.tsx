@@ -113,34 +113,10 @@ export default function ProductPricing() {
     const amount = planAmounts[checkoutPlan.key] ?? 0;
 
     try {
-      // Create order on server
-      const resp = await fetch("/api/razorpay/create-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount, currency: "INR", receipt: `rcpt_${Date.now()}`, notes: { plan: checkoutPlan.key } }),
-      });
-
-      // Parse JSON safely without clone; handle bodyUsed
-      let data: any = null;
-      try {
-        if (resp.bodyUsed) {
-          data = { ok: false, error: "Response body already used" };
-        } else {
-          try {
-            data = await resp.json();
-          } catch (jsonErr) {
-            // fallback to text
-            try {
-              const txt = await resp.text();
-              data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
-            } catch (txtErr) {
-              data = { ok: false, error: String(txtErr || jsonErr) };
-            }
-          }
-        }
-      } catch (err) {
-        data = { ok: false, error: String(err) };
-      }
+      // Create order on server using axios to avoid Response stream issues
+      const axios = (await import("axios")).default;
+      const createResp = await axios.post("/api/razorpay/create-order", { amount, currency: "INR", receipt: `rcpt_${Date.now()}`, notes: { plan: checkoutPlan.key } });
+      const data = createResp.data;
 
       if (!data || !data.ok) throw new Error(data?.error || "Failed to create order");
       const order = data.order;
