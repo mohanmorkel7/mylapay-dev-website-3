@@ -126,7 +126,7 @@ export default function ProductPricing() {
               </button>
               <button
                 onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
+                className="inline-block mt-2 text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3] mx-auto"
               >
                 See more
               </button>
@@ -171,7 +171,7 @@ export default function ProductPricing() {
               </button>
               <button
                 onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
+                className="inline-block mt-2 text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3] mx-auto"
               >
                 See more
               </button>
@@ -225,7 +225,7 @@ export default function ProductPricing() {
               </button>
               <button
                 onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
+                className="inline-block mt-2 text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3] mx-auto"
               >
                 See more
               </button>
@@ -282,7 +282,7 @@ export default function ProductPricing() {
               </button>
               <button
                 onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
+                className="inline-block mt-2 text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3] mx-auto"
               >
                 See more
               </button>
