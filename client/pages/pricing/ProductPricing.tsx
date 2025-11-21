@@ -203,7 +203,7 @@ export default function ProductPricing() {
           </div>
 
           {/* Enterprise Plan */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 flex flex-col h-auto lg:h-[563px]">
+          <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
             <div className="text-center mb-6">
               <h3 className="text-3xl font-semibold mb-3">Enterprise Plan</h3>
               <p className="text-sm text-gray-600 mb-4">
