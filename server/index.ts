@@ -168,8 +168,9 @@ app.post("/api/log-user", (req: Request, res: Response) => {
 
       res.json({ ok: true, order: response.data, keyId });
     } catch (err: any) {
-      console.error("Razorpay create order error:", err?.response?.data || err.message || err);
-      res.status(500).json({ ok: false, error: err?.response?.data || err.message });
+      const errData = err?.response?.data || err?.message || String(err);
+      console.error("Razorpay create order error:", errData);
+      res.status(500).json({ ok: false, error: errData });
     }
   });
 
