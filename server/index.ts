@@ -173,17 +173,14 @@ app.post("/api/log-user", (req: Request, res: Response) => {
     }
   });
 
-  app.post("/api/razorpay/verify", (req: Request, res: Response) => {
+  app.post("/api/razorpay/verify", async (req: Request, res: Response) => {
     try {
       const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
       const keySecret = process.env.RAZORPAY_KEY_SECRET;
       if (!keySecret) return res.status(500).json({ ok: false, error: "Missing key secret" });
 
-      const crypto = require("crypto");
-      const expected = crypto
-        .createHmac("sha256", keySecret)
-        .update(razorpay_order_id + "|" + razorpay_payment_id)
-        .digest("hex");
+      const crypto = await import("crypto");
+      const expected = crypto.createHmac("sha256", keySecret).update(razorpay_order_id + "|" + razorpay_payment_id).digest("hex");
 
       if (expected === razorpay_signature) {
         return res.json({ ok: true });
