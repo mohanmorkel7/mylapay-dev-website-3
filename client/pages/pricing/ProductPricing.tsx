@@ -103,9 +103,9 @@ export default function ProductPricing() {
     try {
       const axios = (await import('axios')).default;
       const productName = product?.name ? product.name.toLowerCase() : 'tokenx';
-      const resp = await axios.post('https://apisandbox-nonprod.mylapay.com/mylapay/v1/mylapay_site/require-otp', { email: trialEmail, productName, otp: trialOtp });
+      const resp = await axios.post('/api/mylapay/require-otp', { email: trialEmail, productName, otp: trialOtp });
       const data = resp.data;
-      if (data && data.ok) {
+      if (data && (data.ok === true || data.ok === 'true')) {
         toast({ title: data.message || 'Success', description: '' });
         setShowTrialModal(false);
         setTrialEmail('');
@@ -113,7 +113,8 @@ export default function ProductPricing() {
         setTrialOtp('');
         setTrialOtpExpiresAt(null);
       } else {
-        toast({ title: 'OTP verification failed', description: String(data?.message || data?.error || 'Invalid OTP') });
+        const msg = data?.message || data?.error || JSON.stringify(data);
+        toast({ title: 'OTP verification failed', description: String(msg) });
       }
     } catch (err: any) {
       console.error('Verify OTP error', err);
