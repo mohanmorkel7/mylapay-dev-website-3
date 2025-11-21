@@ -215,6 +215,20 @@ export function createServer(): Express {
     }
   });
 
+  // --- Server proxy for Mylapay OTP (avoids CORS and exposes sandbox endpoint via our server) ---
+  app.post('/api/mylapay/require-otp', async (req: Request, res: Response) => {
+    try {
+      const axios = await import('axios');
+      const externalUrl = 'https://apisandbox-nonprod.mylapay.com/mylapay/v1/mylapay_site/require-otp';
+      const resp = await axios.default.post(externalUrl, req.body, { headers: { 'Content-Type': 'application/json' } });
+      return res.json(resp.data);
+    } catch (err: any) {
+      console.error('Mylapay require-otp proxy error:', err?.response?.data || err?.message || err);
+      const errData = err?.response?.data || { message: err?.message || String(err) };
+      return res.status(err?.response?.status || 500).json({ ok: false, error: errData });
+    }
+  });
+
   // --- Automatic visitor log ---
   app.get("/api/track-visitor", (_req: Request, res: Response) => {
     try {
