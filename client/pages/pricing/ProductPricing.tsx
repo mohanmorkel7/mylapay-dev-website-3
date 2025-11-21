@@ -114,7 +114,7 @@ export default function ProductPricing() {
           </div>
 
           {/* Basic Plan */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 flex flex-col h-auto lg:h-[500px]">
+          <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
             <div className="text-center mb-6">
               <h3 className="text-3xl font-semibold mb-3">Basic Plan</h3>
               <p className="text-gray-600 text-xl mb-4">$$$$/ Year</p>
