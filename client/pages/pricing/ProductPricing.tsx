@@ -78,7 +78,7 @@ export default function ProductPricing() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-start">
           {/* Trial Plan */}
           <div className="bg-white rounded-2xl shadow-xl p-6 flex flex-col h-auto lg:h-[428px]">
             <div className="text-center mb-6">
