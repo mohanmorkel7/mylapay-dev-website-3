@@ -107,7 +107,7 @@ export default function ProductPricing() {
             </button>
             <a
               href="#"
-              className="text-center text-sm text-gray-600 underline mt-3 block"
+              className="text-center text-xs text-gray-600 underline mt-2 block"
             >
               See more
             </a>
@@ -147,7 +147,7 @@ export default function ProductPricing() {
             </button>
             <a
               href="#"
-              className="text-center text-sm text-gray-600 underline mt-3 block"
+              className="text-center text-xs text-gray-600 underline mt-2 block"
             >
               See more
             </a>
@@ -196,7 +196,7 @@ export default function ProductPricing() {
             </button>
             <a
               href="#"
-              className="text-center text-sm text-gray-600 underline mt-3 block"
+              className="text-center text-xs text-gray-600 underline mt-2 block"
             >
               See more
             </a>
@@ -243,7 +243,7 @@ export default function ProductPricing() {
             </button>
             <a
               href="#"
-              className="text-center text-sm text-gray-600 underline mt-3 block"
+              className="text-center text-xs text-gray-600 underline mt-2 block"
             >
               See more
             </a>
