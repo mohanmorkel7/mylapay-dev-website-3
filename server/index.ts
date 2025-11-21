@@ -166,7 +166,7 @@ app.post("/api/log-user", (req: Request, res: Response) => {
         { auth: { username: keyId, password: keySecret } },
       );
 
-      res.json({ ok: true, order: response.data });
+      res.json({ ok: true, order: response.data, keyId });
     } catch (err: any) {
       console.error("Razorpay create order error:", err?.response?.data || err.message || err);
       res.status(500).json({ ok: false, error: err?.response?.data || err.message });
