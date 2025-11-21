@@ -610,24 +610,50 @@ export default function ProductPricing() {
               </div>
 
               <div className="space-y-3">
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  value={trialEmail}
-                  onChange={(e) => setTrialEmail(e.target.value)}
-                  className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent"
-                />
+                {trialStage === 'email' ? (
+                  <>
+                    <input
+                      type="email"
+                      placeholder="Email address"
+                      value={trialEmail}
+                      onChange={(e) => setTrialEmail(e.target.value)}
+                      className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent"
+                    />
 
-                <button
-                  onClick={() => {
-                    console.log("Trial signup with email:", trialEmail);
-                    setShowTrialModal(false);
-                    setTrialEmail("");
-                  }}
-                  className="w-full bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium hover:bg-[#2399c9] transition-colors"
-                >
-                  Try now the trial
-                </button>
+                    <button
+                      onClick={sendTrialOtp}
+                      className="w-full bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium hover:bg-[#2399c9] transition-colors"
+                    >
+                      Send OTP
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-sm text-gray-600">Enter the 6-digit OTP sent to your email. Expires in 5 minutes.</p>
+                    <input
+                      type="text"
+                      placeholder="Enter OTP"
+                      value={trialOtp}
+                      onChange={(e) => setTrialOtp(e.target.value)}
+                      className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent"
+                    />
+
+                    <div className="flex gap-2">
+                      <button
+                        onClick={verifyTrialOtp}
+                        className="flex-1 bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium hover:bg-[#2399c9] transition-colors"
+                      >
+                        Verify OTP
+                      </button>
+                      <button
+                        onClick={sendTrialOtp}
+                        className="flex-1 border border-gray-300 text-gray-700 py-2 rounded-md text-sm font-medium hover:bg-gray-50 transition-colors"
+                      >
+                        Resend
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
 
               <p className="text-center text-gray-500 text-xs mt-4">
