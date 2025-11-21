@@ -72,8 +72,39 @@ export default function Header() {
   const [productsMenuOpen, setProductsMenuOpen] = useState(false);
   const [resourcesMenuOpen, setResourcesMenuOpen] = useState(false);
   const [pricingMenuOpen, setPricingMenuOpen] = useState(false);
+  const [pricingAlign, setPricingAlign] = useState<'center' | 'left' | 'right'>('center');
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
+  const pricingBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  const computeAlignment = () => {
+    try {
+      const btn = pricingBtnRef.current;
+      if (!btn || typeof window === 'undefined') return;
+      const rect = btn.getBoundingClientRect();
+      const vw = window.innerWidth || document.documentElement.clientWidth;
+      const menuMax = Math.min(780, Math.floor(vw * 0.9));
+      const leftSpace = rect.left;
+      const rightSpace = vw - rect.right;
+
+      // If there's not enough right space for half the menu, anchor to right
+      if (rightSpace < menuMax / 2) {
+        setPricingAlign('right');
+        return;
+      }
+
+      // If there's not enough left space for half the menu, anchor to left
+      if (leftSpace < menuMax / 2) {
+        setPricingAlign('left');
+        return;
+      }
+
+      // Otherwise center
+      setPricingAlign('center');
+    } catch (err) {
+      // noop
+    }
+  };
 
   const handleEnter = (menu: string) => {
     if (timerRef.current) clearTimeout(timerRef.current);
@@ -97,6 +128,7 @@ export default function Header() {
       setPricingMenuOpen(false);
     }
     if (menu === "pricing") {
+      computeAlignment();
       setPricingMenuOpen(true);
       setMegaMenuOpen(false);
       setProductsMenuOpen(false);
