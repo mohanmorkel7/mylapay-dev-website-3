@@ -2254,5 +2254,17 @@
       "ll": null
     },
     "timestamp": "2025-11-21T09:59:39.734Z"
+  },
+  {
+    "sessionId": "sess_aheria68",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T09:59:46.663Z"
   }
 ]
