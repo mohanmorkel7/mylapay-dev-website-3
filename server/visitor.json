@@ -3394,5 +3394,17 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "sessionId": "sess_d973fs1h",
+    "duration": 8,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T12:20:15.128Z"
   }
 ]
