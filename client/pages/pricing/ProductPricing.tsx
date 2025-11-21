@@ -83,7 +83,7 @@ export default function ProductPricing() {
           <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
             <div className="text-center mb-6">
               <h3 className="text-2xl font-semibold mb-2">Trial</h3>
-              <p className="text-[#2CADE3] text-xl mb-4">Free (up to 7 days)</p>
+              <p className="text-[#2CADE3] text-lg mb-3">Free (up to 7 days)</p>
               <p className="text-sm text-gray-600">
                 Best for initial evaluation and integration testing
               </p>
