@@ -5,7 +5,11 @@ import fs from "fs";
 import path from "path";
 import geoip from "geoip-lite";
 import multer from "multer";
-import { handleScheduleDemo, handleContactUs, handleApplyJob } from "./routes/Sendmail";
+import {
+  handleScheduleDemo,
+  handleContactUs,
+  handleApplyJob,
+} from "./routes/Sendmail";
 import { fileURLToPath } from "url";
 import process from "process";
 
@@ -86,7 +90,8 @@ export function createServer(): Express {
     fileFilter: (_req: Request, file: Express.Multer.File, cb) => {
       const allowed = ["application/pdf", "application/msword"];
       if (allowed.includes(file.mimetype)) cb(null, true);
-      else cb(new Error("Unsupported file type. Only PDF and DOC are allowed."));
+      else
+        cb(new Error("Unsupported file type. Only PDF and DOC are allowed."));
     },
   });
 
@@ -101,87 +106,102 @@ export function createServer(): Express {
   app.post("/api/sendmail/apply-job", upload.single("resume"), handleApplyJob);
 
   // --- Manual log ---
-app.post("/api/log-user", (req: Request, res: Response) => {
-  try {
-    const data = req.body;
-    const ip = req.ip;
-    const geo = geoip.lookup(ip) || {};
-
-    const location: Location = {
-      country: geo.country || null,
-      region: geo.region || null,
-      city: geo.city || null,
-      ll: geo.ll || null,
-    };
-
-    const logs = getLogs();
-    const lastLog = logs[logs.length - 1];
-
-    // ⛔ Prevent same IP logging within 5 seconds
-    if (
-      lastLog &&
-      lastLog.ip === ip &&
-      Date.now() - new Date(lastLog.timestamp).getTime() < 5000
-    ) {
-      return res.json({ message: "Duplicate ignored" });
-    }
-
-    const newLog: UserLog = {
-      ...data,
-      ip,
-      location,
-      timestamp: new Date().toISOString(),
-    };
-
-    logs.push(newLog);
-    saveLogs(logs); // ✅ this actually writes the file ONCE
-
-    console.log("✅ User log saved:", newLog); // ✅ console only (not written to file)
-    res.json({ message: "User log saved successfully!" });
-  } catch (err: any) {
-    console.error("❌ Error saving user log:", err);
-    res.status(500).json({ message: "Failed to save log" });
-  }
-});
-
-  // --- Razorpay endpoints ---
-  app.post("/api/razorpay/create-order", async (req: Request, res: Response) => {
+  app.post("/api/log-user", (req: Request, res: Response) => {
     try {
-      const { amount, currency = "INR", receipt = undefined, notes = {} } = req.body;
-      const keyId = process.env.RAZORPAY_KEY_ID;
-      const keySecret = process.env.RAZORPAY_KEY_SECRET;
-      if (!keyId || !keySecret) {
-        return res.status(500).json({ ok: false, error: "Razorpay keys not configured" });
+      const data = req.body;
+      const ip = req.ip;
+      const geo = geoip.lookup(ip) || {};
+
+      const location: Location = {
+        country: geo.country || null,
+        region: geo.region || null,
+        city: geo.city || null,
+        ll: geo.ll || null,
+      };
+
+      const logs = getLogs();
+      const lastLog = logs[logs.length - 1];
+
+      // ⛔ Prevent same IP logging within 5 seconds
+      if (
+        lastLog &&
+        lastLog.ip === ip &&
+        Date.now() - new Date(lastLog.timestamp).getTime() < 5000
+      ) {
+        return res.json({ message: "Duplicate ignored" });
       }
 
-      // amount should be in smallest currency unit (paise)
-      if (!amount || typeof amount !== "number") {
-        return res.status(400).json({ ok: false, error: "Invalid amount" });
-      }
+      const newLog: UserLog = {
+        ...data,
+        ip,
+        location,
+        timestamp: new Date().toISOString(),
+      };
 
-      const axios = await import("axios");
-      const response = await axios.default.post(
-        "https://api.razorpay.com/v1/orders",
-        { amount, currency, receipt, payment_capture: 1, notes },
-        { auth: { username: keyId, password: keySecret } },
-      );
+      logs.push(newLog);
+      saveLogs(logs); // ✅ this actually writes the file ONCE
 
-      res.json({ ok: true, order: response.data, keyId });
+      console.log("✅ User log saved:", newLog); // ✅ console only (not written to file)
+      res.json({ message: "User log saved successfully!" });
     } catch (err: any) {
-      const errData = err?.response?.data || err?.message || String(err);
-      console.error("Razorpay create order error:", errData);
-      res.status(500).json({ ok: false, error: errData });
+      console.error("❌ Error saving user log:", err);
+      res.status(500).json({ message: "Failed to save log" });
     }
   });
 
+  // --- Razorpay endpoints ---
+  app.post(
+    "/api/razorpay/create-order",
+    async (req: Request, res: Response) => {
+      try {
+        const {
+          amount,
+          currency = "INR",
+          receipt = undefined,
+          notes = {},
+        } = req.body;
+        const keyId = process.env.RAZORPAY_KEY_ID;
+        const keySecret = process.env.RAZORPAY_KEY_SECRET;
+        if (!keyId || !keySecret) {
+          return res
+            .status(500)
+            .json({ ok: false, error: "Razorpay keys not configured" });
+        }
+
+        // amount should be in smallest currency unit (paise)
+        if (!amount || typeof amount !== "number") {
+          return res.status(400).json({ ok: false, error: "Invalid amount" });
+        }
+
+        const axios = await import("axios");
+        const response = await axios.default.post(
+          "https://api.razorpay.com/v1/orders",
+          { amount, currency, receipt, payment_capture: 1, notes },
+          { auth: { username: keyId, password: keySecret } },
+        );
+
+        res.json({ ok: true, order: response.data, keyId });
+      } catch (err: any) {
+        const errData = err?.response?.data || err?.message || String(err);
+        console.error("Razorpay create order error:", errData);
+        res.status(500).json({ ok: false, error: errData });
+      }
+    },
+  );
+
   app.post("/api/razorpay/verify", async (req: Request, res: Response) => {
     try {
-      const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+      const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+        req.body;
       const keySecret = process.env.RAZORPAY_KEY_SECRET;
-      if (!keySecret) return res.status(500).json({ ok: false, error: "Missing key secret" });
+      if (!keySecret)
+        return res.status(500).json({ ok: false, error: "Missing key secret" });
 
       const crypto = await import("crypto");
-      const expected = crypto.createHmac("sha256", keySecret).update(razorpay_order_id + "|" + razorpay_payment_id).digest("hex");
+      const expected = crypto
+        .createHmac("sha256", keySecret)
+        .update(razorpay_order_id + "|" + razorpay_payment_id)
+        .digest("hex");
 
       if (expected === razorpay_signature) {
         return res.json({ ok: true });
@@ -189,7 +209,9 @@ app.post("/api/log-user", (req: Request, res: Response) => {
       return res.status(400).json({ ok: false, error: "Invalid signature" });
     } catch (err: any) {
       console.error("Razorpay verify error:", err);
-      res.status(500).json({ ok: false, error: err?.message || "Verification failed" });
+      res
+        .status(500)
+        .json({ ok: false, error: err?.message || "Verification failed" });
     }
   });
 
@@ -208,12 +230,20 @@ app.post("/api/log-user", (req: Request, res: Response) => {
       const logs = getLogs();
       const lastLog = logs[logs.length - 1];
 
-      if (lastLog && lastLog.ip === ip && Date.now() - new Date(lastLog.timestamp).getTime() < 5000) {
+      if (
+        lastLog &&
+        lastLog.ip === ip &&
+        Date.now() - new Date(lastLog.timestamp).getTime() < 5000
+      ) {
         logToFile("⚠️ Duplicate visitor log ignored", { ip });
         return res.json({ message: "Duplicate ignored" });
       }
 
-      const newLog: UserLog = { ip, location, timestamp: new Date().toISOString() };
+      const newLog: UserLog = {
+        ip,
+        location,
+        timestamp: new Date().toISOString(),
+      };
       logs.push(newLog);
       saveLogs(logs);
 
