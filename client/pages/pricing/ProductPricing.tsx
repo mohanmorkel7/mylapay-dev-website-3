@@ -1,7 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Check } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const products = [
   { slug: "mylapay-tokenx", name: "TokenX", fullName: "Mylapay TokenX" },
