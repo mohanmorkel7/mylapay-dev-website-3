@@ -172,8 +172,20 @@ export default function ProductPricing() {
 
           let verifyData: any = null;
           try {
-            const txtv = await verifyRes.clone().text();
-            verifyData = txtv ? JSON.parse(txtv) : { ok: false, error: "Empty verify response" };
+            if (verifyRes.bodyUsed) {
+              verifyData = { ok: false, error: "Verify response body already used" };
+            } else {
+              try {
+                verifyData = await verifyRes.json();
+              } catch (jerr) {
+                try {
+                  const txtv = await verifyRes.text();
+                  verifyData = txtv ? JSON.parse(txtv) : { ok: false, error: "Empty verify response" };
+                } catch (terr) {
+                  verifyData = { ok: false, error: String(terr || jerr) };
+                }
+              }
+            }
           } catch (err) {
             verifyData = { ok: false, error: String(err) };
           }
