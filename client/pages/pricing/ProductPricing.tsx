@@ -120,11 +120,24 @@ export default function ProductPricing() {
         body: JSON.stringify({ amount, currency: "INR", receipt: `rcpt_${Date.now()}`, notes: { plan: checkoutPlan.key } }),
       });
 
-      // Read response text once and parse
+      // Parse JSON safely without clone; handle bodyUsed
       let data: any = null;
       try {
-        const txt = await resp.clone().text();
-        data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
+        if (resp.bodyUsed) {
+          data = { ok: false, error: "Response body already used" };
+        } else {
+          try {
+            data = await resp.json();
+          } catch (jsonErr) {
+            // fallback to text
+            try {
+              const txt = await resp.text();
+              data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
+            } catch (txtErr) {
+              data = { ok: false, error: String(txtErr || jsonErr) };
+            }
+          }
+        }
       } catch (err) {
         data = { ok: false, error: String(err) };
       }
