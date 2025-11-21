@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 // Card network logos
 import networkCertificates1 from "@/pages/assets/images/mastercard.png";
-import networkCertificates2 from "@/pages/assets/cardNetworks/amex.png";
+import networkCertificates2 from "@/pages/assets/cardnetworks/amex.png";
 // import networkCertificates3 from "@/pages/assets/cardNetworks/juspay.jpg";
 // import networkCertificates4 from "@/pages/assets/cardNetworks/razorpay.png";
 import networkCertificates5 from "@/pages/assets/images/rupay.png";
