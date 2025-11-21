@@ -82,7 +82,7 @@ export default function ProductPricing() {
           {/* Trial Plan */}
           <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
             <div className="text-center mb-6">
-              <h3 className="text-3xl font-semibold mb-3">Trial</h3>
+              <h3 className="text-2xl font-semibold mb-2">Trial</h3>
               <p className="text-[#2CADE3] text-xl mb-4">Free (up to 7 days)</p>
               <p className="text-sm text-gray-600">
                 Best for initial evaluation and integration testing
@@ -116,7 +116,7 @@ export default function ProductPricing() {
           {/* Basic Plan */}
           <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
             <div className="text-center mb-6">
-              <h3 className="text-3xl font-semibold mb-3">Basic Plan</h3>
+              <h3 className="text-2xl font-semibold mb-2">Basic Plan</h3>
               <p className="text-gray-600 text-xl mb-4">$$$$/ Year</p>
               <p className="text-sm text-gray-600">
                 Ideal for small to mid-size merchants starting transaction processing
@@ -159,7 +159,7 @@ export default function ProductPricing() {
               Best Seller
             </div>
             <div className="text-center mb-6">
-              <h3 className="text-3xl font-semibold mb-3">Pro Plan</h3>
+              <h3 className="text-2xl font-semibold mb-2">Pro Plan</h3>
               <p className="text-xl mb-4">$$$/ Year</p>
               <p className="text-sm text-gray-600">
                 For growing merchants needing higher throughput and stability
@@ -205,7 +205,7 @@ export default function ProductPricing() {
           {/* Enterprise Plan */}
           <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
             <div className="text-center mb-6">
-              <h3 className="text-3xl font-semibold mb-3">Enterprise Plan</h3>
+              <h3 className="text-2xl font-semibold mb-2">Enterprise Plan</h3>
               <p className="text-sm text-gray-600 mb-4">
                 For large-scale merchants requiring dedicated infrastructure
               </p>
