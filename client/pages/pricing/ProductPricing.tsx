@@ -120,27 +120,13 @@ export default function ProductPricing() {
         body: JSON.stringify({ amount, currency: "INR", receipt: `rcpt_${Date.now()}`, notes: { plan: checkoutPlan.key } }),
       });
 
+      // Read response text once and parse
       let data: any = null;
-      // Try safe parsing using clone() to avoid 'body stream already read'
       try {
-        try {
-          data = await resp.clone().json();
-        } catch (jsonErr) {
-          const txt = await resp.clone().text();
-          try {
-            data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
-          } catch (parseErr) {
-            data = { ok: false, error: String(parseErr), raw: txt };
-          }
-        }
+        const txt = await resp.text();
+        data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
       } catch (err) {
-        // As a last resort, attempt to read text from original response
-        try {
-          const txt = await resp.text();
-          data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
-        } catch (finalErr) {
-          data = { ok: false, error: String(finalErr) };
-        }
+        data = { ok: false, error: String(err) };
       }
 
       if (!data || !data.ok) throw new Error(data?.error || "Failed to create order");
