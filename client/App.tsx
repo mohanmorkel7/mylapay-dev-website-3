@@ -53,6 +53,7 @@ import Dashboard from "./pages/careers/dashboard/index";
 
 import Pricing from "@/pages/pricing/Pricing";
 import ProductPricing from "@/pages/pricing/ProductPricing";
+import PlanComparison from "@/pages/pricing/PlanComparison";
 
 const queryClient = new QueryClient();
 
@@ -118,6 +119,10 @@ const App = () => {
               <Route
                 path="/pricing/:productSlug"
                 element={<ProductPricing />}
+              />
+              <Route
+                path="/pricing/:productSlug/compare"
+                element={<PlanComparison />}
               />
 
               {/* Blog */}

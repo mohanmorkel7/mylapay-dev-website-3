@@ -5,7 +5,11 @@ import fs from "fs";
 import path from "path";
 import geoip from "geoip-lite";
 import multer from "multer";
-import { handleScheduleDemo, handleContactUs, handleApplyJob } from "./routes/Sendmail";
+import {
+  handleScheduleDemo,
+  handleContactUs,
+  handleApplyJob,
+} from "./routes/Sendmail";
 import { fileURLToPath } from "url";
 import process from "process";
 
@@ -86,7 +90,8 @@ export function createServer(): Express {
     fileFilter: (_req: Request, file: Express.Multer.File, cb) => {
       const allowed = ["application/pdf", "application/msword"];
       if (allowed.includes(file.mimetype)) cb(null, true);
-      else cb(new Error("Unsupported file type. Only PDF and DOC are allowed."));
+      else
+        cb(new Error("Unsupported file type. Only PDF and DOC are allowed."));
     },
   });
 
@@ -101,48 +106,156 @@ export function createServer(): Express {
   app.post("/api/sendmail/apply-job", upload.single("resume"), handleApplyJob);
 
   // --- Manual log ---
-app.post("/api/log-user", (req: Request, res: Response) => {
-  try {
-    const data = req.body;
-    const ip = req.ip;
-    const geo = geoip.lookup(ip) || {};
+  app.post("/api/log-user", (req: Request, res: Response) => {
+    try {
+      const data = req.body;
+      const ip = req.ip;
+      const geo = geoip.lookup(ip) || {};
 
-    const location: Location = {
-      country: geo.country || null,
-      region: geo.region || null,
-      city: geo.city || null,
-      ll: geo.ll || null,
-    };
+      const location: Location = {
+        country: geo.country || null,
+        region: geo.region || null,
+        city: geo.city || null,
+        ll: geo.ll || null,
+      };
 
-    const logs = getLogs();
-    const lastLog = logs[logs.length - 1];
+      const logs = getLogs();
+      const lastLog = logs[logs.length - 1];
 
-    // ⛔ Prevent same IP logging within 5 seconds
-    if (
-      lastLog &&
-      lastLog.ip === ip &&
-      Date.now() - new Date(lastLog.timestamp).getTime() < 5000
-    ) {
-      return res.json({ message: "Duplicate ignored" });
+      // ⛔ Prevent same IP logging within 5 seconds
+      if (
+        lastLog &&
+        lastLog.ip === ip &&
+        Date.now() - new Date(lastLog.timestamp).getTime() < 5000
+      ) {
+        return res.json({ message: "Duplicate ignored" });
+      }
+
+      const newLog: UserLog = {
+        ...data,
+        ip,
+        location,
+        timestamp: new Date().toISOString(),
+      };
+
+      logs.push(newLog);
+      saveLogs(logs); // ✅ this actually writes the file ONCE
+
+      console.log("✅ User log saved:", newLog); // ✅ console only (not written to file)
+      res.json({ message: "User log saved successfully!" });
+    } catch (err: any) {
+      console.error("❌ Error saving user log:", err);
+      res.status(500).json({ message: "Failed to save log" });
+    }
+  });
+
+  // --- Razorpay endpoints ---
+  app.post(
+    "/api/razorpay/create-order",
+    async (req: Request, res: Response) => {
+      try {
+        const {
+          amount,
+          currency = "INR",
+          receipt = undefined,
+          notes = {},
+        } = req.body;
+        const keyId = process.env.RAZORPAY_KEY_ID;
+        const keySecret = process.env.RAZORPAY_KEY_SECRET;
+        if (!keyId || !keySecret) {
+          return res
+            .status(500)
+            .json({ ok: false, error: "Razorpay keys not configured" });
+        }
+
+        // amount should be in smallest currency unit (paise)
+        if (!amount || typeof amount !== "number") {
+          return res.status(400).json({ ok: false, error: "Invalid amount" });
+        }
+
+        const axios = await import("axios");
+        const response = await axios.default.post(
+          "https://api.razorpay.com/v1/orders",
+          { amount, currency, receipt, payment_capture: 1, notes },
+          { auth: { username: keyId, password: keySecret } },
+        );
+
+        res.json({ ok: true, order: response.data, keyId });
+      } catch (err: any) {
+        const errData = err?.response?.data || err?.message || String(err);
+        console.error("Razorpay create order error:", errData);
+        res.status(500).json({ ok: false, error: errData });
+      }
+    },
+  );
+
+  app.post("/api/razorpay/verify", async (req: Request, res: Response) => {
+    try {
+      const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+        req.body;
+      const keySecret = process.env.RAZORPAY_KEY_SECRET;
+      if (!keySecret)
+        return res.status(500).json({ ok: false, error: "Missing key secret" });
+
+      const crypto = await import("crypto");
+      const expected = crypto
+        .createHmac("sha256", keySecret)
+        .update(razorpay_order_id + "|" + razorpay_payment_id)
+        .digest("hex");
+
+      if (expected === razorpay_signature) {
+        return res.json({ ok: true });
+      }
+      return res.status(400).json({ ok: false, error: "Invalid signature" });
+    } catch (err: any) {
+      console.error("Razorpay verify error:", err);
+      res
+        .status(500)
+        .json({ ok: false, error: err?.message || "Verification failed" });
+    }
+  });
+
+  // --- Server proxy for Mylapay OTP (avoids CORS and exposes sandbox endpoint via our server) ---
+  app.post("/api/mylapay/require-otp", async (req: Request, res: Response) => {
+    const axios = await import("axios");
+    const externalUrl =
+      "https://apisandbox-nonprod.mylapay.com/mylapay/v1/mylapay_site/require-otp";
+    const maxRetries = 2;
+    const timeoutMs = 5000;
+
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        const resp = await axios.default.post(externalUrl, req.body, {
+          headers: { "Content-Type": "application/json" },
+          timeout: timeoutMs,
+        });
+        // forward success response
+        return res.status(resp.status).json(resp.data);
+      } catch (err: any) {
+        const status = err?.response?.status;
+        const data = err?.response?.data;
+        console.error(`Mylapay require-otp proxy attempt ${attempt} error:`, {
+          status,
+          data: data || err?.message || String(err),
+        });
+
+        // If server error (5xx), retry (unless last attempt)
+        if (status && status >= 500 && attempt < maxRetries) {
+          await new Promise((r) => setTimeout(r, 300 * (attempt + 1)));
+          continue;
+        }
+
+        // For other errors or final attempt, return detailed error to client
+        const errData = data || { message: err?.message || String(err) };
+        return res.status(status || 502).json({ ok: false, error: errData });
+      }
     }
 
-    const newLog: UserLog = {
-      ...data,
-      ip,
-      location,
-      timestamp: new Date().toISOString(),
-    };
-
-    logs.push(newLog);
-    saveLogs(logs); // ✅ this actually writes the file ONCE
-
-    console.log("✅ User log saved:", newLog); // ✅ console only (not written to file)
-    res.json({ message: "User log saved successfully!" });
-  } catch (err: any) {
-    console.error("❌ Error saving user log:", err);
-    res.status(500).json({ message: "Failed to save log" });
-  }
-});
+    // Should not reach here, but fallback
+    return res
+      .status(502)
+      .json({ ok: false, error: { message: "Upstream service unavailable" } });
+  });
 
   // --- Automatic visitor log ---
   app.get("/api/track-visitor", (_req: Request, res: Response) => {
@@ -159,12 +272,20 @@ app.post("/api/log-user", (req: Request, res: Response) => {
       const logs = getLogs();
       const lastLog = logs[logs.length - 1];
 
-      if (lastLog && lastLog.ip === ip && Date.now() - new Date(lastLog.timestamp).getTime() < 5000) {
+      if (
+        lastLog &&
+        lastLog.ip === ip &&
+        Date.now() - new Date(lastLog.timestamp).getTime() < 5000
+      ) {
         logToFile("⚠️ Duplicate visitor log ignored", { ip });
         return res.json({ message: "Duplicate ignored" });
       }
 
-      const newLog: UserLog = { ip, location, timestamp: new Date().toISOString() };
+      const newLog: UserLog = {
+        ip,
+        location,
+        timestamp: new Date().toISOString(),
+      };
       logs.push(newLog);
       saveLogs(logs);
 
