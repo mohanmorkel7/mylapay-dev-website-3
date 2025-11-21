@@ -120,16 +120,27 @@ export default function ProductPricing() {
         body: JSON.stringify({ amount, currency: "INR", receipt: `rcpt_${Date.now()}`, notes: { plan: checkoutPlan.key } }),
       });
 
-      let data: any;
+      let data: any = null;
+      // Try safe parsing using clone() to avoid 'body stream already read'
       try {
-        const txt = await resp.text();
         try {
-          data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
-        } catch (parseErr) {
-          data = { ok: false, error: String(parseErr), raw: txt };
+          data = await resp.clone().json();
+        } catch (jsonErr) {
+          const txt = await resp.clone().text();
+          try {
+            data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
+          } catch (parseErr) {
+            data = { ok: false, error: String(parseErr), raw: txt };
+          }
         }
-      } catch (e) {
-        data = { ok: false, error: String(e) };
+      } catch (err) {
+        // As a last resort, attempt to read text from original response
+        try {
+          const txt = await resp.text();
+          data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
+        } catch (finalErr) {
+          data = { ok: false, error: String(finalErr) };
+        }
       }
 
       if (!data || !data.ok) throw new Error(data?.error || "Failed to create order");
@@ -160,16 +171,25 @@ export default function ProductPricing() {
             }),
           });
 
-          let verifyData: any;
+          let verifyData: any = null;
           try {
-            const txtv = await verifyRes.text();
             try {
-              verifyData = txtv ? JSON.parse(txtv) : { ok: false, error: "Empty verify response" };
-            } catch (parseErr2) {
-              verifyData = { ok: false, error: String(parseErr2), raw: txtv };
+              verifyData = await verifyRes.clone().json();
+            } catch (je) {
+              const txtv = await verifyRes.clone().text();
+              try {
+                verifyData = txtv ? JSON.parse(txtv) : { ok: false, error: "Empty verify response" };
+              } catch (pe) {
+                verifyData = { ok: false, error: String(pe), raw: txtv };
+              }
             }
           } catch (err) {
-            verifyData = { ok: false, error: String(err) };
+            try {
+              const txtv = await verifyRes.text();
+              verifyData = txtv ? JSON.parse(txtv) : { ok: false, error: "Empty verify response" };
+            } catch (finalErr) {
+              verifyData = { ok: false, error: String(finalErr) };
+            }
           }
 
           const details = {
