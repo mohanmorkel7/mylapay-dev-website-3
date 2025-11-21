@@ -122,15 +122,14 @@ export default function ProductPricing() {
 
       let data: any;
       try {
-        data = await resp.json();
-      } catch (e) {
-        // fallback if body already read or invalid json
+        const txt = await resp.text();
         try {
-          const txt = await resp.text();
           data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
-        } catch (err) {
-          data = { ok: false, error: String(err || e) };
+        } catch (parseErr) {
+          data = { ok: false, error: String(parseErr), raw: txt };
         }
+      } catch (e) {
+        data = { ok: false, error: String(e) };
       }
 
       if (!data || !data.ok) throw new Error(data?.error || "Failed to create order");
