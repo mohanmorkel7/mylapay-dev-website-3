@@ -63,13 +63,15 @@ export default function ProductPricing() {
           </h1>
 
           {/* Billing Toggle */}
-          <div className="flex items-center justify-center gap-3 mt-8">
-            <span className="text-sm font-bold">Save 15%</span>
-            <span className="text-sm">on yearly plan!</span>
+          <div className="flex items-center justify-end gap-3 mt-8">
+            <div className="text-right">
+              <span className="text-xs font-semibold">Save 15%</span>
+              <div className="text-xs text-gray-600">on yearly plan!</div>
+            </div>
             <div className="flex items-center gap-1 p-1 border border-gray-200 rounded-full bg-white">
               <button
                 onClick={() => setBillingCycle("yearly")}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                   billingCycle === "yearly"
                     ? "bg-blue-900 text-white"
                     : "text-gray-800"
@@ -79,7 +81,7 @@ export default function ProductPricing() {
               </button>
               <button
                 onClick={() => setBillingCycle("monthly")}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                   billingCycle === "monthly"
                     ? "bg-blue-900 text-white"
                     : "text-gray-800"
