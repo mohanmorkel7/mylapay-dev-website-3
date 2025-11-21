@@ -144,6 +144,57 @@ app.post("/api/log-user", (req: Request, res: Response) => {
   }
 });
 
+  // --- Razorpay endpoints ---
+  app.post("/api/razorpay/create-order", async (req: Request, res: Response) => {
+    try {
+      const { amount, currency = "INR", receipt = undefined, notes = {} } = req.body;
+      const keyId = process.env.RAZORPAY_KEY_ID;
+      const keySecret = process.env.RAZORPAY_KEY_SECRET;
+      if (!keyId || !keySecret) {
+        return res.status(500).json({ ok: false, error: "Razorpay keys not configured" });
+      }
+
+      // amount should be in smallest currency unit (paise)
+      if (!amount || typeof amount !== "number") {
+        return res.status(400).json({ ok: false, error: "Invalid amount" });
+      }
+
+      const axios = await import("axios");
+      const response = await axios.default.post(
+        "https://api.razorpay.com/v1/orders",
+        { amount, currency, receipt, payment_capture: 1, notes },
+        { auth: { username: keyId, password: keySecret } },
+      );
+
+      res.json({ ok: true, order: response.data });
+    } catch (err: any) {
+      console.error("Razorpay create order error:", err?.response?.data || err.message || err);
+      res.status(500).json({ ok: false, error: err?.response?.data || err.message });
+    }
+  });
+
+  app.post("/api/razorpay/verify", (req: Request, res: Response) => {
+    try {
+      const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+      const keySecret = process.env.RAZORPAY_KEY_SECRET;
+      if (!keySecret) return res.status(500).json({ ok: false, error: "Missing key secret" });
+
+      const crypto = require("crypto");
+      const expected = crypto
+        .createHmac("sha256", keySecret)
+        .update(razorpay_order_id + "|" + razorpay_payment_id)
+        .digest("hex");
+
+      if (expected === razorpay_signature) {
+        return res.json({ ok: true });
+      }
+      return res.status(400).json({ ok: false, error: "Invalid signature" });
+    } catch (err: any) {
+      console.error("Razorpay verify error:", err);
+      res.status(500).json({ ok: false, error: err?.message || "Verification failed" });
+    }
+  });
+
   // --- Automatic visitor log ---
   app.get("/api/track-visitor", (_req: Request, res: Response) => {
     try {
