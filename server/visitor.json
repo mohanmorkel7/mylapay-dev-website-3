@@ -2590,5 +2590,17 @@
       "ll": null
     },
     "timestamp": "2025-11-21T11:35:20.035Z"
+  },
+  {
+    "sessionId": "sess_yhw244pl",
+    "duration": 1,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T11:36:25.530Z"
   }
 ]
