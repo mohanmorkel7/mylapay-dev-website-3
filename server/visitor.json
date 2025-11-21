@@ -3586,5 +3586,17 @@
       "ll": null
     },
     "timestamp": "2025-11-21T13:38:31.596Z"
+  },
+  {
+    "sessionId": "sess_cwo65f4c",
+    "duration": 1,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T13:39:20.686Z"
   }
 ]
