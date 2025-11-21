@@ -1954,5 +1954,17 @@
       "ll": null
     },
     "timestamp": "2025-11-21T09:44:30.906Z"
+  },
+  {
+    "sessionId": "sess_wx3pfrmq",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T09:44:46.278Z"
   }
 ]

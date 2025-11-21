@@ -279,7 +279,7 @@ export default function Header() {
                   <ChevronDown size={14} className="mt-[1px]" />
                 </button>
                 {pricingMenuOpen && (
-                  <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-[780px] bg-white shadow-xl rounded-lg p-6 grid grid-cols-3 gap-6 z-50 border border-slate-100 ml-[-20px]">
+                  <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-[780px] max-w-[90vw] bg-white shadow-xl rounded-lg p-6 grid grid-cols-3 gap-6 z-50 border border-slate-100">
                     {products.map((p) => (
                       <Link
                         key={p.label}
@@ -289,7 +289,7 @@ export default function Header() {
                           setPricingMenuOpen(false);
                         }}
                         className={cn(
-                          "block text-sm p-2 rounded-md hover:bg-slate-50",
+                          "block text-sm p-2 rounded-md hover:bg-slate-50 break-words",
                           location.pathname === p.pricingHref
                             ? "text-slate-900 font-bold bg-slate-100"
                             : "text-slate-700 hover:text-slate-900"
