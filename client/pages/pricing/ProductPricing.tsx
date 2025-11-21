@@ -80,7 +80,7 @@ export default function ProductPricing() {
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
           {/* Trial Plan */}
-          <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
+          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col h-full">
             <div className="text-center mb-6">
               <h3 className="text-2xl font-semibold mb-2">Trial</h3>
               <p className="text-[#2CADE3] text-lg mb-3">Free (up to 7 days)</p>
@@ -114,7 +114,7 @@ export default function ProductPricing() {
           </div>
 
           {/* Basic Plan */}
-          <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
+          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col h-full">
             <div className="text-center mb-6">
               <h3 className="text-2xl font-semibold mb-2">Basic Plan</h3>
               <p className="text-gray-600 text-lg mb-3">$$$$/ Year</p>
@@ -154,7 +154,7 @@ export default function ProductPricing() {
           </div>
 
           {/* Pro Plan - Best Seller */}
-          <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col relative">
+          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col h-full relative">
             <div className="absolute top-2 right-2 bg-[#FFCD38] px-3 py-1 rounded text-xs font-medium">
               Best Seller
             </div>
@@ -203,7 +203,7 @@ export default function ProductPricing() {
           </div>
 
           {/* Enterprise Plan */}
-          <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
+          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col h-full">
             <div className="text-center mb-6">
               <h3 className="text-2xl font-semibold mb-2">Enterprise Plan</h3>
               <p className="text-sm text-gray-600 mb-4">
