@@ -80,7 +80,7 @@ export default function ProductPricing() {
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-start">
           {/* Trial Plan */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 flex flex-col h-auto lg:h-[428px]">
+          <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
             <div className="text-center mb-6">
               <h3 className="text-3xl font-semibold mb-3">Trial</h3>
               <p className="text-[#2CADE3] text-xl mb-4">Free (up to 7 days)</p>
