@@ -92,17 +92,17 @@ export default function PlanComparison() {
         <div className="max-w-7xl mx-auto">
           {/* Page Title */}
           <div className="text-center mb-6">
-            <h1 className="text-2xl md:text-3xl font-bold mb-3">
+            <h1 className="text-xl md:text-2xl font-bold mb-3">
               <span className="text-blue-900">Choose Your </span>
               <span className="text-[#2CADE3]">Plans</span>
             </h1>
-            <p className="text-gray-800 text-sm">With our Products</p>
+            <p className="text-gray-800 text-xs">With our Products</p>
           </div>
 
           {/* Product Selection */}
           <div className="flex justify-center mb-8">
             <div className="bg-[#1E3A8A] rounded-lg px-6 py-4">
-              <span className="text-white font-semibold text-lg md:text-xl">
+              <span className="text-white font-semibold text-base md:text-lg">
                 {product.fullName}
               </span>
             </div>
@@ -131,10 +131,10 @@ export default function PlanComparison() {
             </button>
 
             <div className="flex-1 max-w-xl">
-              <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-2">
                 Feature Table
               </h2>
-              <p className="text-gray-900 text-sm md:text-base">
+              <p className="text-gray-900 text-xs md:text-sm">
                 Choose the perfect plan for your business needs
               </p>
             </div>
@@ -147,7 +147,7 @@ export default function PlanComparison() {
               <div className="flex items-center gap-1 p-1 border border-gray-200 rounded-full bg-white">
                 <button
                   onClick={() => setBillingCycle("yearly")}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                  className={`px-3 py-1 rounded-full text-[11px] font-semibold transition-all ${
                     billingCycle === "yearly"
                       ? "bg-blue-900 text-white"
                       : "text-gray-800"
@@ -157,7 +157,7 @@ export default function PlanComparison() {
                 </button>
                 <button
                   onClick={() => setBillingCycle("monthly")}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
+                  className={`px-3 py-1 rounded-full text-[11px] font-semibold transition-all ${
                     billingCycle === "monthly"
                       ? "bg-blue-900 text-white"
                       : "text-gray-800"
@@ -174,7 +174,7 @@ export default function PlanComparison() {
             {/* Compare Plans Column */}
             <div className="bg-white p-6 md:p-8 border-b md:border-b-0 md:border-r border-[#E6E9F5] flex flex-col justify-between">
               <div>
-                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4">
+                <h3 className="text-base md:text-lg font-bold text-gray-900 mb-4">
                   Compare plans
                 </h3>
                 <div className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-gray-400 mb-4">
@@ -190,7 +190,7 @@ export default function PlanComparison() {
             {/* Trial Plan */}
             <div className="bg-white p-6 md:p-7 border-b md:border-b-0 md:border-r border-[#E6E9F5] flex flex-col justify-between text-center">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">
                   Trial
                 </h3>
                 <p className="text-xs text-gray-500 mb-6">/Free (7 days)</p>
@@ -203,7 +203,7 @@ export default function PlanComparison() {
             {/* $25 Plan */}
             <div className="bg-white p-6 md:p-7 border-b md:border-b-0 md:border-r border-[#E6E9F5] flex flex-col justify-between text-center">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">
                   $25
                 </h3>
                 <p className="text-xs text-gray-500 mb-6">/Month</p>
@@ -216,7 +216,7 @@ export default function PlanComparison() {
             {/* $40 Plan */}
             <div className="bg-white p-6 md:p-7 border-b md:border-b-0 md:border-r border-[#E6E9F5] flex flex-col justify-between text-center">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">
                   $40
                 </h3>
                 <p className="text-xs text-gray-500 mb-6">/Month</p>
@@ -229,7 +229,7 @@ export default function PlanComparison() {
             {/* Custom Plan */}
             <div className="bg-white p-6 md:p-7 border-b md:border-b-0 border-[#E6E9F5] flex flex-col justify-between text-center">
               <div>
-                <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6">
                   Custom
                 </h3>
               </div>
@@ -255,9 +255,9 @@ export default function PlanComparison() {
                 ].map((feature, idx) => (
                   <div
                     key={idx}
-                    className="p-5 border-b border-[#E6E9F5] h-20 flex items-center"
+                    className="p-3 border-b border-[#E6E9F5] h-16 flex items-center"
                   >
-                    <span className="text-gray-900 font-medium text-sm md:text-base">
+                    <span className="text-gray-900 font-medium text-xs md:text-sm">
                       {feature}
                     </span>
                   </div>
@@ -277,7 +277,7 @@ export default function PlanComparison() {
                 ].map((value, idx) => (
                   <div
                     key={idx}
-                    className="p-5 border-b border-[#E6E9F5] h-20 flex items-center justify-center"
+                    className="p-3 border-b border-[#E6E9F5] h-16 flex items-center justify-center"
                   >
                     {typeof value === "string" ? (
                       <span className="text-gray-900 font-medium text-sm text-center">
@@ -303,7 +303,7 @@ export default function PlanComparison() {
                 ].map((value, idx) => (
                   <div
                     key={idx}
-                    className="p-5 border-b border-[#E6E9F5] h-20 flex items-center justify-center"
+                    className="p-3 border-b border-[#E6E9F5] h-16 flex items-center justify-center"
                   >
                     {typeof value === "string" ? (
                       <span
@@ -331,7 +331,7 @@ export default function PlanComparison() {
                 ].map((value, idx) => (
                   <div
                     key={idx}
-                    className="p-5 border-b border-[#E6E9F5] h-20 flex items-center justify-center"
+                    className="p-3 border-b border-[#E6E9F5] h-16 flex items-center justify-center"
                   >
                     {typeof value === "string" ? (
                       <span
@@ -359,7 +359,7 @@ export default function PlanComparison() {
                 ].map((value, idx) => (
                   <div
                     key={idx}
-                    className="p-5 border-b border-[#E6E9F5] h-20 flex items-center justify-center"
+                    className="p-3 border-b border-[#E6E9F5] h-16 flex items-center justify-center"
                   >
                     {typeof value === "string" ? (
                       <span
@@ -378,7 +378,7 @@ export default function PlanComparison() {
 
           {/* FAQ Section */}
           <div className="max-w-4xl mx-auto py-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#1E3A8A] text-center mb-8">
+            <h2 className="text-xl md:text-2xl font-bold text-[#1E3A8A] text-center mb-8">
               Frequently Asked Question
             </h2>
 
@@ -392,7 +392,7 @@ export default function PlanComparison() {
                     onClick={() => toggleFaq(faq.id)}
                     className="w-full flex items-center justify-between p-4 md:p-6 text-left hover:bg-gray-50 transition-colors"
                   >
-                    <h3 className="text-base md:text-xl font-bold text-gray-900 pr-4">
+                    <h3 className="text-sm md:text-base font-bold text-gray-900 pr-4">
                       {faq.question}
                     </h3>
                     {expandedFaq === faq.id ? (
