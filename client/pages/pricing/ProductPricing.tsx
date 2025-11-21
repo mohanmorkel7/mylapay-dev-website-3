@@ -43,7 +43,7 @@ export default function ProductPricing() {
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">
             <span className="text-blue-900">Choose Your Plan for </span>
             <span className="text-[#2CADE3]">{product.name}</span>
           </h1>
