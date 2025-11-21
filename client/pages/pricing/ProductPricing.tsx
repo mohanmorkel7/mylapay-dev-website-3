@@ -94,180 +94,197 @@ export default function ProductPricing() {
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
           {/* Trial Plan */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col min-h-[16rem]">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-semibold mb-2">Trial</h3>
-              <p className="text-[#2CADE3] text-lg mb-3">Free (up to 7 days)</p>
-              <p className="text-xs text-gray-600">
-                Best for initial evaluation and integration testing
-              </p>
-            </div>
+          <div className="relative overflow-hidden group bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col min-h-[16rem]">
+            <div className="absolute inset-0 bg-gradient-to-b from-[#2CADE3] to-[#052343] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
-            <div className="space-y-3 mb-6 flex-grow">
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">
-                  Upto 100 transactions per day
-                </span>
+            <div className="relative z-10 text-gray-900 group-hover:text-white">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-semibold mb-2">Trial</h3>
+                <p className="text-[#2CADE3] text-lg mb-3 group-hover:text-white">Free (up to 7 days)</p>
+                <p className="text-xs text-gray-600 group-hover:text-gray-100">
+                  Best for initial evaluation and integration testing
+                </p>
               </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">Email support</span>
-              </div>
-            </div>
 
-            <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium hover:bg-[#2399c9] transition-colors">
-              Try Now
-            </button>
-            <a
-              href="#"
-              className="text-center text-xs text-gray-600 underline mt-2 block"
-            >
-              See more
-            </a>
+              <div className="space-y-3 mb-6 flex-grow">
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
+                    Upto 100 transactions per day
+                  </span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">Email support</span>
+                </div>
+              </div>
+
+              <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
+                Try Now
+              </button>
+              <a
+                href="#"
+                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100"
+              >
+                See more
+              </a>
+            </div>
           </div>
 
           {/* Basic Plan */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col min-h-[20rem]">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-semibold mb-2">Basic Plan</h3>
-              <p className="text-gray-600 text-lg mb-3">$$$$/ Year</p>
-              <p className="text-xs text-gray-600">
-                Ideal for small to mid-size merchants starting transaction
-                processing
-              </p>
-            </div>
+          <div className="relative overflow-hidden group bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col min-h-[20rem]">
+            <div className="absolute inset-0 bg-gradient-to-b from-[#2CADE3] to-[#052343] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
-            <div className="space-y-3 mb-6 flex-grow">
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">
-                  Upto 500 transactions per day
-                </span>
+            <div className="relative z-10 text-gray-900 group-hover:text-white">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-semibold mb-2">Basic Plan</h3>
+                <p className="text-gray-600 text-lg mb-3 group-hover:text-white">$$$$/ Year</p>
+                <p className="text-xs text-gray-600 group-hover:text-gray-100">
+                  Ideal for small to mid-size merchants starting transaction
+                  processing
+                </p>
               </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">
-                  Standard monthly transaction limit
-                </span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">Standard support</span>
-              </div>
-            </div>
 
-            <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium hover:bg-[#2399c9] transition-colors">
-              Buy Now
-            </button>
-            <a
-              href="#"
-              className="text-center text-xs text-gray-600 underline mt-2 block"
-            >
-              See more
-            </a>
+              <div className="space-y-3 mb-6 flex-grow">
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
+                    Upto 500 transactions per day
+                  </span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
+                    Standard monthly transaction limit
+                  </span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">Standard support</span>
+                </div>
+              </div>
+
+              <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
+                Buy Now
+              </button>
+              <a
+                href="#"
+                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100"
+              >
+                See more
+              </a>
+            </div>
           </div>
 
           {/* Pro Plan - Best Seller */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col min-h-[24rem] relative">
-            <div className="absolute top-2 right-2 bg-[#FFCD38] px-3 py-1 rounded text-xs font-medium">
+          <div className="relative overflow-hidden group bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col min-h-[24rem]">
+            <div className="absolute top-2 right-2 bg-[#FFCD38] px-3 py-1 rounded text-xs font-medium z-20">
               Best Seller
             </div>
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-semibold mb-2">Pro Plan</h3>
-              <p className="text-lg mb-3">$$$/ Year</p>
-              <p className="text-xs text-gray-600">
-                For growing merchants needing higher throughput and stability
-              </p>
-            </div>
 
-            <div className="space-y-3 mb-6 flex-grow">
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">1,000+ transactions per day</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">Reduced per-transaction rate</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">High transaction limits</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">Priority support</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">
-                  Access to Value-Added Services (VAS)
-                </span>
-              </div>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-[#2CADE3] to-[#052343] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
-            <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium hover:bg-[#2399c9] transition-colors">
-              Buy Now
-            </button>
-            <a
-              href="#"
-              className="text-center text-xs text-gray-600 underline mt-2 block"
-            >
-              See more
-            </a>
+            <div className="relative z-10 text-gray-900 group-hover:text-white">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-semibold mb-2">Pro Plan</h3>
+                <p className="text-lg mb-3 group-hover:text-white">$$$/ Year</p>
+                <p className="text-xs text-gray-600 group-hover:text-gray-100">
+                  For growing merchants needing higher throughput and stability
+                </p>
+              </div>
+
+              <div className="space-y-3 mb-6 flex-grow">
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-sm group-hover:text-gray-100">1,000+ transactions per day</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-sm group-hover:text-gray-100">Reduced per-transaction rate</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-sm group-hover:text-gray-100">High transaction limits</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-sm group-hover:text-gray-100">Priority support</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-sm group-hover:text-gray-100">
+                    Access to Value-Added Services (VAS)
+                  </span>
+                </div>
+              </div>
+
+              <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
+                Buy Now
+              </button>
+              <a
+                href="#"
+                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100"
+              >
+                See more
+              </a>
+            </div>
           </div>
 
           {/* Enterprise Plan */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col min-h-[28rem]">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-semibold mb-2">Enterprise Plan</h3>
-              <p className="text-sm text-gray-600 mb-4">
-                For large-scale merchants requiring dedicated infrastructure
-              </p>
-            </div>
+          <div className="relative overflow-hidden group bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col min-h-[28rem]">
+            <div className="absolute inset-0 bg-gradient-to-b from-[#2CADE3] to-[#052343] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
-            <div className="space-y-3 mb-6 flex-grow">
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">
-                  5,000+ transactions per day
-                </span>
+            <div className="relative z-10 text-gray-900 group-hover:text-white">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-semibold mb-2">Enterprise Plan</h3>
+                <p className="text-sm text-gray-600 mb-4 group-hover:text-gray-100">
+                  For large-scale merchants requiring dedicated infrastructure
+                </p>
               </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">
-                  Unlimited transactions
-                </span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">
-                  Volume-based pricing
-                </span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">
-                  24×7 dedicated support
-                </span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">
-                  Client-side deployment options
-                </span>
-              </div>
-            </div>
 
-            <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium hover:bg-[#2399c9] transition-colors">
-              Contact Now
-            </button>
-            <a
-              href="#"
-              className="text-center text-xs text-gray-600 underline mt-2 block"
-            >
-              See more
-            </a>
+              <div className="space-y-3 mb-6 flex-grow">
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
+                    5,000+ transactions per day
+                  </span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
+                    Unlimited transactions
+                  </span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
+                    Volume-based pricing
+                  </span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
+                    24×7 dedicated support
+                  </span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
+                    Client-side deployment options
+                  </span>
+                </div>
+              </div>
+
+              <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
+                Contact Now
+              </button>
+              <a
+                href="#"
+                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100"
+              >
+                See more
+              </a>
+            </div>
           </div>
         </div>
       </div>
