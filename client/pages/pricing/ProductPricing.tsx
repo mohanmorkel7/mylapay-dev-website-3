@@ -102,7 +102,7 @@ export default function ProductPricing() {
               </div>
             </div>
 
-            <button className="w-full bg-[#2CADE3] text-white py-3 rounded font-medium hover:bg-[#2399c9] transition-colors">
+            <button className="w-full bg-[#2CADE3] text-white py-2 text-sm rounded font-medium hover:bg-[#2399c9] transition-colors">
               Try Now
             </button>
             <a
@@ -142,7 +142,7 @@ export default function ProductPricing() {
               </div>
             </div>
 
-            <button className="w-full bg-[#2CADE3] text-white py-3 rounded font-medium hover:bg-[#2399c9] transition-colors">
+            <button className="w-full bg-[#2CADE3] text-white py-2 text-sm rounded font-medium hover:bg-[#2399c9] transition-colors">
               Buy Now
             </button>
             <a
@@ -191,7 +191,7 @@ export default function ProductPricing() {
               </div>
             </div>
 
-            <button className="w-full bg-[#2CADE3] text-white py-3 rounded font-medium hover:bg-[#2399c9] transition-colors">
+            <button className="w-full bg-[#2CADE3] text-white py-2 text-sm rounded font-medium hover:bg-[#2399c9] transition-colors">
               Buy Now
             </button>
             <a
@@ -238,7 +238,7 @@ export default function ProductPricing() {
               </div>
             </div>
 
-            <button className="w-full bg-[#2CADE3] text-white py-3 rounded font-medium hover:bg-[#2399c9] transition-colors">
+            <button className="w-full bg-[#2CADE3] text-white py-2 text-sm rounded font-medium hover:bg-[#2399c9] transition-colors">
               Contact Now
             </button>
             <a
