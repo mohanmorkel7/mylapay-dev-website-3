@@ -34,14 +34,28 @@ const products = [
   { slug: "mylapay-switchx", name: "SwitchX", fullName: "Mylapay SwitchX" },
 ];
 
+const planDetails: Record<string, { title: string; priceYearly: string; priceMonthly: string }> = {
+  trial: { title: "Trial", priceYearly: "Free (up to 7 days)", priceMonthly: "Free" },
+  basic: { title: "Basic Plan", priceYearly: "$499 / Year", priceMonthly: "$49 / Month" },
+  pro: { title: "Pro Plan", priceYearly: "$999 / Year", priceMonthly: "$99 / Month" },
+  enterprise: { title: "Enterprise Plan", priceYearly: "Contact for pricing", priceMonthly: "Contact for pricing" },
+};
+
 export default function ProductPricing() {
   const { productSlug } = useParams<{ productSlug: string }>();
   const navigate = useNavigate();
-  const [billingCycle, setBillingCycle] = useState<"yearly" | "monthly">(
-    "yearly",
-  );
+  const [billingCycle, setBillingCycle] = useState<"yearly" | "monthly">("yearly");
+
+  // Trial modal state
   const [showTrialModal, setShowTrialModal] = useState(false);
-  const [email, setEmail] = useState("");
+  const [trialEmail, setTrialEmail] = useState("");
+
+  // Checkout modal state
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+  const [checkoutPlan, setCheckoutPlan] = useState<{ key: string; title: string; price: string } | null>(null);
+  const [checkoutEmail, setCheckoutEmail] = useState("");
+  const [checkoutFirstName, setCheckoutFirstName] = useState("");
+  const [checkoutLastName, setCheckoutLastName] = useState("");
 
   const product = products.find((p) => p.slug === productSlug);
 
@@ -50,15 +64,48 @@ export default function ProductPricing() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Product not found</h1>
-          <button
-            onClick={() => navigate("/pricing")}
-            className="text-blue-600 hover:underline"
-          >
+          <button onClick={() => navigate("/pricing")} className="text-blue-600 hover:underline">
             Go back to pricing
           </button>
         </div>
       </div>
     );
+  }
+
+  function openCheckoutFor(key: string) {
+    const details = planDetails[key];
+    const price = billingCycle === "yearly" ? details.priceYearly : details.priceMonthly;
+    setCheckoutPlan({ key, title: details.title, price });
+    setShowCheckoutModal(true);
+  }
+
+  function handleProceedToPay() {
+    if (!checkoutPlan) return;
+    // Basic validation
+    if (!checkoutEmail || !checkoutFirstName || !checkoutLastName) {
+      // simple alert for now
+      alert("Please provide first name, last name and email to proceed.");
+      return;
+    }
+
+    // Replace this with real checkout integration
+    console.log("Proceeding to pay", {
+      plan: checkoutPlan,
+      billingCycle,
+      email: checkoutEmail,
+      firstName: checkoutFirstName,
+      lastName: checkoutLastName,
+    });
+
+    // Close modal and clear
+    setShowCheckoutModal(false);
+    setCheckoutEmail("");
+    setCheckoutFirstName("");
+    setCheckoutLastName("");
+    setCheckoutPlan(null);
+
+    // Optionally navigate to a dedicated checkout route if needed
+    // navigate('/checkout', { state: { ... } })
   }
 
   return (
@@ -81,9 +128,7 @@ export default function ProductPricing() {
               <button
                 onClick={() => setBillingCycle("yearly")}
                 className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-                  billingCycle === "yearly"
-                    ? "bg-blue-900 text-white"
-                    : "text-gray-800"
+                  billingCycle === "yearly" ? "bg-blue-900 text-white" : "text-gray-800"
                 }`}
               >
                 Yearly
@@ -91,9 +136,7 @@ export default function ProductPricing() {
               <button
                 onClick={() => setBillingCycle("monthly")}
                 className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-                  billingCycle === "monthly"
-                    ? "bg-blue-900 text-white"
-                    : "text-gray-800"
+                  billingCycle === "monthly" ? "bg-blue-900 text-white" : "text-gray-800"
                 }`}
               >
                 Monthly
@@ -110,19 +153,15 @@ export default function ProductPricing() {
 
             <div className="relative z-10 text-gray-900 group-hover:text-white">
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-semibold mb-2">Trial</h3>
-                <p className="text-[#2CADE3] text-lg mb-3 group-hover:text-white">Free (up to 7 days)</p>
-                <p className="text-xs text-gray-600 group-hover:text-gray-100">
-                  Best for initial evaluation and integration testing
-                </p>
+                <h3 className="text-2xl font-semibold mb-2">{planDetails.trial.title}</h3>
+                <p className="text-[#2CADE3] text-lg mb-3 group-hover:text-white">{planDetails.trial.priceYearly}</p>
+                <p className="text-xs text-gray-600 group-hover:text-gray-100">Best for initial evaluation and integration testing</p>
               </div>
 
               <div className="space-y-3 mb-6 flex-grow">
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
-                    Upto 100 transactions per day
-                  </span>
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">Upto 100 transactions per day</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
@@ -130,17 +169,11 @@ export default function ProductPricing() {
                 </div>
               </div>
 
-              <button
-                onClick={() => setShowTrialModal(true)}
-                className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]"
-              >
+              <button onClick={() => setShowTrialModal(true)} className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Try Now
               </button>
               <div className="flex justify-center mt-3">
-                <button
-                  onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                  className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
-                >
+                <button onClick={() => navigate(`/pricing/${productSlug}/compare`)} className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]">
                   See more
                 </button>
               </div>
@@ -153,26 +186,19 @@ export default function ProductPricing() {
 
             <div className="relative z-10 text-gray-900 group-hover:text-white">
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-semibold mb-2">Basic Plan</h3>
-                <p className="text-gray-600 text-lg mb-3 group-hover:text-white">$$$$/ Year</p>
-                <p className="text-xs text-gray-600 group-hover:text-gray-100">
-                  Ideal for small to mid-size merchants starting transaction
-                  processing
-                </p>
+                <h3 className="text-2xl font-semibold mb-2">{planDetails.basic.title}</h3>
+                <p className="text-gray-600 text-lg mb-3 group-hover:text-white">{billingCycle === 'yearly' ? planDetails.basic.priceYearly : planDetails.basic.priceMonthly}</p>
+                <p className="text-xs text-gray-600 group-hover:text-gray-100">Ideal for small to mid-size merchants starting transaction processing</p>
               </div>
 
               <div className="space-y-3 mb-6 flex-grow">
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
-                    Upto 500 transactions per day
-                  </span>
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">Upto 500 transactions per day</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
-                    Standard monthly transaction limit
-                  </span>
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">Standard monthly transaction limit</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
@@ -180,14 +206,11 @@ export default function ProductPricing() {
                 </div>
               </div>
 
-              <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
+              <button onClick={() => openCheckoutFor('basic')} className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Buy Now
               </button>
               <div className="flex justify-center mt-3">
-                <button
-                  onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                  className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
-                >
+                <button onClick={() => navigate(`/pricing/${productSlug}/compare`)} className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]">
                   See more
                 </button>
               </div>
@@ -196,19 +219,15 @@ export default function ProductPricing() {
 
           {/* Pro Plan - Best Seller */}
           <div className="relative overflow-hidden group bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col min-h-[28rem]">
-            <div className="absolute top-2 right-2 bg-[#FFCD38] px-3 py-1 rounded text-xs font-medium z-20">
-              Best Seller
-            </div>
+            <div className="absolute top-2 right-2 bg-[#FFCD38] px-3 py-1 rounded text-xs font-medium z-20">Best Seller</div>
 
             <div className="absolute inset-0 bg-gradient-to-b from-[#2CADE3] to-[#052343] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
             <div className="relative z-10 text-gray-900 group-hover:text-white">
               <div className="text-center mb-6">
-                <h3 className="text-2xl md:text-3xl font-semibold mb-2">Pro Plan</h3>
-                <p className="text-base mb-3 group-hover:text-white">$$$/ Year</p>
-                <p className="text-xs text-gray-600 group-hover:text-gray-100">
-                  For growing merchants needing higher throughput and stability
-                </p>
+                <h3 className="text-2xl md:text-3xl font-semibold mb-2">{planDetails.pro.title}</h3>
+                <p className="text-base mb-3 group-hover:text-white">{billingCycle === 'yearly' ? planDetails.pro.priceYearly : planDetails.pro.priceMonthly}</p>
+                <p className="text-xs text-gray-600 group-hover:text-gray-100">For growing merchants needing higher throughput and stability</p>
               </div>
 
               <div className="space-y-3 mb-6 flex-grow">
@@ -230,20 +249,15 @@ export default function ProductPricing() {
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-sm group-hover:text-gray-100">
-                    Access to Value-Added Services (VAS)
-                  </span>
+                  <span className="text-sm group-hover:text-gray-100">Access to Value-Added Services (VAS)</span>
                 </div>
               </div>
 
-              <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
+              <button onClick={() => openCheckoutFor('pro')} className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Buy Now
               </button>
               <div className="flex justify-center mt-3">
-                <button
-                  onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                  className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
-                >
+                <button onClick={() => navigate(`/pricing/${productSlug}/compare`)} className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]">
                   See more
                 </button>
               </div>
@@ -256,42 +270,31 @@ export default function ProductPricing() {
 
             <div className="relative z-10 text-gray-900 group-hover:text-white">
               <div className="text-center mb-6">
-                <h3 className="text-2xl md:text-3xl font-semibold mb-2">Enterprise Plan</h3>
-                <p className="text-sm text-gray-600 mb-4 group-hover:text-gray-100">
-                  For large-scale merchants requiring dedicated infrastructure
-                </p>
+                <h3 className="text-2xl md:text-3xl font-semibold mb-2">{planDetails.enterprise.title}</h3>
+                <p className="text-sm text-gray-600 mb-4 group-hover:text-gray-100">{billingCycle === 'yearly' ? planDetails.enterprise.priceYearly : planDetails.enterprise.priceMonthly}</p>
+                <p className="text-xs text-gray-600 group-hover:text-gray-100">For large-scale merchants requiring dedicated infrastructure</p>
               </div>
 
               <div className="space-y-3 mb-6 flex-grow">
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
-                    5,000+ transactions per day
-                  </span>
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">5,000+ transactions per day</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
-                    Unlimited transactions
-                  </span>
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">Unlimited transactions</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
-                    Volume-based pricing
-                  </span>
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">Volume-based pricing</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
-                    24×7 dedicated support
-                  </span>
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">24×7 dedicated support</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-gray-800 group-hover:text-white flex-shrink-0 mt-0.5" />
-                  <span className="text-xs text-gray-600 group-hover:text-gray-100">
-                    Client-side deployment options
-                  </span>
+                  <span className="text-xs text-gray-600 group-hover:text-gray-100">Client-side deployment options</span>
                 </div>
               </div>
 
@@ -299,10 +302,7 @@ export default function ProductPricing() {
                 Contact Now
               </button>
               <div className="flex justify-center mt-3">
-                <button
-                  onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                  className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
-                >
+                <button onClick={() => navigate(`/pricing/${productSlug}/compare`)} className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]">
                   See more
                 </button>
               </div>
@@ -320,28 +320,24 @@ export default function ProductPricing() {
 
             <div className="p-4 sm:p-6">
               <div className="text-center mb-4">
-                <h2 className="text-xl md:text-2xl font-bold text-[#1E3A8A] mb-1">
-                  Join Our Trial on
-                </h2>
-                <h3 className="text-xl md:text-2xl font-bold text-[#2CADE3]">
-                  Token X
-                </h3>
+                <h2 className="text-xl md:text-2xl font-bold text-[#1E3A8A] mb-1">Join Our Trial on</h2>
+                <h3 className="text-xl md:text-2xl font-bold text-[#2CADE3]">Token X</h3>
               </div>
 
               <div className="space-y-3">
                 <input
                   type="email"
                   placeholder="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={trialEmail}
+                  onChange={(e) => setTrialEmail(e.target.value)}
                   className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent"
                 />
 
                 <button
                   onClick={() => {
-                    console.log("Trial signup with email:", email);
+                    console.log("Trial signup with email:", trialEmail);
                     setShowTrialModal(false);
-                    setEmail("");
+                    setTrialEmail("");
                   }}
                   className="w-full bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium hover:bg-[#2399c9] transition-colors"
                 >
@@ -349,9 +345,57 @@ export default function ProductPricing() {
                 </button>
               </div>
 
-              <p className="text-center text-gray-500 text-xs mt-4">
-                Submit your email address to join the trial plan
-              </p>
+              <p className="text-center text-gray-500 text-xs mt-4">Submit your email address to join the trial plan</p>
+            </div>
+          </DialogContent>
+        </DialogPortal>
+      </Dialog>
+
+      {/* Checkout Modal */}
+      <Dialog open={showCheckoutModal} onOpenChange={setShowCheckoutModal}>
+        <DialogPortal>
+          <DialogOverlay className="bg-white/80 backdrop-blur-md" />
+          <DialogContent className="max-w-md p-4 sm:p-6 rounded-xl shadow-2xl">
+            <DialogTitle className="sr-only">Checkout</DialogTitle>
+
+            <div className="p-4 sm:p-6">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h2 className="text-xl font-bold text-[#1E3A8A]">Checkout</h2>
+                  <p className="text-sm text-gray-600">Please confirm your details to proceed to payment</p>
+                </div>
+                <button onClick={() => setShowCheckoutModal(false)} className="text-gray-500 hover:text-gray-700">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {checkoutPlan && (
+                <div className="mb-4 p-3 border border-gray-100 rounded-md bg-white">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500">Selected plan</p>
+                      <p className="font-semibold text-gray-900">{checkoutPlan.title}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm text-gray-500">Amount</p>
+                      <p className="font-semibold text-gray-900">{checkoutPlan.price}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input type="text" placeholder="First name" value={checkoutFirstName} onChange={(e) => setCheckoutFirstName(e.target.value)} className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent" />
+                  <input type="text" placeholder="Last name" value={checkoutLastName} onChange={(e) => setCheckoutLastName(e.target.value)} className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent" />
+                </div>
+
+                <input type="email" placeholder="Email address" value={checkoutEmail} onChange={(e) => setCheckoutEmail(e.target.value)} className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent" />
+
+                <button onClick={handleProceedToPay} className="w-full bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium hover:bg-[#2399c9] transition-colors">Proceed to Pay</button>
+              </div>
+
+              <p className="text-center text-gray-500 text-xs mt-4">You will be redirected to the payment gateway after clicking "Proceed to Pay".</p>
             </div>
           </DialogContent>
         </DialogPortal>
