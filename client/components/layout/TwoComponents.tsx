@@ -226,9 +226,8 @@ export default function SolutionSuite() {
               {/* Desktop Grid */}
               <div className="hidden lg:grid grid-cols-2 md:grid-cols-2 gap-4">
                 {networkCertificates.map((netc, idx) => (
-                  <motion.div>
+                  <motion.div key={`netc-${idx}`}>
                     <a
-                      key={idx}
                       className="bg-gradient-to-tr from-blue-50 to-white rounded-2xl p-4 flex items-center justify-center shadow"
                       // href={netc.pdf}
                       target="_blank"
