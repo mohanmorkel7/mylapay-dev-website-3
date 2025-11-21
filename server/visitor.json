@@ -3574,5 +3574,17 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "sessionId": "sess_1e5gy5sj",
+    "duration": 11,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T13:38:31.596Z"
   }
 ]
