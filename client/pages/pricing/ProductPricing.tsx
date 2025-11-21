@@ -472,6 +472,59 @@ export default function ProductPricing() {
           </DialogContent>
         </DialogPortal>
       </Dialog>
+
+      {/* Payment result modal */}
+      <Dialog open={showResultModal} onOpenChange={setShowResultModal}>
+        <DialogPortal>
+          <DialogOverlay className="bg-black/50 backdrop-blur-sm" />
+          <DialogContent className="max-w-md p-4 sm:p-6 rounded-xl shadow-2xl">
+            <DialogTitle className="sr-only">Payment Result</DialogTitle>
+
+            <div className="p-4 sm:p-6">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h2 className="text-xl font-bold text-[#1E3A8A]">Payment Result</h2>
+                  <p className="text-sm text-gray-600">Transaction details</p>
+                </div>
+              </div>
+
+              {resultDetails ? (
+                <div className="space-y-3">
+                  <div className="p-3 border rounded-md bg-white">
+                    <p className="text-sm text-gray-600">Status</p>
+                    <p className="font-semibold">{resultDetails.ok ? "Success" : "Failed"}</p>
+                  </div>
+
+                  {resultDetails.paymentResponse?.razorpay_payment_id && (
+                    <div className="p-3 border rounded-md bg-white">
+                      <p className="text-sm text-gray-600">Payment ID</p>
+                      <p className="font-semibold">{resultDetails.paymentResponse.razorpay_payment_id}</p>
+                    </div>
+                  )}
+
+                  {resultDetails.paymentResponse?.razorpay_order_id && (
+                    <div className="p-3 border rounded-md bg-white">
+                      <p className="text-sm text-gray-600">Order ID</p>
+                      <p className="font-semibold">{resultDetails.paymentResponse.razorpay_order_id}</p>
+                    </div>
+                  )}
+
+                  {resultDetails.verifyData && (
+                    <div className="p-3 border rounded-md bg-white">
+                      <p className="text-sm text-gray-600">Verification</p>
+                      <p className="font-semibold">{resultDetails.verifyData.ok ? "Signature valid" : resultDetails.verifyData.error}</p>
+                    </div>
+                  )}
+
+                  <button onClick={() => setShowResultModal(false)} className="w-full bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium hover:bg-[#2399c9] transition-colors">Close</button>
+                </div>
+              ) : (
+                <p className="text-sm text-gray-600">No transaction details available.</p>
+              )}
+            </div>
+          </DialogContent>
+        </DialogPortal>
+      </Dialog>
     </div>
   );
 }
