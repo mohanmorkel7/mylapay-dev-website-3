@@ -1,0 +1,20 @@
+[
+  {
+    "id": "J101",
+    "title": "HR and Admin",
+    "department": "Administrative",
+    "type": "Full time",
+    "location": "Chennai - Nungambakkam",
+    "daysAgo": "6 days ago",
+    "jd": "We are looking for a dynamic HR & Admin Manager with 1-2 years of experience from a reputed institution, who can drive people initiatives, ensure statutory HR compliance, and manage administration in a fast-paced startup. This role requires a quick-thinking professional who can implement processes at jet speed, balance employee welfare with business needs, manage compliance with local bodies and statutory authorities, and constantly build a positive company culture."
+  },
+  {
+    "id": "J102",
+    "title": "Finance Controller",
+    "department": "Finance",
+    "type": "Full time",
+    "location": "Chennai - Nungambakkam",
+    "daysAgo": "10 days ago",
+    "jd": "We are looking for a dynamic, CA-qualified Finance Controller who will take complete ownership of the finance function in our growing startup..."
+  }
+]

@@ -109,3 +109,33 @@
     background: hsl(var(--primary) / 0.25);
   }
 }
+.primarycolormylapay{
+  color: #2cade3;
+}
+
+.secondarycolormylapay{
+  color: #1f2b5c;
+}
+
+
+.active-tab::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #1f4e6b, #2baee4);
+  box-shadow: 0 2px 6px rgba(43, 174, 228, 0.6);
+}
+
+body{
+  overflow-x: hidden;
+}
+
+@media (max-width: 640px) {
+  .sm40 {
+    width: 90px;
+  }
+}
