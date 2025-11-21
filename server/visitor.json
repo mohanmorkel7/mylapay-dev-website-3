@@ -3442,5 +3442,17 @@
       "ll": null
     },
     "timestamp": "2025-11-21T12:23:51.167Z"
+  },
+  {
+    "sessionId": "sess_kujin4xh",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T12:24:02.638Z"
   }
 ]
