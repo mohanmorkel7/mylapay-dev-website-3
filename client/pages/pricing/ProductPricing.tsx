@@ -309,6 +309,58 @@ export default function ProductPricing() {
           </div>
         </div>
       </div>
+
+      {/* Trial Signup Modal */}
+      <Dialog open={showTrialModal} onOpenChange={setShowTrialModal}>
+        <DialogPortal>
+          <DialogOverlay className="bg-black/60" />
+          <DialogContent className="max-w-lg sm:max-w-xl md:max-w-2xl p-0 gap-0 border-0 rounded-2xl shadow-2xl">
+            <button
+              onClick={() => setShowTrialModal(false)}
+              className="absolute right-6 top-6 z-10 rounded-sm opacity-70 hover:opacity-100 transition-opacity"
+              aria-label="Close"
+            >
+              <X className="h-8 w-8" />
+            </button>
+
+            <div className="p-8 md:p-12">
+              <div className="text-center mb-8">
+                <h2 className="text-3xl md:text-4xl font-bold text-[#1E3A8A] mb-2">
+                  Join Our Trail on
+                </h2>
+                <h3 className="text-3xl md:text-4xl font-bold text-[#2CADE3]">
+                  Token X
+                </h3>
+              </div>
+
+              <div className="space-y-4">
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 border border-black/50 rounded-md text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent"
+                />
+
+                <button
+                  onClick={() => {
+                    console.log("Trial signup with email:", email);
+                    setShowTrialModal(false);
+                    setEmail("");
+                  }}
+                  className="w-full bg-[#2CADE3] text-white py-3 rounded-md text-base font-normal hover:bg-[#2399c9] transition-colors"
+                >
+                  Try now the trial
+                </button>
+              </div>
+
+              <p className="text-center text-gray-500 text-sm mt-6">
+                Submit your email address to join the trail plan
+              </p>
+            </div>
+          </DialogContent>
+        </DialogPortal>
+      </Dialog>
     </div>
   );
 }
