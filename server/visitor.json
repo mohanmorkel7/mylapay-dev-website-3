@@ -1678,5 +1678,17 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "sessionId": "sess_qex891wg",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T09:40:17.328Z"
   }
 ]
