@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Check } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const products = [
   { slug: "mylapay-tokenx", name: "TokenX", fullName: "Mylapay TokenX" },
@@ -30,6 +31,7 @@ const products = [
 export default function ProductPricing() {
   const { productSlug } = useParams<{ productSlug: string }>();
   const navigate = useNavigate();
+  const navigateToCompare = useNavigate();
   const [billingCycle, setBillingCycle] = useState<"yearly" | "monthly">(
     "yearly",
   );
@@ -124,12 +126,12 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Try Now
               </button>
-              <a
-                href="#"
-                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100"
+              <button
+                onClick={() => navigateToCompare(`/pricing/${productSlug}/compare`)}
+                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
               >
                 See more
-              </a>
+              </button>
             </div>
           </div>
 
@@ -169,12 +171,12 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Buy Now
               </button>
-              <a
-                href="#"
-                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100"
+              <button
+                onClick={() => navigateToCompare(`/pricing/${productSlug}/compare`)}
+                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
               >
                 See more
-              </a>
+              </button>
             </div>
           </div>
 
@@ -223,12 +225,12 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Buy Now
               </button>
-              <a
-                href="#"
-                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100"
+              <button
+                onClick={() => navigateToCompare(`/pricing/${productSlug}/compare`)}
+                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
               >
                 See more
-              </a>
+              </button>
             </div>
           </div>
 
@@ -280,12 +282,12 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Contact Now
               </button>
-              <a
-                href="#"
-                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100"
+              <button
+                onClick={() => navigateToCompare(`/pricing/${productSlug}/compare`)}
+                className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
               >
                 See more
-              </a>
+              </button>
             </div>
           </div>
         </div>
