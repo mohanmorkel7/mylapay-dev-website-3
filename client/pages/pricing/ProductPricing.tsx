@@ -117,7 +117,7 @@ export default function ProductPricing() {
           <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
             <div className="text-center mb-6">
               <h3 className="text-2xl font-semibold mb-2">Basic Plan</h3>
-              <p className="text-gray-600 text-xl mb-4">$$$$/ Year</p>
+              <p className="text-gray-600 text-lg mb-3">$$$$/ Year</p>
               <p className="text-sm text-gray-600">
                 Ideal for small to mid-size merchants starting transaction processing
               </p>
@@ -160,7 +160,7 @@ export default function ProductPricing() {
             </div>
             <div className="text-center mb-6">
               <h3 className="text-2xl font-semibold mb-2">Pro Plan</h3>
-              <p className="text-xl mb-4">$$$/ Year</p>
+              <p className="text-lg mb-3">$$$/ Year</p>
               <p className="text-sm text-gray-600">
                 For growing merchants needing higher throughput and stability
               </p>
