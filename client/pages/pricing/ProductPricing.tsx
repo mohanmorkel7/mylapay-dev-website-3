@@ -145,6 +145,11 @@ export default function ProductPricing() {
       const loaded = await loadRazorpayScript();
       if (!loaded) throw new Error("Failed to load Razorpay SDK");
 
+      // Close our checkout modal so Razorpay widget is clickable
+      setShowCheckoutModal(false);
+      // wait a tick so overlay is removed from DOM
+      await new Promise((res) => setTimeout(res, 120));
+
       // Open Razorpay Checkout
       const options: any = {
         key: keyId,
