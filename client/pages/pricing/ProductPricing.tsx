@@ -162,14 +162,14 @@ export default function ProductPricing() {
 
           let verifyData: any;
           try {
-            verifyData = await verifyRes.json();
-          } catch (err) {
+            const txtv = await verifyRes.text();
             try {
-              const txt = await verifyRes.text();
-              verifyData = txt ? JSON.parse(txt) : { ok: false, error: "Empty verify response" };
-            } catch (e2) {
-              verifyData = { ok: false, error: String(e2 || err) };
+              verifyData = txtv ? JSON.parse(txtv) : { ok: false, error: "Empty verify response" };
+            } catch (parseErr2) {
+              verifyData = { ok: false, error: String(parseErr2), raw: txtv };
             }
+          } catch (err) {
+            verifyData = { ok: false, error: String(err) };
           }
 
           const details = {
