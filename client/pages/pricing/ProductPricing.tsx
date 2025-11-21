@@ -123,7 +123,7 @@ export default function ProductPricing() {
       // Read response text once and parse
       let data: any = null;
       try {
-        const txt = await resp.text();
+        const txt = await resp.clone().text();
         data = txt ? JSON.parse(txt) : { ok: false, error: "Empty response" };
       } catch (err) {
         data = { ok: false, error: String(err) };
