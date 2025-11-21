@@ -4222,5 +4222,17 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "sessionId": "sess_4wp93cns",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T14:08:18.587Z"
   }
 ]
