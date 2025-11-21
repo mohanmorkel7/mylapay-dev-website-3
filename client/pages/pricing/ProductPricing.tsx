@@ -186,7 +186,7 @@ export default function ProductPricing() {
 
             <div className="relative z-10 text-gray-900 group-hover:text-white">
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-semibold mb-2">Pro Plan</h3>
+                <h3 className="text-3xl md:text-4xl font-semibold mb-2">Pro Plan</h3>
                 <p className="text-lg mb-3 group-hover:text-white">$$$/ Year</p>
                 <p className="text-xs text-gray-600 group-hover:text-gray-100">
                   For growing merchants needing higher throughput and stability
@@ -231,12 +231,12 @@ export default function ProductPricing() {
           </div>
 
           {/* Enterprise Plan */}
-          <div className="relative overflow-hidden group bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col min-h-[26rem]">
+          <div className="relative overflow-hidden group bg-white rounded-2xl shadow-xl p-6 md:p-8 flex flex-col min-h-[24rem]">
             <div className="absolute inset-0 bg-gradient-to-b from-[#2CADE3] to-[#052343] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
             <div className="relative z-10 text-gray-900 group-hover:text-white">
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-semibold mb-2">Enterprise Plan</h3>
+                <h3 className="text-2xl md:text-3xl font-semibold mb-2">Enterprise Plan</h3>
                 <p className="text-sm text-gray-600 mb-4 group-hover:text-gray-100">
                   For large-scale merchants requiring dedicated infrastructure
                 </p>
