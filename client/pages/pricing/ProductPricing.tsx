@@ -126,7 +126,7 @@ export default function ProductPricing() {
                 Try Now
               </button>
               <button
-                onClick={() => navigateToCompare(`/pricing/${productSlug}/compare`)}
+                onClick={() => navigate(`/pricing/${productSlug}/compare`)}
                 className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
               >
                 See more
@@ -171,7 +171,7 @@ export default function ProductPricing() {
                 Buy Now
               </button>
               <button
-                onClick={() => navigateToCompare(`/pricing/${productSlug}/compare`)}
+                onClick={() => navigate(`/pricing/${productSlug}/compare`)}
                 className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
               >
                 See more
@@ -225,7 +225,7 @@ export default function ProductPricing() {
                 Buy Now
               </button>
               <button
-                onClick={() => navigateToCompare(`/pricing/${productSlug}/compare`)}
+                onClick={() => navigate(`/pricing/${productSlug}/compare`)}
                 className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
               >
                 See more
@@ -282,7 +282,7 @@ export default function ProductPricing() {
                 Contact Now
               </button>
               <button
-                onClick={() => navigateToCompare(`/pricing/${productSlug}/compare`)}
+                onClick={() => navigate(`/pricing/${productSlug}/compare`)}
                 className="text-center text-xs text-gray-600 underline mt-2 block group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
               >
                 See more
