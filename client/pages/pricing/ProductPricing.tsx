@@ -64,9 +64,9 @@ export default function ProductPricing() {
 
           {/* Billing Toggle */}
           <div className="flex items-center justify-end gap-3 mt-8">
-            <div className="text-right">
-              <span className="text-xs font-semibold">Save 15%</span>
-              <div className="text-xs text-gray-600">on yearly plan!</div>
+            <div className="text-right whitespace-nowrap">
+              <span className="text-xs font-semibold mr-2">Save 15%</span>
+              <span className="text-xs text-gray-600">on yearly plan!</span>
             </div>
             <div className="flex items-center gap-1 p-1 border border-gray-200 rounded-full bg-white">
               <button

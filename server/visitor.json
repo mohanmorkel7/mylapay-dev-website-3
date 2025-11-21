@@ -2614,5 +2614,17 @@
       "ll": null
     },
     "timestamp": "2025-11-21T11:36:36.849Z"
+  },
+  {
+    "sessionId": "sess_bujccg7g",
+    "duration": 1,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T11:38:04.611Z"
   }
 ]
