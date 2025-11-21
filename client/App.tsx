@@ -52,6 +52,7 @@ import Login from "@/pages/careers/dashboard/LoginPage";
 import Dashboard from "./pages/careers/dashboard/index";
 
 import Pricing from "@/pages/pricing/Pricing";
+import ProductPricing from "@/pages/pricing/ProductPricing";
 
 const queryClient = new QueryClient();
 
@@ -114,6 +115,7 @@ const App = () => {
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/schedule-demo" element={<Demo />} />
               <Route path="/pricing" element={<Pricing />} />
+              <Route path="/pricing/:productSlug" element={<ProductPricing />} />
 
               {/* Blog */}
               <Route path="/blog" element={<Blog />} />
