@@ -2662,5 +2662,17 @@
       "ll": null
     },
     "timestamp": "2025-11-21T11:42:36.096Z"
+  },
+  {
+    "sessionId": "sess_qywmsmhs",
+    "duration": 2,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T11:44:32.375Z"
   }
 ]
