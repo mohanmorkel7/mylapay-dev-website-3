@@ -154,7 +154,7 @@ export default function ProductPricing() {
           </div>
 
           {/* Pro Plan - Best Seller */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 flex flex-col h-auto lg:h-[563px] relative">
+          <div className="bg-white rounded-2xl shadow-xl p-4 flex flex-col relative">
             <div className="absolute top-2 right-2 bg-[#FFCD38] px-3 py-1 rounded text-xs font-medium">
               Best Seller
             </div>
