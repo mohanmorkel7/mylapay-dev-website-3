@@ -316,6 +316,7 @@ export default function ProductPricing() {
         <DialogPortal>
           <DialogOverlay className="bg-black/60" />
           <DialogContent className="max-w-lg sm:max-w-xl md:max-w-2xl p-0 gap-0 border-0 rounded-2xl shadow-2xl">
+            <DialogTitle className="sr-only">Join Our Trial on Token X</DialogTitle>
             <button
               onClick={() => setShowTrialModal(false)}
               className="absolute right-6 top-6 z-10 rounded-sm opacity-70 hover:opacity-100 transition-opacity"
