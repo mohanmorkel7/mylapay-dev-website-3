@@ -124,7 +124,7 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Try Now
               </button>
-              <div className="flex justify-center">
+              <div className="flex justify-center mt-3">
                 <button
                   onClick={() => navigate(`/pricing/${productSlug}/compare`)}
                   className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
@@ -171,7 +171,7 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Buy Now
               </button>
-              <div className="flex justify-center">
+              <div className="flex justify-center mt-3">
                 <button
                   onClick={() => navigate(`/pricing/${productSlug}/compare`)}
                   className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
@@ -227,7 +227,7 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Buy Now
               </button>
-              <div className="flex justify-center">
+              <div className="flex justify-center mt-3">
                 <button
                   onClick={() => navigate(`/pricing/${productSlug}/compare`)}
                   className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
@@ -286,7 +286,7 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Contact Now
               </button>
-              <div className="flex justify-center">
+              <div className="flex justify-center mt-3">
                 <button
                   onClick={() => navigate(`/pricing/${productSlug}/compare`)}
                   className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
