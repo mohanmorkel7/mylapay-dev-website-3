@@ -70,6 +70,54 @@ export default function ProductPricing() {
   // Trial modal state
   const [showTrialModal, setShowTrialModal] = useState(false);
   const [trialEmail, setTrialEmail] = useState("");
+  const [trialStage, setTrialStage] = useState<'email' | 'otp'>('email');
+  const [trialOtp, setTrialOtp] = useState("");
+  const [trialOtpExpiresAt, setTrialOtpExpiresAt] = useState<number | null>(null);
+
+  // Functions for OTP flow
+  async function sendTrialOtp() {
+    if (!trialEmail) return alert('Enter an email to receive OTP');
+    try {
+      const axios = (await import('axios')).default;
+      const productName = product?.name ? product.name.toLowerCase() : 'tokenx';
+      const resp = await axios.post('https://apisandbox-nonprod.mylapay.com/mylapay/v1/mylapay_site/require-otp', { email: trialEmail, productName });
+      const data = resp.data;
+      if (data && data.ok) {
+        setTrialStage('otp');
+        setTrialOtp('');
+        setTrialOtpExpiresAt(Date.now() + 5 * 60 * 1000);
+        toast({ title: 'OTP sent', description: 'Please check your email and enter the 6-digit OTP (expires in 5 minutes).' });
+      } else {
+        toast({ title: 'Failed to send OTP', description: String(data?.message || data?.error || 'Unknown error') });
+      }
+    } catch (err: any) {
+      console.error('Send OTP error', err);
+      toast({ title: 'Send OTP failed', description: err?.message || String(err) });
+    }
+  }
+
+  async function verifyTrialOtp() {
+    if (!trialOtp) return alert('Enter the OTP');
+    try {
+      const axios = (await import('axios')).default;
+      const productName = product?.name ? product.name.toLowerCase() : 'tokenx';
+      const resp = await axios.post('https://apisandbox-nonprod.mylapay.com/mylapay/v1/mylapay_site/require-otp', { email: trialEmail, productName, otp: trialOtp });
+      const data = resp.data;
+      if (data && data.ok) {
+        toast({ title: data.message || 'Success', description: '' });
+        setShowTrialModal(false);
+        setTrialEmail('');
+        setTrialStage('email');
+        setTrialOtp('');
+        setTrialOtpExpiresAt(null);
+      } else {
+        toast({ title: 'OTP verification failed', description: String(data?.message || data?.error || 'Invalid OTP') });
+      }
+    } catch (err: any) {
+      console.error('Verify OTP error', err);
+      toast({ title: 'Verify OTP failed', description: err?.message || String(err) });
+    }
+  }
 
   // Checkout modal state
   const [showCheckoutModal, setShowCheckoutModal] = useState(false);
