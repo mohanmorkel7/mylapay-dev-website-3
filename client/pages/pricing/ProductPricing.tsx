@@ -314,7 +314,7 @@ export default function ProductPricing() {
       {/* Trial Signup Modal */}
       <Dialog open={showTrialModal} onOpenChange={setShowTrialModal}>
         <DialogPortal>
-          <DialogOverlay className="bg-white/30 backdrop-blur-sm" />
+          <DialogOverlay className="bg-white/70 backdrop-blur-md" />
           <DialogContent className="max-w-md p-4 sm:p-6 rounded-xl shadow-2xl">
             <DialogTitle className="sr-only">Join Our Trial on Token X</DialogTitle>
 
