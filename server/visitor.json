@@ -2566,5 +2566,29 @@
       "ll": null
     },
     "timestamp": "2025-11-21T11:34:37.147Z"
+  },
+  {
+    "sessionId": "sess_ewk3wca2",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T11:34:52.066Z"
+  },
+  {
+    "sessionId": "sess_sq1gx3g0",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-21T11:35:20.035Z"
   }
 ]
