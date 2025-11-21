@@ -300,12 +300,14 @@ export default function Header() {
                 onMouseLeave={() => handleLeave("pricing")}
               >
                 <button
+                  ref={pricingBtnRef}
                   className={cn(
                     "flex items-center gap-1 text-sm font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-slate-900 after:transition-all after:duration-300 after:ease-out after:w-0",
                     pricingMenuOpen || location.pathname.startsWith("/pricing")
                       ? "text-slate-900 after:w-full"
                       : "text-slate-800/90 hover:text-slate-900 hover:after:w-full"
                   )}
+                  onMouseEnter={() => handleEnter('pricing')}
                 >
                   {item.label}
                   <ChevronDown size={14} className="mt-[1px]" />
