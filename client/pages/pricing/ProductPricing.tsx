@@ -6,9 +6,21 @@ const products = [
   { slug: "mylapay-tokenx", name: "TokenX", fullName: "Mylapay TokenX" },
   { slug: "mylapay-secure", name: "Secure", fullName: "Mylapay Secure" },
   { slug: "mylapay-cswitch", name: "C-Switch", fullName: "Mylapay C-Switch" },
-  { slug: "mylapay-intellewatch", name: "IntelleWatch", fullName: "IntelleWatch" },
-  { slug: "mylapay-intellesettle", name: "IntelleSettle", fullName: "IntelleSettle" },
-  { slug: "mylapay-intellesolve", name: "IntelleSolve", fullName: "IntelleSolve" },
+  {
+    slug: "mylapay-intellewatch",
+    name: "IntelleWatch",
+    fullName: "IntelleWatch",
+  },
+  {
+    slug: "mylapay-intellesettle",
+    name: "IntelleSettle",
+    fullName: "IntelleSettle",
+  },
+  {
+    slug: "mylapay-intellesolve",
+    name: "IntelleSolve",
+    fullName: "IntelleSolve",
+  },
   { slug: "mylapay-intelle360", name: "Intelle360", fullName: "Intelle360" },
   { slug: "mylapay-uswitch", name: "U-Switch", fullName: "Mylapay U-Switch" },
   { slug: "mylapay-intellepro", name: "IntellePro", fullName: "IntellePro" },
@@ -18,7 +30,9 @@ const products = [
 export default function ProductPricing() {
   const { productSlug } = useParams<{ productSlug: string }>();
   const navigate = useNavigate();
-  const [billingCycle, setBillingCycle] = useState<"yearly" | "monthly">("yearly");
+  const [billingCycle, setBillingCycle] = useState<"yearly" | "monthly">(
+    "yearly",
+  );
 
   const product = products.find((p) => p.slug === productSlug);
 
@@ -119,7 +133,8 @@ export default function ProductPricing() {
               <h3 className="text-2xl font-semibold mb-2">Basic Plan</h3>
               <p className="text-gray-600 text-lg mb-3">$$$$/ Year</p>
               <p className="text-xs text-gray-600">
-                Ideal for small to mid-size merchants starting transaction processing
+                Ideal for small to mid-size merchants starting transaction
+                processing
               </p>
             </div>
 
@@ -220,15 +235,21 @@ export default function ProductPricing() {
               </div>
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">Unlimited transactions</span>
+                <span className="text-xs text-gray-600">
+                  Unlimited transactions
+                </span>
               </div>
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">Volume-based pricing</span>
+                <span className="text-xs text-gray-600">
+                  Volume-based pricing
+                </span>
               </div>
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />
-                <span className="text-xs text-gray-600">24×7 dedicated support</span>
+                <span className="text-xs text-gray-600">
+                  24×7 dedicated support
+                </span>
               </div>
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-gray-800 flex-shrink-0 mt-0.5" />

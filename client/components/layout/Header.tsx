@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
-import Fulllogo from "@/pages/assets/images/logo-full.webp"
+import Fulllogo from "@/pages/assets/images/logo-full.webp";
 
 const navItems = [
   // { label: "Our Capabilities", href: "/capabilities" },
@@ -16,16 +16,76 @@ const navItems = [
 
 // Products menu
 const products = [
-  { label: "Mylapay TokenX", desc: "Card Tokenization - COF & Alt ID", href: "/products/mylapay-tokenx", sub:"Encrypt | Process | Tokenize", pricingHref: "/pricing/mylapay-tokenx" },
-  { label: "Mylapay Secure", desc: "3DS Server certified by EMVCo", href: "/products/mylapay-secure",sub:"Detect | Prevent | Authenticate", pricingHref: "/pricing/mylapay-secure" },
-  { label: "Mylapay C-Switch", desc: "Base I Auth Switch for Card Payments", href: "/products/mylapay-cswitch",sub:"Integrate | Transact | Authorize", pricingHref: "/pricing/mylapay-cswitch" },
-  { label: "IntelleWatch", desc: "Fraud Risk Management (FRM) System", href: "/products/mylapay-intellewatch", sub:"Monitor | Block | Safeguard", pricingHref: "/pricing/mylapay-intellewatch" },
-  { label: "IntelleSettle", desc: "Base II Clearing & Settlement System", href: "/products/mylapay-intellesettle",sub:"Submit | Collect | Settle", pricingHref: "/pricing/mylapay-intellesettle" },
-  { label: "IntelleSolve", desc: "Chargeback Management System", href: "/products/mylapay-intellesolve",sub:"Defend | Resolve | Recover", pricingHref: "/pricing/mylapay-intellesolve" },
-  { label: "Intelle360", desc: "Analytics Suite for Acquiring Payments", href: "/products/mylapay-intelle360",sub:"Intelligence | Protection | Growth", pricingHref: "/pricing/mylapay-intelle360" },
-  { label: "Mylapay U-Switch", desc: "UPI Switch for PSPs, Beneficiary Banks", href: "/products/mylapay-uswitch",sub:"Connect | Route | Approve", pricingHref: "/pricing/mylapay-uswitch" },
-  { label: "IntellePro", desc: "Real-time TMS for UPI Transactions", href: "/products/mylapay-intellepro",sub:"Reconcile | Settle | Recover", pricingHref: "/pricing/mylapay-intellepro" },
-  { label: "Mylapay SwitchX", desc: "Payment Orchestration Hub", href: "/products/mylapay-switchx",sub:"Route | Integrate | Optimize", pricingHref: "/pricing/mylapay-switchx" },
+  {
+    label: "Mylapay TokenX",
+    desc: "Card Tokenization - COF & Alt ID",
+    href: "/products/mylapay-tokenx",
+    sub: "Encrypt | Process | Tokenize",
+    pricingHref: "/pricing/mylapay-tokenx",
+  },
+  {
+    label: "Mylapay Secure",
+    desc: "3DS Server certified by EMVCo",
+    href: "/products/mylapay-secure",
+    sub: "Detect | Prevent | Authenticate",
+    pricingHref: "/pricing/mylapay-secure",
+  },
+  {
+    label: "Mylapay C-Switch",
+    desc: "Base I Auth Switch for Card Payments",
+    href: "/products/mylapay-cswitch",
+    sub: "Integrate | Transact | Authorize",
+    pricingHref: "/pricing/mylapay-cswitch",
+  },
+  {
+    label: "IntelleWatch",
+    desc: "Fraud Risk Management (FRM) System",
+    href: "/products/mylapay-intellewatch",
+    sub: "Monitor | Block | Safeguard",
+    pricingHref: "/pricing/mylapay-intellewatch",
+  },
+  {
+    label: "IntelleSettle",
+    desc: "Base II Clearing & Settlement System",
+    href: "/products/mylapay-intellesettle",
+    sub: "Submit | Collect | Settle",
+    pricingHref: "/pricing/mylapay-intellesettle",
+  },
+  {
+    label: "IntelleSolve",
+    desc: "Chargeback Management System",
+    href: "/products/mylapay-intellesolve",
+    sub: "Defend | Resolve | Recover",
+    pricingHref: "/pricing/mylapay-intellesolve",
+  },
+  {
+    label: "Intelle360",
+    desc: "Analytics Suite for Acquiring Payments",
+    href: "/products/mylapay-intelle360",
+    sub: "Intelligence | Protection | Growth",
+    pricingHref: "/pricing/mylapay-intelle360",
+  },
+  {
+    label: "Mylapay U-Switch",
+    desc: "UPI Switch for PSPs, Beneficiary Banks",
+    href: "/products/mylapay-uswitch",
+    sub: "Connect | Route | Approve",
+    pricingHref: "/pricing/mylapay-uswitch",
+  },
+  {
+    label: "IntellePro",
+    desc: "Real-time TMS for UPI Transactions",
+    href: "/products/mylapay-intellepro",
+    sub: "Reconcile | Settle | Recover",
+    pricingHref: "/pricing/mylapay-intellepro",
+  },
+  {
+    label: "Mylapay SwitchX",
+    desc: "Payment Orchestration Hub",
+    href: "/products/mylapay-switchx",
+    sub: "Route | Integrate | Optimize",
+    pricingHref: "/pricing/mylapay-switchx",
+  },
 ];
 
 // Solutions menu
@@ -39,19 +99,22 @@ const solutions = [
   {
     key: "card",
     title: "Card Payments",
-    description: "End-to-end card acceptance: tokenization, authorization, settlement, recon & reporting.",
+    description:
+      "End-to-end card acceptance: tokenization, authorization, settlement, recon & reporting.",
     href: "/solutions/card-payments",
   },
   {
     key: "upi",
     title: "UPI payments",
-    description: "Fast, low-cost UPI acceptance with instant settlement & reconciliation.",
+    description:
+      "Fast, low-cost UPI acceptance with instant settlement & reconciliation.",
     href: "/solutions/upi-payments",
   },
   {
     key: "orchestration",
     title: "Payment Orchestration",
-    description: "Smart routing, failover & optimization across multiple providers to maximize success rates.",
+    description:
+      "Smart routing, failover & optimization across multiple providers to maximize success rates.",
     href: "/solutions/payment-orchestration",
   },
 ];
@@ -72,7 +135,9 @@ export default function Header() {
   const [productsMenuOpen, setProductsMenuOpen] = useState(false);
   const [resourcesMenuOpen, setResourcesMenuOpen] = useState(false);
   const [pricingMenuOpen, setPricingMenuOpen] = useState(false);
-  const [pricingAlign, setPricingAlign] = useState<'center' | 'left' | 'right'>('center');
+  const [pricingAlign, setPricingAlign] = useState<"center" | "left" | "right">(
+    "center",
+  );
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
   const pricingBtnRef = useRef<HTMLButtonElement | null>(null);
@@ -80,7 +145,7 @@ export default function Header() {
   const computeAlignment = () => {
     try {
       const btn = pricingBtnRef.current;
-      if (!btn || typeof window === 'undefined') return;
+      if (!btn || typeof window === "undefined") return;
       const rect = btn.getBoundingClientRect();
       const vw = window.innerWidth || document.documentElement.clientWidth;
       const menuMax = Math.min(780, Math.floor(vw * 0.9));
@@ -89,18 +154,18 @@ export default function Header() {
 
       // If there's not enough right space for half the menu, anchor to right
       if (rightSpace < menuMax / 2) {
-        setPricingAlign('right');
+        setPricingAlign("right");
         return;
       }
 
       // If there's not enough left space for half the menu, anchor to left
       if (leftSpace < menuMax / 2) {
-        setPricingAlign('left');
+        setPricingAlign("left");
         return;
       }
 
       // Otherwise center
-      setPricingAlign('center');
+      setPricingAlign("center");
     } catch (err) {
       // noop
     }
@@ -173,7 +238,7 @@ export default function Header() {
                     "flex items-center gap-1 text-sm font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-slate-900 after:transition-all after:duration-300 after:ease-out after:w-0",
                     megaMenuOpen || location.pathname.startsWith("/products")
                       ? "text-slate-900 after:w-full"
-                      : "text-slate-800/90 hover:text-slate-900 hover:after:w-full"
+                      : "text-slate-800/90 hover:text-slate-900 hover:after:w-full",
                   )}
                 >
                   {item.label}
@@ -193,10 +258,12 @@ export default function Header() {
                           "block text-sm p-2 rounded-md hover:bg-slate-50",
                           location.pathname === p.href
                             ? "text-slate-900 font-bold bg-slate-100"
-                            : "text-slate-700 hover:text-slate-900"
+                            : "text-slate-700 hover:text-slate-900",
                         )}
                       >
-                        <span className="font-semibold secondarycolormylapay">{p.label}</span>
+                        <span className="font-semibold secondarycolormylapay">
+                          {p.label}
+                        </span>
                         <p className="text-xs text-slate-600">{p.desc}</p>
                         <p className="text-xs text-slate-600">{p.sub}</p>
                       </Link>
@@ -215,9 +282,10 @@ export default function Header() {
                 <button
                   className={cn(
                     "flex items-center gap-1 text-sm font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-slate-900 after:transition-all after:duration-300 after:ease-out after:w-0",
-                    productsMenuOpen || location.pathname.startsWith("/solutions")
+                    productsMenuOpen ||
+                      location.pathname.startsWith("/solutions")
                       ? "text-slate-900 after:w-full"
-                      : "text-slate-800/90 hover:text-slate-900 hover:after:w-full"
+                      : "text-slate-800/90 hover:text-slate-900 hover:after:w-full",
                   )}
                 >
                   {item.label}
@@ -237,11 +305,15 @@ export default function Header() {
                           "block text-sm p-2 rounded-md hover:bg-slate-50",
                           location.pathname === p.href
                             ? "text-slate-900 font-bold bg-slate-100"
-                            : "text-slate-700 hover:text-slate-900"
+                            : "text-slate-700 hover:text-slate-900",
                         )}
                       >
-                        <span className="font-semibold secondarycolormylapay">{p.title}</span>
-                        <p className="text-xs text-slate-600">{p.description}</p>
+                        <span className="font-semibold secondarycolormylapay">
+                          {p.title}
+                        </span>
+                        <p className="text-xs text-slate-600">
+                          {p.description}
+                        </p>
                       </Link>
                     ))}
                   </div>
@@ -258,9 +330,10 @@ export default function Header() {
                 <button
                   className={cn(
                     "flex items-center gap-1 text-sm font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-slate-900 after:transition-all after:duration-300 after:ease-out after:w-0",
-                    resourcesMenuOpen || location.pathname.startsWith("/resources")
+                    resourcesMenuOpen ||
+                      location.pathname.startsWith("/resources")
                       ? "text-slate-900 after:w-full"
-                      : "text-slate-800/90 hover:text-slate-900 hover:after:w-full"
+                      : "text-slate-800/90 hover:text-slate-900 hover:after:w-full",
                   )}
                 >
                   {item.label}
@@ -280,7 +353,7 @@ export default function Header() {
                           "block text-sm p-2 rounded-md hover:bg-slate-50",
                           location.pathname === r.href
                             ? "text-slate-900 font-bold bg-slate-100"
-                            : "text-slate-700 hover:text-slate-900"
+                            : "text-slate-700 hover:text-slate-900",
                         )}
                       >
                         <span className="font-semibold secondarycolormylapay">
@@ -305,18 +378,24 @@ export default function Header() {
                     "flex items-center gap-1 text-sm font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-slate-900 after:transition-all after:duration-300 after:ease-out after:w-0",
                     pricingMenuOpen || location.pathname.startsWith("/pricing")
                       ? "text-slate-900 after:w-full"
-                      : "text-slate-800/90 hover:text-slate-900 hover:after:w-full"
+                      : "text-slate-800/90 hover:text-slate-900 hover:after:w-full",
                   )}
-                  onMouseEnter={() => handleEnter('pricing')}
+                  onMouseEnter={() => handleEnter("pricing")}
                 >
                   {item.label}
                   <ChevronDown size={14} className="mt-[1px]" />
                 </button>
                 {pricingMenuOpen && (
-                  <div className={cn(
-                    "absolute mt-4 w-[780px] max-w-[90vw] bg-white shadow-xl rounded-lg p-6 grid grid-cols-3 gap-6 z-50 border border-slate-100",
-                    pricingAlign === 'center' ? 'left-1/2 -translate-x-1/2' : pricingAlign === 'right' ? 'right-0' : 'left-0'
-                  )}>
+                  <div
+                    className={cn(
+                      "absolute mt-4 w-[780px] max-w-[90vw] bg-white shadow-xl rounded-lg p-6 grid grid-cols-3 gap-6 z-50 border border-slate-100",
+                      pricingAlign === "center"
+                        ? "left-1/2 -translate-x-1/2"
+                        : pricingAlign === "right"
+                          ? "right-0"
+                          : "left-0",
+                    )}
+                  >
                     {products.map((p) => (
                       <Link
                         key={p.label}
@@ -329,10 +408,12 @@ export default function Header() {
                           "block text-sm p-2 rounded-md hover:bg-slate-50 break-words",
                           location.pathname === p.pricingHref
                             ? "text-slate-900 font-bold bg-slate-100"
-                            : "text-slate-700 hover:text-slate-900"
+                            : "text-slate-700 hover:text-slate-900",
                         )}
                       >
-                        <span className="font-semibold secondarycolormylapay">{p.label}</span>
+                        <span className="font-semibold secondarycolormylapay">
+                          {p.label}
+                        </span>
                         <p className="text-xs text-slate-600">{p.desc}</p>
                         <p className="text-xs text-slate-600">{p.sub}</p>
                       </Link>
@@ -340,8 +421,7 @@ export default function Header() {
                   </div>
                 )}
               </div>
-            ) 
-            : item.external ? (
+            ) : item.external ? (
               <a
                 key={item.href}
                 href={item.href}
@@ -351,8 +431,7 @@ export default function Header() {
               >
                 {item.label}
               </a>
-            )  :
-            (
+            ) : (
               // Normal link
               <Link
                 key={item.href}
@@ -361,15 +440,13 @@ export default function Header() {
                   "text-sm font-medium relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-slate-900 after:transition-all after:duration-300 after:ease-out after:w-0",
                   location.pathname === item.href
                     ? "text-slate-900 after:w-full"
-                    : "text-slate-800/90 hover:text-slate-900 hover:after:w-full"
+                    : "text-slate-800/90 hover:text-slate-900 hover:after:w-full",
                 )}
               >
                 {item.label}
               </Link>
-            )
+            ),
           )}
-         
-        
         </nav>
 
         {/* Mobile Hamburger */}
@@ -379,7 +456,12 @@ export default function Header() {
           onClick={() => setOpen((v) => !v)}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <path
+              d="M4 6h16M4 12h16M4 18h16"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
           </svg>
         </button>
       </div>
@@ -388,7 +470,7 @@ export default function Header() {
       <div
         className={cn(
           "md:hidden border-t bg-white/80 transition-all",
-          open ? "block" : "hidden"
+          open ? "block" : "hidden",
         )}
       >
         <div className="container py-3 flex flex-col max-h-[80vh] overflow-y-auto">
@@ -402,7 +484,10 @@ export default function Header() {
                   {item.label}
                   <ChevronDown
                     size={16}
-                    className={cn("transition-transform", megaMenuOpen ? "rotate-180" : "rotate-0")}
+                    className={cn(
+                      "transition-transform",
+                      megaMenuOpen ? "rotate-180" : "rotate-0",
+                    )}
                   />
                 </button>
                 {megaMenuOpen && (
@@ -416,7 +501,7 @@ export default function Header() {
                           "block text-sm p-2 rounded-md",
                           location.pathname === p.href
                             ? "text-slate-900 font-bold bg-slate-100"
-                            : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                            : "text-slate-700 hover:text-slate-900 hover:bg-slate-50",
                         )}
                       >
                         <span className="font-semibold">{p.label}</span>
@@ -435,7 +520,10 @@ export default function Header() {
                   {item.label}
                   <ChevronDown
                     size={16}
-                    className={cn("transition-transform", productsMenuOpen ? "rotate-180" : "rotate-0")}
+                    className={cn(
+                      "transition-transform",
+                      productsMenuOpen ? "rotate-180" : "rotate-0",
+                    )}
                   />
                 </button>
                 {productsMenuOpen && (
@@ -449,11 +537,13 @@ export default function Header() {
                           "block text-sm p-2 rounded-md",
                           location.pathname === p.href
                             ? "text-slate-900 font-bold bg-slate-100"
-                            : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                            : "text-slate-700 hover:text-slate-900 hover:bg-slate-50",
                         )}
                       >
                         <span className="font-semibold">{p.title}</span>
-                        <p className="text-xs text-slate-600">{p.description}</p>
+                        <p className="text-xs text-slate-600">
+                          {p.description}
+                        </p>
                       </Link>
                     ))}
                   </div>
@@ -468,7 +558,10 @@ export default function Header() {
                   {item.label}
                   <ChevronDown
                     size={16}
-                    className={cn("transition-transform", resourcesMenuOpen ? "rotate-180" : "rotate-0")}
+                    className={cn(
+                      "transition-transform",
+                      resourcesMenuOpen ? "rotate-180" : "rotate-0",
+                    )}
                   />
                 </button>
                 {resourcesMenuOpen && (
@@ -482,7 +575,7 @@ export default function Header() {
                           "block text-sm p-2 rounded-md",
                           location.pathname === r.href
                             ? "text-slate-900 font-bold bg-slate-100"
-                            : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                            : "text-slate-700 hover:text-slate-900 hover:bg-slate-50",
                         )}
                       >
                         <span className="font-semibold">{r.title}</span>
@@ -500,7 +593,10 @@ export default function Header() {
                   {item.label}
                   <ChevronDown
                     size={16}
-                    className={cn("transition-transform", pricingMenuOpen ? "rotate-180" : "rotate-0")}
+                    className={cn(
+                      "transition-transform",
+                      pricingMenuOpen ? "rotate-180" : "rotate-0",
+                    )}
                   />
                 </button>
                 {pricingMenuOpen && (
@@ -514,7 +610,7 @@ export default function Header() {
                           "block text-sm p-2 rounded-md",
                           location.pathname === p.pricingHref
                             ? "text-slate-900 font-bold bg-slate-100"
-                            : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                            : "text-slate-700 hover:text-slate-900 hover:bg-slate-50",
                         )}
                       >
                         <span className="font-semibold">{p.label}</span>
@@ -524,20 +620,18 @@ export default function Header() {
                   </div>
                 )}
               </div>
-            )
-            :
-            // : item.external ? (
-            //   <a
-            //     key={item.href}
-            //     href={item.href}
-            //     target="_blank"
-            //     rel="noopener noreferrer"
-            //     className="py-2 text-base text-slate-800/90 hover:text-slate-900"
-            //   >
-            //     {item.label}
-            //   </a>
-            // )
-             (
+            ) : (
+              // : item.external ? (
+              //   <a
+              //     key={item.href}
+              //     href={item.href}
+              //     target="_blank"
+              //     rel="noopener noreferrer"
+              //     className="py-2 text-base text-slate-800/90 hover:text-slate-900"
+              //   >
+              //     {item.label}
+              //   </a>
+              // )
               <Link
                 key={item.href}
                 to={item.href}
@@ -546,12 +640,12 @@ export default function Header() {
                   "py-2 text-base",
                   location.pathname === item.href
                     ? "text-slate-900 font-bold"
-                    : "text-slate-800/90 hover:text-slate-900"
+                    : "text-slate-800/90 hover:text-slate-900",
                 )}
               >
                 {item.label}
               </Link>
-            )
+            ),
           )}
         </div>
       </div>
