@@ -46,7 +46,6 @@ import Dashboard from "./pages/careers/dashboard/index";
 
 import Pricing from "@/pages/pricing/Pricing";
 
-initTracking();
 
 const queryClient = new QueryClient();
 
@@ -84,6 +83,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 const App = () => {
   useEffect(() => {
     initUserTracking();
+    initTracking();
   }, []);
 
   return (
@@ -162,4 +162,13 @@ const App = () => {
   );
 };
 
-createRoot(document.getElementById("root")!).render(<App />);
+const rootEl = document.getElementById("root");
+if (rootEl) {
+  createRoot(rootEl).render(<App />);
+} else {
+  // Fail gracefully if root element is missing
+  // This prevents runtime exceptions during non-browser execution
+  // and provides a clear console message for debugging
+  // eslint-disable-next-line no-console
+  console.error('Root element not found: cannot mount React application.');
+}
