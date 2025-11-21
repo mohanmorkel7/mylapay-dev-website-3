@@ -81,15 +81,16 @@ export default function ProductPricing() {
     try {
       const axios = (await import('axios')).default;
       const productName = product?.name ? product.name.toLowerCase() : 'tokenx';
-      const resp = await axios.post('https://apisandbox-nonprod.mylapay.com/mylapay/v1/mylapay_site/require-otp', { email: trialEmail, productName });
+      const resp = await axios.post('/api/mylapay/require-otp', { email: trialEmail, productName });
       const data = resp.data;
-      if (data && data.ok) {
+      if (data && (data.ok === true || data.ok === 'true')) {
         setTrialStage('otp');
         setTrialOtp('');
         setTrialOtpExpiresAt(Date.now() + 5 * 60 * 1000);
         toast({ title: 'OTP sent', description: 'Please check your email and enter the 6-digit OTP (expires in 5 minutes).' });
       } else {
-        toast({ title: 'Failed to send OTP', description: String(data?.message || data?.error || 'Unknown error') });
+        const msg = data?.message || data?.error || JSON.stringify(data);
+        toast({ title: 'Failed to send OTP', description: String(msg) });
       }
     } catch (err: any) {
       console.error('Send OTP error', err);
