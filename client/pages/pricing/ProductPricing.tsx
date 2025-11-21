@@ -124,12 +124,14 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Try Now
               </button>
-              <button
-                onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                className="inline-block mt-2 text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3] mx-auto"
-              >
-                See more
-              </button>
+              <div className="flex justify-center">
+                <button
+                  onClick={() => navigate(`/pricing/${productSlug}/compare`)}
+                  className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
+                >
+                  See more
+                </button>
+              </div>
             </div>
           </div>
 
@@ -169,12 +171,14 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Buy Now
               </button>
-              <button
-                onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                className="inline-block mt-2 text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3] mx-auto"
-              >
-                See more
-              </button>
+              <div className="flex justify-center">
+                <button
+                  onClick={() => navigate(`/pricing/${productSlug}/compare`)}
+                  className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
+                >
+                  See more
+                </button>
+              </div>
             </div>
           </div>
 
@@ -223,12 +227,14 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Buy Now
               </button>
-              <button
-                onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                className="inline-block mt-2 text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3] mx-auto"
-              >
-                See more
-              </button>
+              <div className="flex justify-center">
+                <button
+                  onClick={() => navigate(`/pricing/${productSlug}/compare`)}
+                  className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
+                >
+                  See more
+                </button>
+              </div>
             </div>
           </div>
 
@@ -280,12 +286,14 @@ export default function ProductPricing() {
               <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Contact Now
               </button>
-              <button
-                onClick={() => navigate(`/pricing/${productSlug}/compare`)}
-                className="inline-block mt-2 text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3] mx-auto"
-              >
-                See more
-              </button>
+              <div className="flex justify-center">
+                <button
+                  onClick={() => navigate(`/pricing/${productSlug}/compare`)}
+                  className="text-xs text-gray-600 underline group-hover:text-gray-100 cursor-pointer hover:text-[#2CADE3]"
+                >
+                  See more
+                </button>
+              </div>
             </div>
           </div>
         </div>
