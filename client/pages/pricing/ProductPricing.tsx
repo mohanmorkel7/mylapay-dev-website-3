@@ -1,6 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { Check } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogOverlay,
+  DialogPortal,
+} from "@/components/ui/dialog";
 
 const products = [
   { slug: "mylapay-tokenx", name: "TokenX", fullName: "Mylapay TokenX" },
@@ -33,6 +39,8 @@ export default function ProductPricing() {
   const [billingCycle, setBillingCycle] = useState<"yearly" | "monthly">(
     "yearly",
   );
+  const [showTrialModal, setShowTrialModal] = useState(false);
+  const [email, setEmail] = useState("");
 
   const product = products.find((p) => p.slug === productSlug);
 
@@ -121,7 +129,10 @@ export default function ProductPricing() {
                 </div>
               </div>
 
-              <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
+              <button
+                onClick={() => setShowTrialModal(true)}
+                className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]"
+              >
                 Try Now
               </button>
               <div className="flex justify-center mt-3">
