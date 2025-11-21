@@ -92,17 +92,17 @@ export default function PlanComparison() {
         <div className="max-w-7xl mx-auto">
           {/* Page Title */}
           <div className="text-center mb-6">
-            <h1 className="text-3xl md:text-4xl font-bold mb-3">
+            <h1 className="text-2xl md:text-3xl font-bold mb-3">
               <span className="text-blue-900">Choose Your </span>
               <span className="text-[#2CADE3]">Plans</span>
             </h1>
-            <p className="text-gray-800 text-base">With our Products</p>
+            <p className="text-gray-800 text-sm">With our Products</p>
           </div>
 
           {/* Product Selection */}
           <div className="flex justify-center mb-8">
             <div className="bg-[#1E3A8A] rounded-lg px-6 py-4">
-              <span className="text-white font-semibold text-xl md:text-2xl">
+              <span className="text-white font-semibold text-lg md:text-xl">
                 {product.fullName}
               </span>
             </div>
@@ -131,10 +131,10 @@ export default function PlanComparison() {
             </button>
 
             <div className="flex-1 max-w-xl">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
                 Feature Table
               </h2>
-              <p className="text-gray-900 text-base md:text-lg">
+              <p className="text-gray-900 text-sm md:text-base">
                 Choose the perfect plan for your business needs
               </p>
             </div>
@@ -147,7 +147,7 @@ export default function PlanComparison() {
               <div className="flex items-center gap-1 p-1 border border-gray-200 rounded-full bg-white">
                 <button
                   onClick={() => setBillingCycle("yearly")}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                     billingCycle === "yearly"
                       ? "bg-blue-900 text-white"
                       : "text-gray-800"
@@ -157,7 +157,7 @@ export default function PlanComparison() {
                 </button>
                 <button
                   onClick={() => setBillingCycle("monthly")}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                     billingCycle === "monthly"
                       ? "bg-blue-900 text-white"
                       : "text-gray-800"
@@ -174,13 +174,13 @@ export default function PlanComparison() {
             {/* Compare Plans Column */}
             <div className="bg-white p-6 md:p-8 border-b md:border-b-0 md:border-r border-[#E6E9F5] flex flex-col justify-between">
               <div>
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-4">
                   Compare plans
                 </h3>
                 <div className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-gray-400 mb-4">
                   <span className="text-gray-900 font-medium">40% Off</span>
                 </div>
-                <p className="text-sm text-gray-500">
+                <p className="text-xs text-gray-500">
                   Choose your workspace plan according to your organisational
                   plan
                 </p>
@@ -190,12 +190,12 @@ export default function PlanComparison() {
             {/* Trial Plan */}
             <div className="bg-white p-6 md:p-7 border-b md:border-b-0 md:border-r border-[#E6E9F5] flex flex-col justify-between text-center">
               <div>
-                <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
                   Trial
                 </h3>
-                <p className="text-sm text-gray-500 mb-6">/Free (7 days)</p>
+                <p className="text-xs text-gray-500 mb-6">/Free (7 days)</p>
               </div>
-              <button className="w-full bg-[#2CADE3] text-white py-3 md:py-4 text-sm font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
                 Try now
               </button>
             </div>
@@ -203,12 +203,12 @@ export default function PlanComparison() {
             {/* $25 Plan */}
             <div className="bg-white p-6 md:p-7 border-b md:border-b-0 md:border-r border-[#E6E9F5] flex flex-col justify-between text-center">
               <div>
-                <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
                   $25
                 </h3>
-                <p className="text-sm text-gray-500 mb-6">/Month</p>
+                <p className="text-xs text-gray-500 mb-6">/Month</p>
               </div>
-              <button className="w-full bg-[#2CADE3] text-white py-3 md:py-4 text-sm font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
                 Choose This Plan
               </button>
             </div>
@@ -216,12 +216,12 @@ export default function PlanComparison() {
             {/* $40 Plan */}
             <div className="bg-white p-6 md:p-7 border-b md:border-b-0 md:border-r border-[#E6E9F5] flex flex-col justify-between text-center">
               <div>
-                <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
                   $40
                 </h3>
-                <p className="text-sm text-gray-500 mb-6">/Month</p>
+                <p className="text-xs text-gray-500 mb-6">/Month</p>
               </div>
-              <button className="w-full bg-[#2CADE3] text-white py-3 md:py-4 text-sm font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
                 Choose This Plan
               </button>
             </div>
@@ -233,7 +233,7 @@ export default function PlanComparison() {
                   Custom
                 </h3>
               </div>
-              <button className="w-full bg-[#2CADE3] text-white py-3 md:py-4 text-sm font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
                 Contact Now
               </button>
             </div>
@@ -257,7 +257,7 @@ export default function PlanComparison() {
                     key={idx}
                     className="p-5 border-b border-[#E6E9F5] h-20 flex items-center"
                   >
-                    <span className="text-gray-900 font-medium text-base md:text-lg">
+                    <span className="text-gray-900 font-medium text-sm md:text-base">
                       {feature}
                     </span>
                   </div>
@@ -280,7 +280,7 @@ export default function PlanComparison() {
                     className="p-5 border-b border-[#E6E9F5] h-20 flex items-center justify-center"
                   >
                     {typeof value === "string" ? (
-                      <span className="text-gray-900 font-medium text-center">
+                      <span className="text-gray-900 font-medium text-sm text-center">
                         {value}
                       </span>
                     ) : (
@@ -307,7 +307,7 @@ export default function PlanComparison() {
                   >
                     {typeof value === "string" ? (
                       <span
-                        className={`text-gray-900 font-medium text-center ${idx === 1 ? "font-semibold" : ""}`}
+                        className={`text-gray-900 font-medium text-sm text-center ${idx === 1 ? "font-semibold" : ""}`}
                       >
                         {value}
                       </span>
@@ -335,7 +335,7 @@ export default function PlanComparison() {
                   >
                     {typeof value === "string" ? (
                       <span
-                        className={`text-gray-900 font-medium text-center ${idx === 1 ? "font-semibold" : ""}`}
+                        className={`text-gray-900 font-medium text-sm text-center ${idx === 1 ? "font-semibold" : ""}`}
                       >
                         {value}
                       </span>
@@ -363,7 +363,7 @@ export default function PlanComparison() {
                   >
                     {typeof value === "string" ? (
                       <span
-                        className={`text-gray-900 font-medium text-center ${idx === 1 ? "font-semibold" : ""}`}
+                        className={`text-gray-900 font-medium text-sm text-center ${idx === 1 ? "font-semibold" : ""}`}
                       >
                         {value}
                       </span>
@@ -378,7 +378,7 @@ export default function PlanComparison() {
 
           {/* FAQ Section */}
           <div className="max-w-4xl mx-auto py-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1E3A8A] text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1E3A8A] text-center mb-8">
               Frequently Asked Question
             </h2>
 
@@ -392,7 +392,7 @@ export default function PlanComparison() {
                     onClick={() => toggleFaq(faq.id)}
                     className="w-full flex items-center justify-between p-4 md:p-6 text-left hover:bg-gray-50 transition-colors"
                   >
-                    <h3 className="text-lg md:text-2xl font-bold text-gray-900 pr-4">
+                    <h3 className="text-base md:text-xl font-bold text-gray-900 pr-4">
                       {faq.question}
                     </h3>
                     {expandedFaq === faq.id ? (
