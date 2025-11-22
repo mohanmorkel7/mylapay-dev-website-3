@@ -5026,5 +5026,17 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "sessionId": "sess_q14fc3hs",
+    "duration": 1,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:35:06.008Z"
   }
 ]
