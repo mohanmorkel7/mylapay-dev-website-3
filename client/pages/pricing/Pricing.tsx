@@ -335,6 +335,7 @@ export default function PromotionPlans() {
 </AnimatePresence>
 
 
+      <Footer />
     </div>
   );
 }
