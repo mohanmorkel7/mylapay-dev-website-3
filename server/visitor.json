@@ -5038,5 +5038,17 @@
       "ll": null
     },
     "timestamp": "2025-11-22T06:35:06.008Z"
+  },
+  {
+    "sessionId": "sess_diqdyr3t",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:35:12.021Z"
   }
 ]
