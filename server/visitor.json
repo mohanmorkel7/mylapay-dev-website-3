@@ -5710,5 +5710,17 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "sessionId": "sess_pfn1awrz",
+    "duration": 3,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:57:35.376Z"
   }
 ]
