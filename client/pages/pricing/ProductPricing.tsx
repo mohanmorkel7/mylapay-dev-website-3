@@ -66,6 +66,7 @@ const planDetails: Record<
 export default function ProductPricing() {
   const { productSlug } = useParams<{ productSlug: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const [billingCycle, setBillingCycle] = useState<"yearly" | "monthly">(
     "yearly",
   );
