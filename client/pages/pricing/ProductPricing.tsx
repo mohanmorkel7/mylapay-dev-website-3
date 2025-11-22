@@ -1,6 +1,6 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Check, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "@/hooks/use-toast";
 import {
   Dialog,
@@ -9,6 +9,7 @@ import {
   DialogPortal,
   DialogTitle,
 } from "@/components/ui/dialog";
+import Footer from "@/components/layout/Footer";
 
 const products = [
   { slug: "mylapay-tokenx", name: "TokenX", fullName: "Mylapay TokenX" },
@@ -64,6 +65,7 @@ const planDetails: Record<
 export default function ProductPricing() {
   const { productSlug } = useParams<{ productSlug: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const [billingCycle, setBillingCycle] = useState<"yearly" | "monthly">(
     "yearly",
   );
@@ -320,8 +322,67 @@ export default function ProductPricing() {
     }
   }
 
+  // Listen to URL search params to open modals directly (e.g., from comparison page links)
+  useEffect(() => {
+    try {
+      const sp = new URLSearchParams(location.search);
+      const action = sp.get("action");
+      if (action === "trial") {
+        setShowTrialModal(true);
+      }
+      if (action === "checkout") {
+        const plan = sp.get("plan");
+        if (plan && planDetails[plan]) {
+          const details = planDetails[plan];
+          const price =
+            billingCycle === "yearly"
+              ? details.priceYearly
+              : details.priceMonthly;
+          setCheckoutPlan({ key: plan, title: details.title, price });
+          setShowCheckoutModal(true);
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, [location.search, billingCycle]);
+
+  // When the trial modal is closed and it was opened from the compare page,
+  // navigate back to the compare route so users return to the plan comparison
+  useEffect(() => {
+    try {
+      if (!showTrialModal) {
+        const sp = new URLSearchParams(location.search);
+        const from = sp.get("from");
+        const action = sp.get("action");
+        if (from === "compare" && action === "trial") {
+          navigate(`/pricing/${productSlug}/compare`);
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, [showTrialModal, location.search, productSlug, navigate]);
+
+  // When the checkout modal is closed and opened from the compare page,
+  // navigate back to the compare route so users return to the plan comparison
+  useEffect(() => {
+    try {
+      if (!showCheckoutModal) {
+        const sp = new URLSearchParams(location.search);
+        const from = sp.get("from");
+        const action = sp.get("action");
+        if (from === "compare" && action === "checkout") {
+          navigate(`/pricing/${productSlug}/compare`);
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, [showCheckoutModal, location.search, productSlug, navigate]);
+
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-white pt-16 md:pt-20 pb-8 lg:pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div className="min-h-[calc(100vh-4rem)] bg-white pt-16 md:pt-20 pb-0 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
@@ -595,7 +656,10 @@ export default function ProductPricing() {
                 </div>
               </div>
 
-              <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
+              <button
+                onClick={() => navigate("/contact")}
+                className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]"
+              >
                 Contact Now
               </button>
               <div className="flex justify-center mt-3">
@@ -616,9 +680,7 @@ export default function ProductPricing() {
         <DialogPortal>
           <DialogOverlay className="bg-white/70 backdrop-blur-md" />
           <DialogContent className="max-w-md p-4 sm:p-6 rounded-xl shadow-2xl">
-            <DialogTitle className="sr-only">
-              Join Our Trial on Token X
-            </DialogTitle>
+            <DialogTitle className="sr-only">{`Join Our Trial on ${product.name}`}</DialogTitle>
 
             <div className="p-4 sm:p-6">
               <div className="text-center mb-4">
@@ -626,7 +688,7 @@ export default function ProductPricing() {
                   Join Our Trial on
                 </h2>
                 <h3 className="text-xl md:text-2xl font-bold text-[#2CADE3]">
-                  Token X
+                  {product.name}
                 </h3>
               </div>
 
@@ -838,6 +900,9 @@ export default function ProductPricing() {
           </DialogContent>
         </DialogPortal>
       </Dialog>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

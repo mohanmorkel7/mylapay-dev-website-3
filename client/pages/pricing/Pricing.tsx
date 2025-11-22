@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Footer from "@/components/layout/Footer";
 
 const plans = [
   {
@@ -93,7 +94,7 @@ const products = [
       ENTERPRISE: 1550,
     },
   },
-   {
+  {
     name: "Mylapay SwitchX",
     prices: {
       STARTER: 560,
@@ -101,7 +102,6 @@ const products = [
       ENTERPRISE: 1550,
     },
   },
-
 ];
 
 export default function PromotionPlans() {
@@ -223,117 +223,125 @@ export default function PromotionPlans() {
       </div>
 
       {/* Modal */}
-<AnimatePresence>
-  {isModalOpen && (
-    <motion.div
-      className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.15 }}
-    >
-      <motion.div
-        className="bg-white rounded-2xl p-6 w-11/12 sm:w-96 shadow-lg relative"
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.95, opacity: 0 }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
-      >
-        {/* Close button */}
-        <button
-          onClick={closeModal}
-          className="absolute top-2 right-3 text-gray-500 hover:text-black text-xl"
-        >
-          ✕
-        </button>
-
-        {/* Modal Heading */}
-        <h3 className="text-xl font-semibold mb-4 text-center">
-          Select Your Product(s)
-        </h3>
-
-        {/* Multi-select dropdown */}
-        <div className="relative w-full mb-4">
-  <button
-    type="button"
-    onClick={() => setDropdownOpen(!dropdownOpen)}
-    className="w-full border rounded-lg p-2 text-left flex justify-between items-center bg-white"
-  >
-    {selectedProduct.length > 0
-      ? `${selectedProduct.length} product(s) selected`
-      : "Select Product(s)"}
-    <span className="ml-2">&#9662;</span>
-  </button>
-
-  {dropdownOpen && (
-    <div className="absolute z-10 w-full max-h-60 overflow-auto bg-white border rounded-lg mt-1 shadow-lg">
-      {products.map((product) => {
-        const isSelected = selectedProduct.includes(product.name);
-        return (
-          <label
-            key={product.name}
-            className="flex items-center justify-between px-3 py-2 cursor-pointer hover:bg-gray-100"
-          >
-            <span>{product.name}</span>
-            <input
-              type="checkbox"
-              checked={isSelected}
-              onChange={() => {
-                if (isSelected) {
-                  setSelectedProduct(selectedProduct.filter((p) => p !== product.name));
-                } else {
-                  setSelectedProduct([...selectedProduct, product.name]);
-                }
-              }}
-            />
-          </label>
-        );
-      })}
-    </div>
-  )}
-</div>
-
-
-        {/* Selected Products display as pills */}
-        {selectedProduct.length > 0 && (
+      <AnimatePresence>
+        {isModalOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mt-3"
+            className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
           >
-            <p className="text-gray-700">
-              Selected Plan:{" "}
-              <span className="font-bold text-blue-600">{selectedPlan}</span>
-            </p>
-            <p className="text-gray-700 mb-2">Selected Product(s):</p>
-            <div className="flex flex-wrap gap-2 justify-center">
-              {selectedProduct.map((product) => (
-                <span
-                  key={product}
-                  className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+            <motion.div
+              className="bg-white rounded-2xl p-6 w-11/12 sm:w-96 shadow-lg relative"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              {/* Close button */}
+              <button
+                onClick={closeModal}
+                className="absolute top-2 right-3 text-gray-500 hover:text-black text-xl"
+              >
+                ✕
+              </button>
+
+              {/* Modal Heading */}
+              <h3 className="text-xl font-semibold mb-4 text-center">
+                Select Your Product(s)
+              </h3>
+
+              {/* Multi-select dropdown */}
+              <div className="relative w-full mb-4">
+                <button
+                  type="button"
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="w-full border rounded-lg p-2 text-left flex justify-between items-center bg-white"
                 >
-                  {product}
-                </span>
-              ))}
-            </div>
+                  {selectedProduct.length > 0
+                    ? `${selectedProduct.length} product(s) selected`
+                    : "Select Product(s)"}
+                  <span className="ml-2">&#9662;</span>
+                </button>
+
+                {dropdownOpen && (
+                  <div className="absolute z-10 w-full max-h-60 overflow-auto bg-white border rounded-lg mt-1 shadow-lg">
+                    {products.map((product) => {
+                      const isSelected = selectedProduct.includes(product.name);
+                      return (
+                        <label
+                          key={product.name}
+                          className="flex items-center justify-between px-3 py-2 cursor-pointer hover:bg-gray-100"
+                        >
+                          <span>{product.name}</span>
+                          <input
+                            type="checkbox"
+                            checked={isSelected}
+                            onChange={() => {
+                              if (isSelected) {
+                                setSelectedProduct(
+                                  selectedProduct.filter(
+                                    (p) => p !== product.name,
+                                  ),
+                                );
+                              } else {
+                                setSelectedProduct([
+                                  ...selectedProduct,
+                                  product.name,
+                                ]);
+                              }
+                            }}
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Selected Products display as pills */}
+              {selectedProduct.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-center mt-3"
+                >
+                  <p className="text-gray-700">
+                    Selected Plan:{" "}
+                    <span className="font-bold text-blue-600">
+                      {selectedPlan}
+                    </span>
+                  </p>
+                  <p className="text-gray-700 mb-2">Selected Product(s):</p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {selectedProduct.map((product) => (
+                      <span
+                        key={product}
+                        className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+                      >
+                        {product}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Confirm button */}
+              <div className="mt-6 text-center">
+                <button
+                  onClick={closeModal}
+                  className="px-5 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:scale-105 transition-transform"
+                >
+                  Confirm
+                </button>
+              </div>
+            </motion.div>
           </motion.div>
         )}
+      </AnimatePresence>
 
-        {/* Confirm button */}
-        <div className="mt-6 text-center">
-          <button
-            onClick={closeModal}
-            className="px-5 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:scale-105 transition-transform"
-          >
-            Confirm
-          </button>
-        </div>
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
-
+      <Footer />
     </div>
   );
 }
