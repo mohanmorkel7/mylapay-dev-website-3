@@ -5050,5 +5050,17 @@
       "ll": null
     },
     "timestamp": "2025-11-22T06:35:12.021Z"
+  },
+  {
+    "sessionId": "sess_4csz1htr",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:35:30.412Z"
   }
 ]
