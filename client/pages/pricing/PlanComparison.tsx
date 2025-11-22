@@ -442,9 +442,9 @@ export default function PlanComparison() {
                 <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2">
                   Compare plans
                 </h3>
-                <div className="inline-flex items-center justify-center px-3 py-1 rounded-full border border-gray-400 mb-2">
+                {/* <div className="inline-flex items-center justify-center px-3 py-1 rounded-full border border-gray-400 mb-2">
                   <span className="text-gray-900 font-medium">40% Off</span>
-                </div>
+                </div> */}
                 <p className="text-xs text-gray-500">
                   Choose your workspace plan according to your organisational
                   plan

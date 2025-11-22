@@ -5866,5 +5866,197 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:07:43.955Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/pricing/mylapay-secure",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:07:49.561Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/pricing/mylapay-secure/compare",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:07:56.592Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/pricing/mylapay-secure/compare",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:08:03.618Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/pricing/mylapay-secure",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:08:12.518Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "sessionId": "sess_jxajug34",
+    "duration": 91,
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T07:10:12.280Z"
+  },
+  {
+    "page": "/pricing/mylapay-secure/compare",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:10:28.350Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/pricing/mylapay-secure",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:10:33.698Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:10:45.870Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/pricing/mylapay-intellesolve",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:10:56.892Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/pricing/mylapay-intellesolve/compare",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:11:13.999Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/pricing/mylapay-cswitch",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:11:19.994Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/pricing/mylapay-secure/compare",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:11:27.251Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/contact",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:12:06.322Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/pricing/mylapay-cswitch/compare",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:12:40.175Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
+  },
+  {
+    "page": "/pricing/mylapay-intellesolve",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0",
+    "timestamp": "2025-11-22T07:13:18.435Z",
+    "ip": "::1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    }
   }
 ]
