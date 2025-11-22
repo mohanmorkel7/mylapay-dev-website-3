@@ -4510,5 +4510,17 @@
       "ll": null
     },
     "timestamp": "2025-11-22T06:00:25.794Z"
+  },
+  {
+    "sessionId": "sess_vx4mjb8y",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:00:31.408Z"
   }
 ]
