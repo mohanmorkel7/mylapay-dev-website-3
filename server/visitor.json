@@ -4810,5 +4810,17 @@
       "ll": null
     },
     "timestamp": "2025-11-22T06:10:32.346Z"
+  },
+  {
+    "sessionId": "sess_ze5eundg",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:10:37.787Z"
   }
 ]
