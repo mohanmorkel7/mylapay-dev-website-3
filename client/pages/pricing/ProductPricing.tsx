@@ -382,8 +382,9 @@ export default function ProductPricing() {
   }, [showCheckoutModal, location.search, productSlug, navigate]);
 
   return (
+    <>
     <div className="min-h-[calc(100vh-4rem)] bg-white pt-16 md:pt-20 pb-0 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto pb-10">
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold mb-3">
@@ -902,7 +903,9 @@ export default function ProductPricing() {
       </Dialog>
 
       {/* Footer */}
-      <Footer />
+      
     </div>
+    <Footer />
+    </>
   );
 }
