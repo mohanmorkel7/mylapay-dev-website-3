@@ -596,7 +596,7 @@ export default function ProductPricing() {
                 </div>
               </div>
 
-              <button className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
+              <button onClick={() => navigate('/contact')} className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
                 Contact Now
               </button>
               <div className="flex justify-center mt-3">
