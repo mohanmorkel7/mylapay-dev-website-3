@@ -1,6 +1,6 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Check, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "@/hooks/use-toast";
 import {
   Dialog,
@@ -9,6 +9,7 @@ import {
   DialogPortal,
   DialogTitle,
 } from "@/components/ui/dialog";
+import Footer from "@/components/layout/Footer";
 
 const products = [
   { slug: "mylapay-tokenx", name: "TokenX", fullName: "Mylapay TokenX" },
