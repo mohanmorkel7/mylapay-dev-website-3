@@ -4990,5 +4990,17 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "sessionId": "sess_pjtst3lq",
+    "duration": 4,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:31:26.555Z"
   }
 ]
