@@ -58,8 +58,8 @@ const faqs = [
 ];
 
 export default function PlanComparison() {
-  const { productSlug } = Router.useParams<{ productSlug: string }>();
-  const navigate = Router.useNavigate();
+  const { productSlug } = useParams<{ productSlug: string }>();
+  const navigate = useNavigate();
   const [expandedFaq, setExpandedFaq] = useState<number | null>(1);
   const [billingCycle, setBillingCycle] = useState<"yearly" | "monthly">(
     "yearly",
