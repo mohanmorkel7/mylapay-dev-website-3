@@ -4570,5 +4570,17 @@
       "ll": null
     },
     "timestamp": "2025-11-22T06:01:09.318Z"
+  },
+  {
+    "sessionId": "sess_o7yich6n",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:01:25.185Z"
   }
 ]
