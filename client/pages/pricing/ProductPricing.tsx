@@ -344,6 +344,23 @@ export default function ProductPricing() {
     }
   }, [location.search, billingCycle]);
 
+  // When the trial modal is closed and it was opened from the compare page,
+  // navigate back to the compare route so users return to the plan comparison
+  useEffect(() => {
+    try {
+      if (!showTrialModal) {
+        const sp = new URLSearchParams(location.search);
+        const from = sp.get("from");
+        const action = sp.get("action");
+        if (from === "compare" && action === "trial") {
+          navigate(`/pricing/${productSlug}/compare`);
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, [showTrialModal, location.search, productSlug, navigate]);
+
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-white pt-16 md:pt-20 pb-8 lg:pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -648,7 +665,7 @@ export default function ProductPricing() {
                   Join Our Trial on
                 </h2>
                 <h3 className="text-xl md:text-2xl font-bold text-[#2CADE3]">
-                  Token X
+                  {product.name}
                 </h3>
               </div>
 
