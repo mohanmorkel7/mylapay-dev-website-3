@@ -5782,5 +5782,17 @@
       "ll": null
     },
     "timestamp": "2025-11-22T06:59:53.861Z"
+  },
+  {
+    "sessionId": "sess_2f4puela",
+    "duration": 1,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T07:00:44.683Z"
   }
 ]
