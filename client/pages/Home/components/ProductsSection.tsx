@@ -61,11 +61,7 @@ const text = "Mylapay Product Suites";
               >
                 {" "}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#1b355f] to-[#219dd2] opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"></div>
-                <Link
-                  to="/products/mylapay-tokenx"
-                  className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center"
-                  aria-hidden
-                >
+                <div className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center" aria-hidden>
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -87,7 +83,7 @@ const text = "Mylapay Product Suites";
                       strokeLinejoin="round"
                     />
                   </svg>
-                </Link>
+                </div>
                 <div className="flex flex-col items-start relative z-10">
                   <KeyRound className="h-8 w-8 text-white mb-3" aria-hidden />
 
@@ -115,10 +111,7 @@ const text = "Mylapay Product Suites";
               >
                 {" "}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#1b355f] to-[#219dd2] opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"></div>
-                <a
-                  href="#"
-                  className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center"
-                >
+                <div className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center" role="presentation">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -140,7 +133,7 @@ const text = "Mylapay Product Suites";
                       strokeLinejoin="round"
                     />
                   </svg>
-                </a>
+                </div>
                 <div className="flex flex-col items-start relative z-10">
                   <ShieldCheck
                     className="h-8 w-8 text-white mb-3"
@@ -171,10 +164,7 @@ const text = "Mylapay Product Suites";
               >
                 {" "}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#1b355f] to-[#219dd2] opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"></div>
-                <a
-                  href="#"
-                  className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center"
-                >
+                <div className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center" role="presentation">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -196,7 +186,7 @@ const text = "Mylapay Product Suites";
                       strokeLinejoin="round"
                     />
                   </svg>
-                </a>
+                </div>
                 <div className="flex flex-col items-start relative z-10">
                   <Server className="h-8 w-8 text-white mb-3" aria-hidden />
 
@@ -224,10 +214,7 @@ const text = "Mylapay Product Suites";
               >
                 {" "}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#1b355f] to-[#219dd2] opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"></div>
-                <a
-                  href="#"
-                  className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center"
-                >
+                <div className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center" role="presentation">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -249,7 +236,7 @@ const text = "Mylapay Product Suites";
                       strokeLinejoin="round"
                     />
                   </svg>
-                </a>
+                </div>
                 <div className="flex flex-col items-start relative z-10">
                   <ShieldAlert
                     className="h-8 w-8 text-white mb-3"
@@ -280,10 +267,7 @@ const text = "Mylapay Product Suites";
               >
                 {" "}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#1b355f] to-[#219dd2] opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"></div>
-                <a
-                  href="#"
-                  className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center"
-                >
+                <div className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center" role="presentation">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -305,7 +289,7 @@ const text = "Mylapay Product Suites";
                       strokeLinejoin="round"
                     />
                   </svg>
-                </a>
+                </div>
                 <div className="flex flex-col items-start relative z-10">
                   <Database className="h-8 w-8 text-white mb-3" aria-hidden />
 
@@ -333,10 +317,7 @@ const text = "Mylapay Product Suites";
               >
                 {" "}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#1b355f] to-[#219dd2] opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"></div>
-                <a
-                  href="#"
-                  className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center"
-                >
+                <div className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center" role="presentation">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -358,7 +339,7 @@ const text = "Mylapay Product Suites";
                       strokeLinejoin="round"
                     />
                   </svg>
-                </a>
+                </div>
                 <div className="flex flex-col items-start relative z-10">
                   <RotateCcw className="h-8 w-8 text-white mb-3" aria-hidden />
 
@@ -386,10 +367,7 @@ const text = "Mylapay Product Suites";
               >
                 {" "}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#1b355f] to-[#219dd2] opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"></div>
-                <a
-                  href="#"
-                  className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center"
-                >
+                <div className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center" role="presentation">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -411,7 +389,7 @@ const text = "Mylapay Product Suites";
                       strokeLinejoin="round"
                     />
                   </svg>
-                </a>
+                </div>
                 <div className="flex flex-col items-start relative z-10">
                   <BarChart3 className="h-8 w-8 text-white mb-3" aria-hidden />
 
@@ -439,10 +417,7 @@ const text = "Mylapay Product Suites";
               >
                 {" "}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#1b355f] to-[#219dd2] opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"></div>
-                <a
-                  href="#"
-                  className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center"
-                >
+                <div className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center" role="presentation">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -464,7 +439,7 @@ const text = "Mylapay Product Suites";
                       strokeLinejoin="round"
                     />
                   </svg>
-                </a>
+                </div>
                 <div className="flex flex-col items-start relative z-10">
                   <GitBranch className="h-8 w-8 text-white mb-3" aria-hidden />
 
@@ -492,10 +467,7 @@ const text = "Mylapay Product Suites";
               >
                 {" "}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#1b355f] to-[#219dd2] opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"></div>
-                <a
-                  href="#"
-                  className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center"
-                >
+                <div className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center" role="presentation">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -517,7 +489,7 @@ const text = "Mylapay Product Suites";
                       strokeLinejoin="round"
                     />
                   </svg>
-                </a>
+                </div>
                 <div className="flex flex-col items-start relative z-10">
                   <Activity className="h-8 w-8 text-white mb-3" aria-hidden />
 
@@ -549,10 +521,7 @@ const text = "Mylapay Product Suites";
               >
                 {" "}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#1b355f] to-[#219dd2] opacity-0 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"></div>
-                <a
-                  href="#"
-                  className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center"
-                >
+                <div className="absolute top-4 right-4 z-30 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all text-[#219dd2] flex items-center justify-center" role="presentation">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -574,7 +543,7 @@ const text = "Mylapay Product Suites";
                       strokeLinejoin="round"
                     />
                   </svg>
-                </a>
+                </div>
                 <div className="flex flex-col items-center relative z-10">
                   <Zap className="h-8 w-8 text-white mb-3" aria-hidden />
 
