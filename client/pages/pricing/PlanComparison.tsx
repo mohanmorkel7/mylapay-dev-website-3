@@ -79,7 +79,9 @@ export default function PlanComparison() {
   const [trialEmail, setTrialEmail] = useState("");
   const [trialStage, setTrialStage] = useState<"email" | "otp">("email");
   const [trialOtp, setTrialOtp] = useState("");
-  const [trialOtpExpiresAt, setTrialOtpExpiresAt] = useState<number | null>(null);
+  const [trialOtpExpiresAt, setTrialOtpExpiresAt] = useState<number | null>(
+    null,
+  );
 
   useEffect(() => {
     // reset OTP stage when modal is opened/closed
@@ -156,23 +158,47 @@ export default function PlanComparison() {
 
   // Checkout modal state (local to comparison page)
   const [showCheckoutModal, setShowCheckoutModal] = useState(false);
-  const [checkoutPlan, setCheckoutPlan] = useState<{ key: string; title: string; price: string } | null>(null);
+  const [checkoutPlan, setCheckoutPlan] = useState<{
+    key: string;
+    title: string;
+    price: string;
+  } | null>(null);
   const [checkoutEmail, setCheckoutEmail] = useState("");
   const [checkoutFirstName, setCheckoutFirstName] = useState("");
   const [checkoutLastName, setCheckoutLastName] = useState("");
   const [showResultModal, setShowResultModal] = useState(false);
   const [resultDetails, setResultDetails] = useState<any>(null);
 
-  const planDetails: Record<string, { title: string; priceYearly: string; priceMonthly: string }> = {
-    trial: { title: "Trial", priceYearly: "Free (up to 7 days)", priceMonthly: "Free" },
-    basic: { title: "Basic Plan", priceYearly: "$499 / Year", priceMonthly: "$49 / Month" },
-    pro: { title: "Pro Plan", priceYearly: "$999 / Year", priceMonthly: "$99 / Month" },
-    enterprise: { title: "Enterprise Plan", priceYearly: "Contact for pricing", priceMonthly: "Contact for pricing" },
+  const planDetails: Record<
+    string,
+    { title: string; priceYearly: string; priceMonthly: string }
+  > = {
+    trial: {
+      title: "Trial",
+      priceYearly: "Free (up to 7 days)",
+      priceMonthly: "Free",
+    },
+    basic: {
+      title: "Basic Plan",
+      priceYearly: "$499 / Year",
+      priceMonthly: "$49 / Month",
+    },
+    pro: {
+      title: "Pro Plan",
+      priceYearly: "$999 / Year",
+      priceMonthly: "$99 / Month",
+    },
+    enterprise: {
+      title: "Enterprise Plan",
+      priceYearly: "Contact for pricing",
+      priceMonthly: "Contact for pricing",
+    },
   };
 
   function openCheckoutFor(key: string) {
     const details = planDetails[key];
-    const price = billingCycle === "yearly" ? details.priceYearly : details.priceMonthly;
+    const price =
+      billingCycle === "yearly" ? details.priceYearly : details.priceMonthly;
     setCheckoutPlan({ key, title: details.title, price });
     setShowCheckoutModal(true);
   }
@@ -208,7 +234,9 @@ export default function PlanComparison() {
     try {
       const axios = (await import("axios")).default;
       if (!amount || amount <= 0) {
-        alert("This plan requires custom pricing or is free. Please contact sales.");
+        alert(
+          "This plan requires custom pricing or is free. Please contact sales.",
+        );
         setShowCheckoutModal(false);
         return;
       }
@@ -225,12 +253,19 @@ export default function PlanComparison() {
       } catch (err: any) {
         console.error("Create order axios error:", err?.response || err);
         const serverErr = err?.response?.data || err?.message || String(err);
-        alert("Payment initialization failed: " + (typeof serverErr === "string" ? serverErr : JSON.stringify(serverErr)));
+        alert(
+          "Payment initialization failed: " +
+            (typeof serverErr === "string"
+              ? serverErr
+              : JSON.stringify(serverErr)),
+        );
         return;
       }
 
       if (!data || !data.ok) {
-        alert("Failed to create order: " + (data?.error || JSON.stringify(data)));
+        alert(
+          "Failed to create order: " + (data?.error || JSON.stringify(data)),
+        );
         return;
       }
 
@@ -264,12 +299,20 @@ export default function PlanComparison() {
             verifyData = { ok: false, error: err?.message || String(err) };
           }
 
-          const details = { ok: verifyData.ok, paymentResponse: response, order, verifyData };
+          const details = {
+            ok: verifyData.ok,
+            paymentResponse: response,
+            order,
+            verifyData,
+          };
           setResultDetails(details);
           setShowResultModal(true);
           setShowCheckoutModal(false);
         },
-        prefill: { name: `${checkoutFirstName} ${checkoutLastName}`, email: checkoutEmail },
+        prefill: {
+          name: `${checkoutFirstName} ${checkoutLastName}`,
+          email: checkoutEmail,
+        },
         theme: { color: "#2CADE3" },
       };
 
@@ -417,7 +460,10 @@ export default function PlanComparison() {
                 </h3>
                 <p className="text-xs text-gray-500 mb-6">/Free (7 days)</p>
               </div>
-              <button onClick={() => setShowTrialModal(true)} className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button
+                onClick={() => setShowTrialModal(true)}
+                className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors"
+              >
                 Try now
               </button>
             </div>
@@ -430,7 +476,10 @@ export default function PlanComparison() {
                 </h3>
                 <p className="text-xs text-gray-500 mb-6">/Month</p>
               </div>
-              <button onClick={() => openCheckoutFor("basic")} className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button
+                onClick={() => openCheckoutFor("basic")}
+                className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors"
+              >
                 Choose This Plan
               </button>
             </div>
@@ -443,7 +492,10 @@ export default function PlanComparison() {
                 </h3>
                 <p className="text-xs text-gray-500 mb-6">/Month</p>
               </div>
-              <button onClick={() => openCheckoutFor("pro")} className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button
+                onClick={() => openCheckoutFor("pro")}
+                className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors"
+              >
                 Choose This Plan
               </button>
             </div>
@@ -455,7 +507,10 @@ export default function PlanComparison() {
                   Custom
                 </h3>
               </div>
-              <button onClick={() => navigate('/contact')} className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button
+                onClick={() => navigate("/contact")}
+                className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors"
+              >
                 Contact Now
               </button>
             </div>
@@ -646,8 +701,12 @@ export default function PlanComparison() {
 
             <div className="p-4 sm:p-6">
               <div className="text-center mb-4">
-                <h2 className="text-xl md:text-2xl font-bold text-[#1E3A8A] mb-1">Join Our Trial on</h2>
-                <h3 className="text-xl md:text-2xl font-bold text-[#2CADE3]">{product?.name}</h3>
+                <h2 className="text-xl md:text-2xl font-bold text-[#1E3A8A] mb-1">
+                  Join Our Trial on
+                </h2>
+                <h3 className="text-xl md:text-2xl font-bold text-[#2CADE3]">
+                  {product?.name}
+                </h3>
               </div>
 
               <div className="space-y-3">
@@ -670,7 +729,10 @@ export default function PlanComparison() {
                   </>
                 ) : (
                   <>
-                    <p className="text-sm text-gray-600">Enter the 6-digit OTP sent to your email. Expires in 5 minutes.</p>
+                    <p className="text-sm text-gray-600">
+                      Enter the 6-digit OTP sent to your email. Expires in 5
+                      minutes.
+                    </p>
                     <input
                       type="text"
                       placeholder="Enter OTP"
@@ -697,7 +759,9 @@ export default function PlanComparison() {
                 )}
               </div>
 
-              <p className="text-center text-gray-500 text-xs mt-4">Submit your email address to join the trial plan</p>
+              <p className="text-center text-gray-500 text-xs mt-4">
+                Submit your email address to join the trial plan
+              </p>
             </div>
           </DialogContent>
         </DialogPortal>
@@ -714,7 +778,9 @@ export default function PlanComparison() {
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h2 className="text-xl font-bold text-[#1E3A8A]">Checkout</h2>
-                  <p className="text-sm text-gray-600">Please confirm your details to proceed to payment</p>
+                  <p className="text-sm text-gray-600">
+                    Please confirm your details to proceed to payment
+                  </p>
                 </div>
               </div>
 
@@ -723,11 +789,15 @@ export default function PlanComparison() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-gray-500">Selected plan</p>
-                      <p className="font-semibold text-gray-900">{checkoutPlan.title}</p>
+                      <p className="font-semibold text-gray-900">
+                        {checkoutPlan.title}
+                      </p>
                     </div>
                     <div className="text-right">
                       <p className="text-sm text-gray-500">Amount</p>
-                      <p className="font-semibold text-gray-900">{checkoutPlan.price}</p>
+                      <p className="font-semibold text-gray-900">
+                        {checkoutPlan.price}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -735,19 +805,50 @@ export default function PlanComparison() {
 
               <div className="space-y-3">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <input type="text" placeholder="First name" value={checkoutFirstName} onChange={(e) => setCheckoutFirstName(e.target.value)} className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent" />
-                  <input type="text" placeholder="Last name" value={checkoutLastName} onChange={(e) => setCheckoutLastName(e.target.value)} className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent" />
+                  <input
+                    type="text"
+                    placeholder="First name"
+                    value={checkoutFirstName}
+                    onChange={(e) => setCheckoutFirstName(e.target.value)}
+                    className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Last name"
+                    value={checkoutLastName}
+                    onChange={(e) => setCheckoutLastName(e.target.value)}
+                    className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent"
+                  />
                 </div>
 
-                <input type="email" placeholder="Email address" value={checkoutEmail} onChange={(e) => setCheckoutEmail(e.target.value)} className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent" />
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  value={checkoutEmail}
+                  onChange={(e) => setCheckoutEmail(e.target.value)}
+                  className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent"
+                />
 
                 <div className="flex gap-2">
-                  <button onClick={handleProceedToPay} className="flex-1 bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium hover:bg-[#2399c9] transition-colors">Proceed to Pay</button>
-                  <button onClick={() => setShowCheckoutModal(false)} className="flex-1 border border-gray-300 text-gray-700 py-2 rounded-md text-sm font-medium hover:bg-gray-50 transition-colors">Cancel</button>
+                  <button
+                    onClick={handleProceedToPay}
+                    className="flex-1 bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium hover:bg-[#2399c9] transition-colors"
+                  >
+                    Proceed to Pay
+                  </button>
+                  <button
+                    onClick={() => setShowCheckoutModal(false)}
+                    className="flex-1 border border-gray-300 text-gray-700 py-2 rounded-md text-sm font-medium hover:bg-gray-50 transition-colors"
+                  >
+                    Cancel
+                  </button>
                 </div>
               </div>
 
-              <p className="text-center text-gray-500 text-xs mt-4">You will be redirected to the payment gateway after clicking "Proceed to Pay".</p>
+              <p className="text-center text-gray-500 text-xs mt-4">
+                You will be redirected to the payment gateway after clicking
+                "Proceed to Pay".
+              </p>
             </div>
           </DialogContent>
         </DialogPortal>
@@ -761,10 +862,19 @@ export default function PlanComparison() {
             <DialogTitle className="sr-only">Payment Result</DialogTitle>
             {resultDetails && (
               <div>
-                <h2 className="text-xl font-bold mb-2">{resultDetails.ok ? 'Payment Successful' : 'Payment Failed'}</h2>
-                <pre className="text-xs text-gray-700 max-h-40 overflow-auto">{JSON.stringify(resultDetails, null, 2)}</pre>
+                <h2 className="text-xl font-bold mb-2">
+                  {resultDetails.ok ? "Payment Successful" : "Payment Failed"}
+                </h2>
+                <pre className="text-xs text-gray-700 max-h-40 overflow-auto">
+                  {JSON.stringify(resultDetails, null, 2)}
+                </pre>
                 <div className="mt-4 flex gap-2">
-                  <button onClick={() => setShowResultModal(false)} className="flex-1 bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium">Close</button>
+                  <button
+                    onClick={() => setShowResultModal(false)}
+                    className="flex-1 bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium"
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             )}

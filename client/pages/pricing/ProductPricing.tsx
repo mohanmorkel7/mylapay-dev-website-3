@@ -334,7 +334,10 @@ export default function ProductPricing() {
         const plan = sp.get("plan");
         if (plan && planDetails[plan]) {
           const details = planDetails[plan];
-          const price = billingCycle === "yearly" ? details.priceYearly : details.priceMonthly;
+          const price =
+            billingCycle === "yearly"
+              ? details.priceYearly
+              : details.priceMonthly;
           setCheckoutPlan({ key: plan, title: details.title, price });
           setShowCheckoutModal(true);
         }
@@ -653,7 +656,10 @@ export default function ProductPricing() {
                 </div>
               </div>
 
-              <button onClick={() => navigate('/contact')} className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]">
+              <button
+                onClick={() => navigate("/contact")}
+                className="w-full bg-[#2CADE3] text-white py-3 text-sm rounded font-medium transition-colors group-hover:bg-white group-hover:text-[#052343]"
+              >
                 Contact Now
               </button>
               <div className="flex justify-center mt-3">
