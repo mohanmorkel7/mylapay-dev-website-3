@@ -5722,5 +5722,17 @@
       "ll": null
     },
     "timestamp": "2025-11-22T06:57:35.376Z"
+  },
+  {
+    "sessionId": "sess_b0onqn81",
+    "duration": 1,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:59:06.072Z"
   }
 ]
