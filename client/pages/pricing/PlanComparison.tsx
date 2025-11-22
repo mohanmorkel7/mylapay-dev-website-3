@@ -1,5 +1,5 @@
-import * as Router from "react-router-dom";
-import * as Router from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Footer from "@/components/layout/Footer";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useState } from "react";
