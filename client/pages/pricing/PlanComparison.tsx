@@ -154,6 +154,139 @@ export default function PlanComparison() {
     }
   }
 
+  // Checkout modal state (local to comparison page)
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+  const [checkoutPlan, setCheckoutPlan] = useState<{ key: string; title: string; price: string } | null>(null);
+  const [checkoutEmail, setCheckoutEmail] = useState("");
+  const [checkoutFirstName, setCheckoutFirstName] = useState("");
+  const [checkoutLastName, setCheckoutLastName] = useState("");
+  const [showResultModal, setShowResultModal] = useState(false);
+  const [resultDetails, setResultDetails] = useState<any>(null);
+
+  const planDetails: Record<string, { title: string; priceYearly: string; priceMonthly: string }> = {
+    trial: { title: "Trial", priceYearly: "Free (up to 7 days)", priceMonthly: "Free" },
+    basic: { title: "Basic Plan", priceYearly: "$499 / Year", priceMonthly: "$49 / Month" },
+    pro: { title: "Pro Plan", priceYearly: "$999 / Year", priceMonthly: "$99 / Month" },
+    enterprise: { title: "Enterprise Plan", priceYearly: "Contact for pricing", priceMonthly: "Contact for pricing" },
+  };
+
+  function openCheckoutFor(key: string) {
+    const details = planDetails[key];
+    const price = billingCycle === "yearly" ? details.priceYearly : details.priceMonthly;
+    setCheckoutPlan({ key, title: details.title, price });
+    setShowCheckoutModal(true);
+  }
+
+  async function loadRazorpayScript() {
+    if (typeof window === "undefined") return false;
+    if ((window as any).Razorpay) return true;
+    return new Promise<boolean>((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  }
+
+  async function handleProceedToPay() {
+    if (!checkoutPlan) return;
+    if (!checkoutEmail || !checkoutFirstName || !checkoutLastName) {
+      alert("Please provide first name, last name and email to proceed.");
+      return;
+    }
+
+    const planAmounts: Record<string, number> = {
+      basic: billingCycle === "yearly" ? 49900 : 4900,
+      pro: billingCycle === "yearly" ? 99900 : 9900,
+      enterprise: billingCycle === "yearly" ? 0 : 0,
+      trial: 0,
+    };
+
+    const amount = planAmounts[checkoutPlan.key] ?? 0;
+
+    try {
+      const axios = (await import("axios")).default;
+      if (!amount || amount <= 0) {
+        alert("This plan requires custom pricing or is free. Please contact sales.");
+        setShowCheckoutModal(false);
+        return;
+      }
+
+      let data: any;
+      try {
+        const createResp = await axios.post("/api/razorpay/create-order", {
+          amount,
+          currency: "INR",
+          receipt: `rcpt_${Date.now()}`,
+          notes: { plan: checkoutPlan.key },
+        });
+        data = createResp.data;
+      } catch (err: any) {
+        console.error("Create order axios error:", err?.response || err);
+        const serverErr = err?.response?.data || err?.message || String(err);
+        alert("Payment initialization failed: " + (typeof serverErr === "string" ? serverErr : JSON.stringify(serverErr)));
+        return;
+      }
+
+      if (!data || !data.ok) {
+        alert("Failed to create order: " + (data?.error || JSON.stringify(data)));
+        return;
+      }
+
+      const order = data.order;
+      const keyId = data.keyId;
+
+      const loaded = await loadRazorpayScript();
+      if (!loaded) throw new Error("Failed to load Razorpay SDK");
+
+      setShowCheckoutModal(false);
+      await new Promise((res) => setTimeout(res, 120));
+
+      const options: any = {
+        key: keyId,
+        amount: order.amount,
+        currency: order.currency,
+        name: "Mylapay",
+        description: checkoutPlan.title,
+        order_id: order.id,
+        handler: async function (response: any) {
+          const axios = (await import("axios")).default;
+          let verifyData: any = null;
+          try {
+            const vr = await axios.post("/api/razorpay/verify", {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            });
+            verifyData = vr.data;
+          } catch (err: any) {
+            verifyData = { ok: false, error: err?.message || String(err) };
+          }
+
+          const details = { ok: verifyData.ok, paymentResponse: response, order, verifyData };
+          setResultDetails(details);
+          setShowResultModal(true);
+          setShowCheckoutModal(false);
+        },
+        prefill: { name: `${checkoutFirstName} ${checkoutLastName}`, email: checkoutEmail },
+        theme: { color: "#2CADE3" },
+      };
+
+      const rzp = new (window as any).Razorpay(options);
+      rzp.open();
+      rzp.on("payment.failed", function (response: any) {
+        const details = { ok: false, paymentResponse: response };
+        setResultDetails(details);
+        setShowResultModal(true);
+        setShowCheckoutModal(false);
+      });
+    } catch (err: any) {
+      console.error("Checkout error:", err);
+      alert(err?.message || "Payment failed to initiate");
+    }
+  }
+
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
