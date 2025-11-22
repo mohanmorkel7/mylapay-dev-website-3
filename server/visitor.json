@@ -5602,5 +5602,17 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "sessionId": "sess_lovdauwz",
+    "duration": 1,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:53:16.502Z"
   }
 ]
