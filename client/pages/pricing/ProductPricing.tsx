@@ -361,6 +361,23 @@ export default function ProductPricing() {
     }
   }, [showTrialModal, location.search, productSlug, navigate]);
 
+  // When the checkout modal is closed and opened from the compare page,
+  // navigate back to the compare route so users return to the plan comparison
+  useEffect(() => {
+    try {
+      if (!showCheckoutModal) {
+        const sp = new URLSearchParams(location.search);
+        const from = sp.get("from");
+        const action = sp.get("action");
+        if (from === "compare" && action === "checkout") {
+          navigate(`/pricing/${productSlug}/compare`);
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, [showCheckoutModal, location.search, productSlug, navigate]);
+
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-white pt-16 md:pt-20 pb-8 lg:pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
