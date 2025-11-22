@@ -209,7 +209,7 @@ export default function PlanComparison() {
                 </h3>
                 <p className="text-xs text-gray-500 mb-6">/Month</p>
               </div>
-              <button className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button onClick={() => navigate(`/pricing/${productSlug}?action=checkout&plan=basic`)} className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
                 Choose This Plan
               </button>
             </div>
@@ -222,7 +222,7 @@ export default function PlanComparison() {
                 </h3>
                 <p className="text-xs text-gray-500 mb-6">/Month</p>
               </div>
-              <button className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button onClick={() => navigate(`/pricing/${productSlug}?action=checkout&plan=pro`)} className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
                 Choose This Plan
               </button>
             </div>
@@ -234,7 +234,7 @@ export default function PlanComparison() {
                   Custom
                 </h3>
               </div>
-              <button className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button onClick={() => navigate('/contact')} className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
                 Contact Now
               </button>
             </div>
@@ -416,6 +416,7 @@ export default function PlanComparison() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
