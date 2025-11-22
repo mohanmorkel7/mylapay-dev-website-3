@@ -321,6 +321,28 @@ export default function ProductPricing() {
     }
   }
 
+  // Listen to URL search params to open modals directly (e.g., from comparison page links)
+  useEffect(() => {
+    try {
+      const sp = new URLSearchParams(location.search);
+      const action = sp.get("action");
+      if (action === "trial") {
+        setShowTrialModal(true);
+      }
+      if (action === "checkout") {
+        const plan = sp.get("plan");
+        if (plan && planDetails[plan]) {
+          const details = planDetails[plan];
+          const price = billingCycle === "yearly" ? details.priceYearly : details.priceMonthly;
+          setCheckoutPlan({ key: plan, title: details.title, price });
+          setShowCheckoutModal(true);
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, [location.search, billingCycle]);
+
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-white pt-16 md:pt-20 pb-8 lg:pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-7xl mx-auto">
