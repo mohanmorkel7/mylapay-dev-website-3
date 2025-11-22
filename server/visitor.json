@@ -4906,5 +4906,17 @@
       "city": null,
       "ll": null
     }
+  },
+  {
+    "sessionId": "sess_sir07ffx",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:27:34.745Z"
   }
 ]
