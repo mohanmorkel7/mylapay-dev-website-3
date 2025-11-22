@@ -861,6 +861,9 @@ export default function ProductPricing() {
           </DialogContent>
         </DialogPortal>
       </Dialog>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
