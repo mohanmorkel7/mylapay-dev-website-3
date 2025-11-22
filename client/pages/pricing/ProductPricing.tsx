@@ -64,9 +64,9 @@ const planDetails: Record<
 };
 
 export default function ProductPricing() {
-  const { productSlug } = Router.useParams<{ productSlug: string }>();
-  const navigate = Router.useNavigate();
-  const location = Router.useLocation();
+  const { productSlug } = useParams<{ productSlug: string }>();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [billingCycle, setBillingCycle] = useState<"yearly" | "monthly">(
     "yearly",
   );
