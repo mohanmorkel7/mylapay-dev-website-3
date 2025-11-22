@@ -703,6 +703,75 @@ export default function PlanComparison() {
         </DialogPortal>
       </Dialog>
 
+      {/* Checkout Modal */}
+      <Dialog open={showCheckoutModal} onOpenChange={setShowCheckoutModal}>
+        <DialogPortal>
+          <DialogOverlay className="bg-white/80 backdrop-blur-md" />
+          <DialogContent className="max-w-md p-4 sm:p-6 rounded-xl shadow-2xl">
+            <DialogTitle className="sr-only">Checkout</DialogTitle>
+
+            <div className="p-4 sm:p-6">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h2 className="text-xl font-bold text-[#1E3A8A]">Checkout</h2>
+                  <p className="text-sm text-gray-600">Please confirm your details to proceed to payment</p>
+                </div>
+              </div>
+
+              {checkoutPlan && (
+                <div className="mb-4 p-3 border border-gray-100 rounded-md bg-white">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-gray-500">Selected plan</p>
+                      <p className="font-semibold text-gray-900">{checkoutPlan.title}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm text-gray-500">Amount</p>
+                      <p className="font-semibold text-gray-900">{checkoutPlan.price}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input type="text" placeholder="First name" value={checkoutFirstName} onChange={(e) => setCheckoutFirstName(e.target.value)} className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent" />
+                  <input type="text" placeholder="Last name" value={checkoutLastName} onChange={(e) => setCheckoutLastName(e.target.value)} className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent" />
+                </div>
+
+                <input type="email" placeholder="Email address" value={checkoutEmail} onChange={(e) => setCheckoutEmail(e.target.value)} className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent" />
+
+                <div className="flex gap-2">
+                  <button onClick={handleProceedToPay} className="flex-1 bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium hover:bg-[#2399c9] transition-colors">Proceed to Pay</button>
+                  <button onClick={() => setShowCheckoutModal(false)} className="flex-1 border border-gray-300 text-gray-700 py-2 rounded-md text-sm font-medium hover:bg-gray-50 transition-colors">Cancel</button>
+                </div>
+              </div>
+
+              <p className="text-center text-gray-500 text-xs mt-4">You will be redirected to the payment gateway after clicking "Proceed to Pay".</p>
+            </div>
+          </DialogContent>
+        </DialogPortal>
+      </Dialog>
+
+      {/* Payment result modal */}
+      <Dialog open={showResultModal} onOpenChange={setShowResultModal}>
+        <DialogPortal>
+          <DialogOverlay className="bg-black/50 backdrop-blur-sm" />
+          <DialogContent className="max-w-md p-4 sm:p-6 rounded-xl shadow-2xl">
+            <DialogTitle className="sr-only">Payment Result</DialogTitle>
+            {resultDetails && (
+              <div>
+                <h2 className="text-xl font-bold mb-2">{resultDetails.ok ? 'Payment Successful' : 'Payment Failed'}</h2>
+                <pre className="text-xs text-gray-700 max-h-40 overflow-auto">{JSON.stringify(resultDetails, null, 2)}</pre>
+                <div className="mt-4 flex gap-2">
+                  <button onClick={() => setShowResultModal(false)} className="flex-1 bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium">Close</button>
+                </div>
+              </div>
+            )}
+          </DialogContent>
+        </DialogPortal>
+      </Dialog>
+
       <Footer />
     </div>
   );
