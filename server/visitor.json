@@ -4522,5 +4522,17 @@
       "ll": null
     },
     "timestamp": "2025-11-22T06:00:31.408Z"
+  },
+  {
+    "sessionId": "sess_bi3rydd0",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:00:40.494Z"
   }
 ]
