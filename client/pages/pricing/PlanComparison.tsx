@@ -1,7 +1,15 @@
 import { useParams, useNavigate } from "react-router-dom";
 import Footer from "@/components/layout/Footer";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { toast } from "@/hooks/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const products = [
   { slug: "mylapay-tokenx", name: "TokenX", fullName: "Mylapay TokenX" },
@@ -65,6 +73,86 @@ export default function PlanComparison() {
   );
 
   const product = products.find((p) => p.slug === productSlug);
+
+  // Trial modal state (local to comparison page)
+  const [showTrialModal, setShowTrialModal] = useState(false);
+  const [trialEmail, setTrialEmail] = useState("");
+  const [trialStage, setTrialStage] = useState<"email" | "otp">("email");
+  const [trialOtp, setTrialOtp] = useState("");
+  const [trialOtpExpiresAt, setTrialOtpExpiresAt] = useState<number | null>(null);
+
+  useEffect(() => {
+    // reset OTP stage when modal is opened/closed
+    if (!showTrialModal) {
+      setTrialStage("email");
+      setTrialEmail("");
+      setTrialOtp("");
+      setTrialOtpExpiresAt(null);
+    }
+  }, [showTrialModal]);
+
+  async function sendTrialOtp() {
+    if (!trialEmail) return alert("Enter an email to receive OTP");
+    try {
+      const axios = (await import("axios")).default;
+      const productName = product?.name ? product.name.toLowerCase() : "tokenx";
+      const resp = await axios.post("/api/mylapay/require-otp", {
+        email: trialEmail,
+        productName,
+      });
+      const data = resp.data;
+      if (data && (data.ok === true || data.ok === "true")) {
+        setTrialStage("otp");
+        setTrialOtp("");
+        setTrialOtpExpiresAt(Date.now() + 5 * 60 * 1000);
+        toast({
+          title: "OTP sent",
+          description:
+            "Please check your email and enter the 6-digit OTP (expires in 5 minutes).",
+        });
+      } else {
+        const msg = data?.message || data?.error || JSON.stringify(data);
+        toast({ title: "Failed to send OTP", description: String(msg) });
+      }
+    } catch (err: any) {
+      console.error("Send OTP error", err);
+      toast({
+        title: "Send OTP failed",
+        description: err?.message || String(err),
+      });
+    }
+  }
+
+  async function verifyTrialOtp() {
+    if (!trialOtp) return alert("Enter the OTP");
+    try {
+      const axios = (await import("axios")).default;
+      const productName = product?.name ? product.name.toLowerCase() : "tokenx";
+      const resp = await axios.post("/api/mylapay/require-otp", {
+        email: trialEmail,
+        productName,
+        otp: trialOtp,
+      });
+      const data = resp.data;
+      if (data && (data.ok === true || data.ok === "true")) {
+        toast({ title: data.message || "Success", description: "" });
+        setShowTrialModal(false);
+        setTrialEmail("");
+        setTrialStage("email");
+        setTrialOtp("");
+        setTrialOtpExpiresAt(null);
+      } else {
+        const msg = data?.message || data?.error || JSON.stringify(data);
+        toast({ title: "OTP verification failed", description: String(msg) });
+      }
+    } catch (err: any) {
+      console.error("Verify OTP error", err);
+      toast({
+        title: "Verify OTP failed",
+        description: err?.message || String(err),
+      });
+    }
+  }
 
   if (!product) {
     return (
@@ -196,7 +284,7 @@ export default function PlanComparison() {
                 </h3>
                 <p className="text-xs text-gray-500 mb-6">/Free (7 days)</p>
               </div>
-              <button onClick={() => navigate(`/pricing/${productSlug}?action=trial&from=compare`)} className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
+              <button onClick={() => setShowTrialModal(true)} className="w-full bg-[#2CADE3] text-white py-2 md:py-3 text-xs font-bold rounded hover:bg-[#2399c9] transition-colors">
                 Try now
               </button>
             </div>
@@ -416,6 +504,72 @@ export default function PlanComparison() {
           </div>
         </div>
       </div>
+      {/* Trial Signup Modal (local to comparison page) */}
+      <Dialog open={showTrialModal} onOpenChange={setShowTrialModal}>
+        <DialogPortal>
+          <DialogOverlay className="bg-white/70 backdrop-blur-md" />
+          <DialogContent className="max-w-md p-4 sm:p-6 rounded-xl shadow-2xl">
+            <DialogTitle className="sr-only">{`Join Our Trial on ${product?.name || "Product"}`}</DialogTitle>
+
+            <div className="p-4 sm:p-6">
+              <div className="text-center mb-4">
+                <h2 className="text-xl md:text-2xl font-bold text-[#1E3A8A] mb-1">Join Our Trial on</h2>
+                <h3 className="text-xl md:text-2xl font-bold text-[#2CADE3]">{product?.name}</h3>
+              </div>
+
+              <div className="space-y-3">
+                {trialStage === "email" ? (
+                  <>
+                    <input
+                      type="email"
+                      placeholder="Email address"
+                      value={trialEmail}
+                      onChange={(e) => setTrialEmail(e.target.value)}
+                      className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent"
+                    />
+
+                    <button
+                      onClick={sendTrialOtp}
+                      className="w-full bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium hover:bg-[#2399c9] transition-colors"
+                    >
+                      Send OTP
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-sm text-gray-600">Enter the 6-digit OTP sent to your email. Expires in 5 minutes.</p>
+                    <input
+                      type="text"
+                      placeholder="Enter OTP"
+                      value={trialOtp}
+                      onChange={(e) => setTrialOtp(e.target.value)}
+                      className="w-full px-3 py-2 border border-black/30 rounded-md text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2CADE3] focus:border-transparent"
+                    />
+
+                    <div className="flex gap-2">
+                      <button
+                        onClick={verifyTrialOtp}
+                        className="flex-1 bg-[#2CADE3] text-white py-2 rounded-md text-sm font-medium hover:bg-[#2399c9] transition-colors"
+                      >
+                        Verify OTP
+                      </button>
+                      <button
+                        onClick={sendTrialOtp}
+                        className="flex-1 border border-gray-300 text-gray-700 py-2 rounded-md text-sm font-medium hover:bg-gray-50 transition-colors"
+                      >
+                        Resend
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              <p className="text-center text-gray-500 text-xs mt-4">Submit your email address to join the trial plan</p>
+            </div>
+          </DialogContent>
+        </DialogPortal>
+      </Dialog>
+
       <Footer />
     </div>
   );
