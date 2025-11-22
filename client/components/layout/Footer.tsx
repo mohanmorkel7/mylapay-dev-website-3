@@ -23,7 +23,7 @@ export default function Footer() {
     <footer className="bg-[#202c5c] text-white pt-12">
       {/* Outer wrapper: full-bleed on homepage/pricing, or centered padded on other pages */}
       <div className={isFullWidth ? "w-full py-14" : "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14"}>
-        <div className={isFullWidth ? "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" : ""}>
+        <div className={isFullWidth ? "container mx-auto" : ""}>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Logo + Copy */}
           <div className="md:col-span-3">
