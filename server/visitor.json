@@ -5794,5 +5794,17 @@
       "ll": null
     },
     "timestamp": "2025-11-22T07:00:44.683Z"
+  },
+  {
+    "sessionId": "sess_eb4omd6y",
+    "duration": 1,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T07:01:24.507Z"
   }
 ]
