@@ -4558,5 +4558,17 @@
       "ll": null
     },
     "timestamp": "2025-11-22T06:00:56.234Z"
+  },
+  {
+    "sessionId": "sess_bq0rwm8x",
+    "duration": 0,
+    "ip": "::ffff:127.0.0.1",
+    "location": {
+      "country": null,
+      "region": null,
+      "city": null,
+      "ll": null
+    },
+    "timestamp": "2025-11-22T06:01:09.318Z"
   }
 ]
