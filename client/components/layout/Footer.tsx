@@ -18,8 +18,8 @@ export default function Footer() {
 
   const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
   return (
-    <footer className="bg-[#202c5c] text-white">
-      <div className="container mx-auto py-14">
+    <footer className="bg-[#202c5c] text-white pt-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           {/* Logo + Copy */}
           <div className="md:col-span-3">
