@@ -640,9 +640,7 @@ export default function ProductPricing() {
         <DialogPortal>
           <DialogOverlay className="bg-white/70 backdrop-blur-md" />
           <DialogContent className="max-w-md p-4 sm:p-6 rounded-xl shadow-2xl">
-            <DialogTitle className="sr-only">
-              Join Our Trial on Token X
-            </DialogTitle>
+            <DialogTitle className="sr-only">{`Join Our Trial on ${product.name}`}</DialogTitle>
 
             <div className="p-4 sm:p-6">
               <div className="text-center mb-4">
